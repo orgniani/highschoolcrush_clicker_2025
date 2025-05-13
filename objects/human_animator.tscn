@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuxjkncqb8mx6"]
+
+[ext_resource type="Script" uid="uid://elgeketjbx46" path="res://scripts/human/human_animator.gd" id="1_hmffe"]
+[ext_resource type="Script" uid="uid://bqnhd5q4syi43" path="res://scripts/human/human_part_animator.gd" id="2_mdpjf"]
+[ext_resource type="SpriteFrames" uid="uid://ba2ukg1t80qp8" path="res://resources/animations/body/body_default.tres" id="3_otug7"]
+[ext_resource type="SpriteFrames" uid="uid://81mqlwcadir8" path="res://resources/animations/hair/bowlcut_hair.tres" id="4_fh44b"]
+[ext_resource type="SpriteFrames" uid="uid://b8u488b4bodne" path="res://resources/animations/hand/empty_hand.tres" id="5_rq8m3"]
+
+[node name="HumanAnimator" type="Node2D" node_paths=PackedStringArray("parts")]
+script = ExtResource("1_hmffe")
+parts = [NodePath("BodyPart"), NodePath("HairPart"), NodePath("HandPart")]
+metadata/_custom_type_script = "uid://elgeketjbx46"
+
+[node name="BodyPart" type="Node2D" parent="." node_paths=PackedStringArray("animated_sprite")]
+script = ExtResource("2_mdpjf")
+animated_sprite = NodePath("body")
+metadata/_custom_type_script = "uid://bqnhd5q4syi43"
+
+[node name="body" type="AnimatedSprite2D" parent="BodyPart"]
+sprite_frames = ExtResource("3_otug7")
+animation = &"idle"
+
+[node name="HairPart" type="Node2D" parent="." node_paths=PackedStringArray("animated_sprite")]
+script = ExtResource("2_mdpjf")
+animated_sprite = NodePath("hair")
+metadata/_custom_type_script = "uid://bqnhd5q4syi43"
+
+[node name="hair" type="AnimatedSprite2D" parent="HairPart"]
+sprite_frames = ExtResource("4_fh44b")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="HandPart" type="Node2D" parent="." node_paths=PackedStringArray("animated_sprite")]
+script = ExtResource("2_mdpjf")
+animated_sprite = NodePath("hand")
+metadata/_custom_type_script = "uid://bqnhd5q4syi43"
+
+[node name="hand" type="AnimatedSprite2D" parent="HandPart"]
+sprite_frames = ExtResource("5_rq8m3")
+animation = &"idle"
+autoplay = "idle"

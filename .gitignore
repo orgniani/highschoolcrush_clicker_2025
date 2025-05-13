@@ -1,0 +1,28 @@
+# Godot 4+ cache
+.godot/
+
+# Godot-imported files (auto-generated)
+.import/
+*.translation
+
+# Export config (skip if doing CI/CD or shared exports)
+export.cfg
+export_presets.cfg
+!.github/dist/export_presets.cfg
+
+# Mono files (only needed for C# projects)
+.mono/
+data_*/
+mono_crash.*.json
+
+# OS/editor-specific files
+.directory
+.DS_Store
+*~
+*.blend1
+
+# IDEs
+.idea/
+
+# Addons (customize as needed)
+addons/

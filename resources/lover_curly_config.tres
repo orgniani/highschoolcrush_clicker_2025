@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanConfig" load_steps=5 format=3 uid="uid://bngiiwwgchvd"]
+
+[ext_resource type="SpriteFrames" uid="uid://x6a26qrgspew" path="res://resources/animations/body/body_black.tres" id="1_05a03"]
+[ext_resource type="SpriteFrames" uid="uid://npwt3olbkol7" path="res://resources/animations/hair/curly_hair.tres" id="2_05a03"]
+[ext_resource type="SpriteFrames" uid="uid://b7argpfhp80qt" path="res://resources/animations/hand/empty_hand_black.tres" id="3_myrtr"]
+[ext_resource type="Script" uid="uid://3k8h5kgo1iid" path="res://scripts/human/human_config.gd" id="4_8aptw"]
+
+[resource]
+script = ExtResource("4_8aptw")
+body_sprite_frames = ExtResource("1_05a03")
+hair_sprite_frames = ExtResource("2_05a03")
+hand_sprite_frames = ExtResource("3_myrtr")
+metadata/_custom_type_script = "uid://3k8h5kgo1iid"
