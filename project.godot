@@ -11,21 +11,26 @@ config_version=5
 [application]
 
 config/name="highschoolCrush_Clicker"
-run/main_scene="uid://dw3xvnexig6h5"
+run/main_scene="uid://be1xmgvuhyir7"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [file_customization]
 
 folder_colors={
+"res://art/": "red",
+"res://art/sprites/": "red",
 "res://audio/": "orange",
 "res://builds/": "yellow",
 "res://objects/": "purple",
 "res://resources/": "green",
 "res://scenes/": "pink",
-"res://scripts/": "teal",
-"res://sprites/": "blue"
+"res://scripts/": "teal"
 }
+
+[global_group]
+
+lovers=""
 
 [input]
 

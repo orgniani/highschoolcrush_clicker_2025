@@ -2,12 +2,12 @@ extends Node
 
 class_name LoverStateMachine
 
+signal romance_success
+
 var _fill = 1.0
 var _active = false
 var _required_clicks = 10
 var _fill_time = 3.0
-
-var on_romance_success := func() -> void: pass
 
 func setup(clicks: int, time: float):
 	_required_clicks = clicks
@@ -34,7 +34,7 @@ func register_click():
 	if _fill >= 1.0:
 		_active = false
 		print("Romance success!")
-		on_romance_success.call()
+		emit_signal("romance_success")
 
 func get_fill_percentage() -> float:
 	return _fill

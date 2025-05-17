@@ -18,7 +18,7 @@ func _ready():
 	
 	set_process(true)
 	state_machine.setup(required_clicks, fill_time)
-	state_machine.on_romance_success = _on_romance_success
+	state_machine.romance_success.connect(_on_romance_success)
 
 func _process(delta):
 	if Input.is_action_just_pressed("click"):

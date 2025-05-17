@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" load_steps=20 format=3 uid="uid://81mqlwcadir8"]
 
-[ext_resource type="Texture2D" uid="uid://df20y5am7cvqc" path="res://sprites/Human/IDLE/HAIR/bowlhair_idle_strip9.png" id="1_7jl76"]
-[ext_resource type="Texture2D" uid="uid://cbc166ytm2ivs" path="res://sprites/Human/WALKING/HAIR/bowlhair_walk_strip8.png" id="2_ca1l0"]
+[ext_resource type="Texture2D" uid="uid://df20y5am7cvqc" path="res://art/sprites/Human/IDLE/HAIR/bowlhair_idle_strip9.png" id="1_7jl76"]
+[ext_resource type="Texture2D" uid="uid://cbc166ytm2ivs" path="res://art/sprites/Human/WALKING/HAIR/bowlhair_walk_strip8.png" id="2_ca1l0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4vq5b"]
 atlas = ExtResource("1_7jl76")

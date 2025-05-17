@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cuxjkncqb8mx6" path="res://objects/human_animator.tscn" id="2_rmcuh"]
 [ext_resource type="Script" uid="uid://bvoyt6bm5coqt" path="res://scripts/lover/lover_follower.gd" id="3_7mh6s"]
 [ext_resource type="Script" uid="uid://casnc1jootvaf" path="res://scripts/lover/lover_state_machine.gd" id="4_y040x"]
-[ext_resource type="Texture2D" uid="uid://dtso1iiu8g2wr" path="res://sprites/UI/HeartBorder.png" id="5_2jkde"]
-[ext_resource type="Texture2D" uid="uid://d1qvhhs1cputj" path="res://sprites/UI/HeartFill.png" id="6_b326f"]
+[ext_resource type="Texture2D" uid="uid://dtso1iiu8g2wr" path="res://art/UI/HeartBorder.png" id="5_2jkde"]
+[ext_resource type="Texture2D" uid="uid://d1qvhhs1cputj" path="res://art/UI/HeartFill.png" id="6_b326f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acjsf"]
 size = Vector2(20, 23)
 
-[node name="Lover" type="CharacterBody2D" node_paths=PackedStringArray("heart_bar")]
+[node name="Lover" type="CharacterBody2D" node_paths=PackedStringArray("heart_bar") groups=["lovers"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_hj7k7")
