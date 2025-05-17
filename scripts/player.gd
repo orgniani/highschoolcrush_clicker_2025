@@ -4,7 +4,8 @@ extends CharacterBody2D
 @onready var animator: HumanAnimator = $HumanAnimator
 
 @export var speed: float = 100
-var _last_flip_left: bool = false
+
+var last_follower: CharacterBody2D = self
 
 func _ready():
 	animator.apply_config(config)
@@ -24,9 +25,6 @@ func _physics_process(delta: float) -> void:
 	
 	var is_moving = velocity.length() > 0
 
-	if is_moving:
-		_last_flip_left = velocity.x < 0
-
 	var anim = "walk" if is_moving else "idle"
-	animator.play_animation(anim, _last_flip_left)
+	animator.play_animation(anim, velocity.x, true)
 pass

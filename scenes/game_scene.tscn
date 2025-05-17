@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dw3xvnexig6h5"]
+[gd_scene load_steps=11 format=3 uid="uid://dw3xvnexig6h5"]
 
 [ext_resource type="Script" uid="uid://b6ft0mm7ki03w" path="res://scripts/game_scene.gd" id="1_w5aja"]
 [ext_resource type="PackedScene" uid="uid://be1xmgvuhyir7" path="res://scenes/menu_scene.tscn" id="2_onqr8"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bfx07bbpmw13i" path="res://sprites/spr_tileset_sunnysideworld_16px.png" id="4_y3j0m"]
 [ext_resource type="PackedScene" uid="uid://gbsphto4w7bn" path="res://objects/player.tscn" id="5_rurhu"]
 [ext_resource type="PackedScene" uid="uid://buhsyo1luhxbm" path="res://objects/lover.tscn" id="6_rurhu"]
+[ext_resource type="Resource" uid="uid://bngiiwwgchvd" path="res://resources/lover_curly_config.tres" id="7_kk2rg"]
+[ext_resource type="Resource" uid="uid://cn5h6psr23iow" path="res://resources/lover_long_hair_config.tres" id="8_b5spy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kk2rg"]
 texture = ExtResource("4_y3j0m")
@@ -1769,12 +1771,19 @@ tile_set = SubResource("TileSet_b5spy")
 format = 2
 layer_0/tile_data = PackedInt32Array(327676, 1507329, 44, 327677, 1507329, 44, 327678, 1507329, 44, 327679, 1507329, 44, 262144, 1507329, 44, 262145, 1507329, 44, 262146, 1507329, 44, 262147, 1507329, 44, 262148, 1507329, 44, 262149, 1507329, 44, 262150, 1507329, 44, 262151, 1507329, 44, 262152, 1507329, 44, 262153, 1507329, 44, 327675, 1507329, 44, 327674, 1507329, 44, 262138, 1507329, 43, 262139, 1507329, 43, 262140, 1507329, 43, 262141, 1507329, 43, 262142, 1507329, 43, 262143, 1507329, 43, 196608, 1507329, 43, 196609, 1507329, 43, 196610, 1507329, 43, 196611, 1507329, 43, 196612, 1507329, 43, 196613, 1507329, 43, 196614, 1507329, 43, 196615, 1507329, 43, 196616, 1507329, 43, 196617, 1507329, 43)
 
-[node name="Lover" parent="." instance=ExtResource("6_rurhu")]
-position = Vector2(69, 110)
-
 [node name="Player" parent="." instance=ExtResource("5_rurhu")]
 position = Vector2(141.924, 90.2319)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
+
+[node name="Lover" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_rurhu")]
+position = Vector2(102, 90)
+player = NodePath("../Player")
+config = ExtResource("7_kk2rg")
+
+[node name="Lover2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_rurhu")]
+position = Vector2(44, 90)
+player = NodePath("../Player")
+config = ExtResource("8_b5spy")

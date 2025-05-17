@@ -4,6 +4,8 @@ class_name HumanAnimator
 
 @export var parts: Array[HumanPartAnimator]
 
+var _last_flip_left := false
+
 func apply_config(config: HumanConfig):
 	for part in parts:
 		match part.animated_sprite.name:
@@ -14,6 +16,15 @@ func apply_config(config: HumanConfig):
 			"hand":
 				part.animated_sprite.frames = config.hand_sprite_frames
 
-func play_animation(animation_name: String, flip: bool):
+func play_animation(animation_name: String, direction_or_flip, remember_direction := false):
+	var flip: bool
+
+	if remember_direction:
+		if abs(direction_or_flip) > 0.01:
+			_last_flip_left = direction_or_flip < 0
+		flip = _last_flip_left
+	else:
+		flip = direction_or_flip
+
 	for part in parts:
 		part.play(animation_name, flip)
