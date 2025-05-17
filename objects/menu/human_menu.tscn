@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfg8u10fcljld"]
+
+[ext_resource type="Script" uid="uid://dru50mql1qkig" path="res://scripts/human/human_menu.gd" id="1_c5gk5"]
+[ext_resource type="PackedScene" uid="uid://cuxjkncqb8mx6" path="res://objects/human_animator.tscn" id="3_xcvpk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxedw"]
+
+[node name="HumanMenu" type="Area2D"]
+script = ExtResource("1_c5gk5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_bxedw")
+
+[node name="HumanAnimator" parent="." instance=ExtResource("3_xcvpk")]

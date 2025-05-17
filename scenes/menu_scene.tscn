@@ -1,14 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://be1xmgvuhyir7"]
+[gd_scene load_steps=12 format=3 uid="uid://be1xmgvuhyir7"]
 
 [ext_resource type="Script" uid="uid://blgegqc6nlc7u" path="res://scripts/scenes/menu_scene.gd" id="1_482oc"]
-[ext_resource type="Texture2D" uid="uid://byau5y2ppd8fu" path="res://art/UI/menus/whiteSquare.png" id="1_vrre2"]
-[ext_resource type="Texture2D" uid="uid://dgm58b4mycd6l" path="res://art/UI/Square Buttons 26x19.png" id="2_6wmco"]
+[ext_resource type="Texture2D" uid="uid://dgm58b4mycd6l" path="res://art/UI/menus/Square Buttons 26x19.png" id="2_6wmco"]
 [ext_resource type="FontFile" uid="uid://b8i3q121b40nv" path="res://art/fonts/MinimalPixelFont.ttf" id="2_o71fo"]
 [ext_resource type="PackedScene" uid="uid://dw3xvnexig6h5" path="res://scenes/game_scene.tscn" id="2_u4hxd"]
+[ext_resource type="TileSet" uid="uid://dii5dkt7jw1jb" path="res://resources/tile_maps/default_tile_map.tres" id="4_6od1f"]
+[ext_resource type="PackedScene" uid="uid://cfg8u10fcljld" path="res://objects/menu/human_menu.tscn" id="6_yfxa8"]
+[ext_resource type="Resource" uid="uid://prxuqwniotqm" path="res://resources/player_config.tres" id="7_520ac"]
+[ext_resource type="Resource" uid="uid://bngiiwwgchvd" path="res://resources/lover_curly_config.tres" id="7_vjll7"]
+[ext_resource type="Resource" uid="uid://cn5h6psr23iow" path="res://resources/lover_long_hair_config.tres" id="8_520ac"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_482oc"]
 atlas = ExtResource("2_6wmco")
 region = Rect2(11, 70, 26, 19)
+filter_clip = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6od1f"]
 atlas = ExtResource("2_6wmco")
@@ -19,45 +24,88 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = 2.0
+offset_right = -11.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_482oc")
 game_scene = ExtResource("2_u4hxd")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(0.823529, 0.878431, 0.466667, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_vrre2")
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(4, 4)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(15, 14)
+tile_set = ExtResource("4_6od1f")
+format = 2
+layer_0/name = "Background"
+layer_0/tile_data = PackedInt32Array(0, 131073, 1, 65536, 65537, 1, 131072, 131073, 1, 196608, 65537, 1, 262144, 131073, 1, 327680, 65537, 1, 393216, 131073, 1, 458752, 65537, 1, 524288, 1638401, 7, 589824, 655361, 7, 655360, 65537, 3, 1, 131073, 1, 65537, 65537, 1, 131073, 131073, 1, 196609, 65537, 1, 262145, 131073, 1, 327681, 65537, 1, 393217, 131073, 1, 458753, 65537, 1, 524289, 1638401, 7, 589825, 720897, 7, 655361, 65537, 3, 2, 131073, 1, 65538, 65537, 1, 131074, 131073, 1, 196610, 65537, 1, 262146, 131073, 1, 327682, 65537, 1, 393218, 131073, 1, 458754, 65537, 1, 524290, 1638401, 7, 589826, 655361, 7, 655362, 65537, 3, 3, 131073, 1, 65539, 65537, 1, 131075, 131073, 1, 196611, 65537, 1, 262147, 131073, 1, 327683, 65537, 1, 393219, 131073, 1, 458755, 65537, 1, 524291, 1638401, 7, 589827, 589825, 7, 655363, 65537, 3, 4, 131073, 1, 65540, 65537, 1, 131076, 131073, 1, 196612, 65537, 1, 262148, 131073, 1, 327684, 65537, 1, 393220, 131073, 1, 458756, 65537, 1, 524292, 262145, 3, 589828, 720897, 7, 655364, 65537, 3, 5, 131073, 1, 65541, 65537, 1, 131077, 131073, 1, 196613, 65537, 1, 262149, 131073, 1, 327685, 65537, 1, 393221, 131073, 1, 458757, 65537, 1, 524293, 262145, 3, 589829, 589825, 7, 655365, 65537, 3, 6, 131073, 1, 65542, 65537, 1, 131078, 131073, 1, 196614, 65537, 1, 262150, 131073, 1, 327686, 65537, 1, 393222, 131073, 1, 458758, 65537, 1, 524294, 262145, 3, 589830, 655361, 7, 655366, 65537, 3, 7, 131073, 1, 65543, 65537, 1, 131079, 131073, 1, 196615, 65537, 1, 262151, 131073, 1, 327687, 65537, 1, 393223, 131073, 1, 458759, 65537, 1, 524295, 262145, 3, 589831, 720897, 7, 655367, 65537, 3, 8, 131073, 1, 65544, 65537, 1, 131080, 131073, 1, 196616, 65537, 1, 262152, 131073, 1, 327688, 65537, 1, 393224, 131073, 1, 458760, 65537, 1, 524296, 262145, 3, 589832, 655361, 7, 655368, 65537, 3, 9, 131073, 1, 65545, 65537, 1, 131081, 131073, 1, 196617, 65537, 1, 262153, 131073, 1, 327689, 65537, 1, 393225, 131073, 1, 458761, 65537, 1, 524297, 262145, 3, 589833, 655361, 8, 655369, 65537, 3, 10, 131073, 1, 65546, 65537, 1, 131082, 131073, 1, 196618, 65537, 1, 262154, 131073, 1, 327690, 65537, 1, 393226, 131073, 1, 458762, 65537, 1, 524298, 262145, 3, 589834, 655361, 7, 655370, 65537, 3, 11, 131073, 1, 65547, 65537, 1, 131083, 131073, 1, 196619, 65537, 1, 262155, 131073, 1, 327691, 65537, 1, 393227, 131073, 1, 458763, 65537, 1, 524299, 262145, 3, 589835, 720897, 7, 655371, 65537, 3, 12, 131073, 1, 65548, 65537, 1, 131084, 131073, 1, 196620, 65537, 1, 262156, 131073, 1, 327692, 65537, 1, 393228, 131073, 1, 458764, 65537, 1, 524300, 262145, 3, 589836, 655361, 7, 655372, 65537, 3, 13, 131073, 1, 65549, 65537, 1, 131085, 131073, 1, 196621, 65537, 1, 262157, 131073, 1, 327693, 65537, 1, 393229, 131073, 1, 458765, 65537, 1, 524301, 262145, 3, 589837, 589825, 7, 655373, 65537, 3, 14, 131073, 1, 65550, 65537, 1, 131086, 131073, 1, 196622, 65537, 1, 262158, 131073, 1, 327694, 65537, 1, 393230, 131073, 1, 458766, 65537, 1, 524302, 1638401, 7, 589838, 655361, 7, 655374, 65537, 3, 15, 131073, 1, 65551, 65537, 1, 131087, 131073, 1, 196623, 65537, 1, 262159, 131073, 1, 327695, 65537, 1, 393231, 131073, 1, 458767, 65537, 1, 524303, 1638401, 7, 589839, 589825, 7, 655375, 65537, 3, 16, 131073, 1, 65552, 65537, 1, 131088, 131073, 1, 196624, 65537, 1, 262160, 131073, 1, 327696, 65537, 1, 393232, 131073, 1, 458768, 65537, 1, 524304, 1638401, 7, 589840, 655361, 7, 655376, 65537, 3, 17, 131073, 1, 65553, 65537, 1, 131089, 131073, 1, 196625, 65537, 1, 262161, 131073, 1, 327697, 65537, 1, 393233, 131073, 1, 458769, 65537, 1, 524305, 1638401, 7, 589841, 720897, 7, 655377, 65537, 3, 18, 131073, 1, 65554, 65537, 1, 131090, 131073, 1, 196626, 65537, 1, 262162, 131073, 1, 327698, 65537, 1, 393234, 131073, 1, 458770, 65537, 1, 524306, 1638401, 7, 589842, 655361, 7, 655378, 65537, 3, -1, 65537, 1, 65535, 131073, 1, 131071, 65537, 1, 196607, 131073, 1, 262143, 65537, 1, 327679, 131073, 1, 393215, 65537, 1, 458751, 131073, 1, 524287, 65537, 1, 589823, 1638401, 7, 655359, 655361, 8, 720895, 65537, 3, -65536, 65537, 1, -65535, 65537, 1, -65534, 65537, 1, -65533, 65537, 1, -65532, 65537, 1, -65531, 65537, 1, -65530, 65537, 1, -65529, 65537, 1, -65528, 65537, 1, -65527, 65537, 1, -65526, 65537, 1, -65525, 65537, 1, -65524, 65537, 1, -65523, 65537, 1, -65522, 65537, 1, -65521, 65537, 1, -65520, 65537, 1, -65519, 65537, 1, -65518, 65537, 1, -65537, 131073, 1, -131072, 131073, 1, -131071, 131073, 1, -131070, 131073, 1, -131069, 131073, 1, -131068, 131073, 1, -131067, 131073, 1, -131066, 131073, 1, -131065, 131073, 1, -131064, 131073, 1, -131063, 131073, 1, -131062, 131073, 1, -131061, 131073, 1, -131060, 131073, 1, -131059, 131073, 1, -131058, 131073, 1, -131057, 131073, 1, -131056, 131073, 1, -131055, 131073, 1, -131054, 131073, 1)
+layer_1/name = "BackTrees"
+layer_1/tile_data = PackedInt32Array(65535, 3735553, 7, 131071, 3735553, 8, 0, 3670017, 7, 65536, 3670017, 8, 1, 3735553, 7, 65537, 3735553, 8, 2, 3670017, 7, 65538, 3670017, 8, 15, 3735553, 7, 65551, 3735553, 8, 16, 3670017, 7, 65552, 3670017, 8, 17, 3735553, 7, 65553, 3735553, 8, 18, 3670017, 7, 65554, 3670017, 8, 14, 3670017, 7, 65550, 3670017, 8, 12, 3670017, 7, 65548, 3670017, 8, 13, 3735553, 7, 65549, 3735553, 8, 10, 3670017, 7, 65546, 3670017, 8, 11, 3735553, 7, 65547, 3735553, 8, 8, 3670017, 7, 65544, 3670017, 8, 9, 3735553, 7, 65545, 3735553, 8, 6, 3670017, 7, 65542, 3670017, 8, 7, 3735553, 7, 65543, 3735553, 8, 5, 3735553, 7, 65541, 3735553, 8, 4, 3670017, 7, 65540, 3670017, 8, 3, 3735553, 7, 65539, 3735553, 8, -65536, 3670017, 6, -65535, 3735553, 6, -65534, 3670017, 6, -65533, 3735553, 6, -2, 3670017, 6, -1, 3735553, 6, -65532, 3670017, 6, -65531, 3735553, 6, -65530, 3670017, 6, -65529, 3735553, 6, -65528, 3670017, 6, -65527, 3735553, 6, -65526, 3670017, 6, -65525, 3735553, 6, -65524, 3670017, 6, -65523, 3735553, 6, -65522, 3670017, 6, -65521, 3735553, 6, -65520, 3670017, 6, -65519, 3735553, 6, -65518, 3670017, 6, -65517, 3735553, 6, -65537, 3670017, 4, -131072, 3735553, 4, -131071, 3670017, 4, -131070, 3735553, 4, -65539, 3670017, 4, -65538, 3735553, 4, -131069, 3670017, 4, -131068, 3735553, 4, -131066, 3735553, 4, -131065, 3670017, 4, -131067, 3670017, 4, -131064, 3735553, 4, -131063, 3670017, 4, -131062, 3735553, 4, -131061, 3670017, 4, -131060, 3735553, 4, -131059, 3670017, 4, -131058, 3735553, 4, -131057, 3670017, 4, -131056, 3735553, 4, -131055, 3670017, 4, -131054, 3735553, 4, -131053, 3670017, 4, -131052, 3735553, 4, 196607, 3735553, 9, 131072, 3801089, 9, 131073, 3735553, 9, 131074, 3801089, 9, 131075, 3735553, 9, 131076, 3801089, 9, 131077, 3735553, 9, 131078, 3801089, 9, 131079, 3735553, 9, 131080, 3801089, 9, 131081, 3735553, 9, 131082, 3801089, 9, 131083, 3735553, 9, 131084, 3801089, 9, 131085, 3735553, 9, 131086, 3801089, 9, 131087, 3735553, 9, 131088, 3801089, 9, 131089, 3735553, 9, 131090, 3801089, 9)
+layer_2/name = "Middle"
+layer_2/tile_data = PackedInt32Array(327686, 1048577, 44, 327687, 1048577, 44, 327688, 1048577, 44, 327689, 1048577, 44, 327690, 1048577, 44, 393223, 1048577, 44, 393224, 1048577, 44, 393225, 1048577, 44, 393226, 1048577, 44, 393222, 1048577, 44, 458760, 1048577, 47, 458761, 1048577, 46, 458759, 1048577, 46, 458758, 1048577, 45, 458762, 1048577, 45, 262154, 1048577, 44, 196618, 1048577, 44, 196617, 1048577, 44, 196616, 1048577, 44, 196615, 1048577, 44, 196614, 1048577, 44, 262150, 1048577, 44, 262151, 1048577, 44, 262152, 1048577, 44, 262153, 1048577, 44, 458757, 1048577, 45, 458763, 1048577, 45, 458755, 983041, 45, 458764, 1048577, 45, 458756, 1048577, 45, 458765, 1114113, 45, 393221, 1048577, 44, 393220, 1048577, 44, 327684, 1048577, 44, 262148, 1048577, 44, 196612, 1048577, 44, 196613, 1048577, 44, 262149, 1048577, 44, 327685, 1048577, 44, 393227, 1048577, 44, 327691, 1048577, 44, 262155, 1048577, 44, 196619, 1048577, 44, 196620, 1048577, 44, 262156, 1048577, 44, 327692, 1048577, 44, 393228, 1048577, 44, 393219, 983041, 44, 327683, 983041, 44, 262147, 983041, 44, 196611, 983041, 44, 393229, 1114113, 44, 327693, 1114113, 44, 262157, 1114113, 44, 196621, 1114113, 44, 131075, 983041, 43, 65539, 983041, 43, 131085, 1114113, 43, 65549, 1114113, 43, 131076, 1703937, 45, 131077, 1179649, 42, 131078, 1179649, 42, 131079, 1179649, 42, 131080, 1179649, 42, 131081, 1179649, 42, 131082, 1179649, 42, 131083, 1179649, 42, 131084, 1769473, 45, 65548, 1769473, 45, 65547, 1179649, 42, 65546, 1179649, 42, 65545, 1179649, 42, 65544, 1179649, 42, 65543, 1179649, 42, 65542, 1179649, 42, 65541, 1179649, 42, 65540, 1703937, 45, 3, 983041, 41, 4, 1048577, 41, 5, 1048577, 41, 6, 1048577, 41, 7, 1048577, 41, 8, 1048577, 41, 9, 1048577, 41, 10, 1048577, 41, 11, 1048577, 41, 12, 1048577, 41, 13, 1114113, 41)
+layer_3/name = "TopBack"
+layer_3/tile_data = PackedInt32Array(196613, 1507329, 44, 196619, 1507329, 44, 196620, 1835009, 45, 196612, 1310721, 45, 131076, 1310721, 44, 65540, 1310721, 43, 4, 2097153, 41, 5, 1376257, 47, 12, 2228225, 41, 131084, 1835009, 44, 65548, 1835009, 43, 11, 1769473, 47, 6, 1441793, 47, 10, 1703937, 47, -65530, 1441793, 46, -65526, 1703937, 46, 131077, 1376257, 44, 131078, 1441793, 44, 65542, 1441793, 43, 65541, 1376257, 43, 65543, 1507329, 43, 131079, 1507329, 44, 65544, 1638401, 44, 65545, 1638401, 43, 65546, 1703937, 43, 131082, 1703937, 44, 131083, 1769473, 44, 65547, 1769473, 43, 196618, 1507329, 44, 196617, 1507329, 44, 196615, 1507329, 44, 196614, 1507329, 44, 196616, 1507329, 44, 131080, 1507329, 44, 131081, 1507329, 44, 7, 1703937, 45, 8, 1441793, 45, 9, 1769473, 45, -65529, 1572865, 43, -65528, 1572865, 43, -65527, 1572865, 43)
+layer_4/name = "Top"
+layer_4/tile_data = PackedInt32Array(327687, 2097153, 45, 327688, 2162689, 45, 327689, 2228225, 45, 262152, 2162689, 44, 262151, 2097153, 44, 262153, 2228225, 44, 196616, 2162689, 43, 196617, 2228225, 43, 196615, 2097153, 43, 131080, 2162689, 42, 131081, 2228225, 42, 131079, 2097153, 42, 327691, 1966081, 45, 262154, 1900545, 44, 262155, 1966081, 44, 262156, 2031617, 44, 327692, 2031617, 45, 327690, 1900545, 45, 327685, 1966081, 45, 327684, 1900545, 45, 327686, 2031617, 45, 262150, 2031617, 44, 262148, 1900545, 44, 262149, 1966081, 44)
+layer_5/name = "Plants"
+layer_5/tile_data = PackedInt32Array(458765, 3211265, 3, 524301, 3211265, 4, 458766, 3276801, 3, 524302, 3276801, 4, 524300, 3145729, 3, 458767, 3211265, 7, 458768, 3276801, 7, 327680, 3211265, 5, 393216, 3211265, 6, 327681, 3276801, 5, 393217, 3276801, 6, 131072, 3407873, 3, 196608, 3407873, 4, 262144, 3407873, 5, 65537, 3407873, 3, 131073, 3407873, 4, 196609, 3407873, 5, 524293, 3211265, 8, 65552, 3211265, 3, 131088, 3211265, 4, 65553, 3276801, 3, 131089, 3276801, 4, 131086, 3211265, 1, 196622, 3211265, 2, 131087, 3276801, 1, 196623, 3276801, 2, 458755, 3211265, 1, 524291, 3211265, 2, 458756, 3276801, 1, 524292, 3276801, 2)
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 128.0
+offset_top = 10.0
+offset_right = -976.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.45098, 0.207843, 0.4, 1)
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("2_o71fo")
+theme_override_font_sizes/font_size = 15
+text = "highschool crush"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 40.0
+offset_right = 64.0
+offset_bottom = 137.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -56.0
-offset_top = 17.0
-offset_right = 56.0
-offset_bottom = 230.0
+offset_left = -12.0
+offset_top = -32.5
+offset_right = 14.0
+offset_bottom = 32.5
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.000263769
 alignment = 1
 
-[node name="StartButton" type="TextureButton" parent="VBoxContainer"]
+[node name="StartButton" type="TextureButton" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("AtlasTexture_482oc")
 texture_hover = SubResource("AtlasTexture_6od1f")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/StartButton"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/StartButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,19 +114,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.564706, 0.384314, 0.364706, 1)
 theme_override_fonts/font = ExtResource("2_o71fo")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 10
 text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CreditButton" type="TextureButton" parent="VBoxContainer"]
+[node name="CreditButton" type="TextureButton" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("AtlasTexture_482oc")
 texture_hover = SubResource("AtlasTexture_6od1f")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/CreditButton"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/CreditButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,19 +135,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.564706, 0.384314, 0.364706, 1)
 theme_override_fonts/font = ExtResource("2_o71fo")
-theme_override_font_sizes/font_size = 40
-text = "Credits"
+theme_override_font_sizes/font_size = 10
+text = "Credit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QuitButton" type="TextureButton" parent="VBoxContainer"]
+[node name="QuitButton" type="TextureButton" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("AtlasTexture_482oc")
 texture_hover = SubResource("AtlasTexture_6od1f")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/QuitButton"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/QuitButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,25 +156,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.564706, 0.384314, 0.364706, 1)
 theme_override_fonts/font = ExtResource("2_o71fo")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 10
 text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 192.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.741176, 0.458824, 0.494118, 1)
-theme_override_colors/font_shadow_color = Color(0.639216, 0.360784, 0.443137, 1)
-theme_override_fonts/font = ExtResource("2_o71fo")
-theme_override_font_sizes/font_size = 100
-text = "highschool crush"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Player" parent="." instance=ExtResource("6_yfxa8")]
+position = Vector2(44, 140)
+config = ExtResource("7_520ac")
 
-[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/CreditButton" to="." method="_on_credit_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="Player2" parent="." instance=ExtResource("6_yfxa8")]
+position = Vector2(252, 103)
+config = ExtResource("7_vjll7")
+
+[node name="Player3" parent="." instance=ExtResource("6_yfxa8")]
+position = Vector2(276, 97)
+config = ExtResource("8_520ac")
+flip = true
+
+[connection signal="pressed" from="Panel/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/CreditButton" to="." method="_on_credit_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

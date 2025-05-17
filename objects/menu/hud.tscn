@@ -1,0 +1,189 @@
+[gd_scene load_steps=10 format=3 uid="uid://bp553va4wmaj3"]
+
+[ext_resource type="Script" uid="uid://dspuclrb6fl6l" path="res://scripts/managers/hud_manager.gd" id="1_iin16"]
+[ext_resource type="FontFile" uid="uid://b8i3q121b40nv" path="res://art/fonts/MinimalPixelFont.ttf" id="1_l1st6"]
+[ext_resource type="PackedScene" uid="uid://be1xmgvuhyir7" path="res://scenes/menu_scene.tscn" id="2_3178q"]
+[ext_resource type="Texture2D" uid="uid://dgm58b4mycd6l" path="res://art/UI/menus/Square Buttons 26x19.png" id="3_sjfwy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3178q"]
+atlas = ExtResource("3_sjfwy")
+region = Rect2(11, 70, 26, 19)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sseqv"]
+atlas = ExtResource("3_sjfwy")
+region = Rect2(59, 70, 26, 19)
+
+[sub_resource type="Animation" id="Animation_kk2rg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOverPanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameOverPanel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rurhu"]
+resource_name = "pop_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOverPanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.000546875),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameOverPanel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.642389, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b5spy"]
+_data = {
+&"RESET": SubResource("Animation_kk2rg"),
+&"pop_up": SubResource("Animation_rurhu")
+}
+
+[node name="HUD" type="Control" node_paths=PackedStringArray("score_label", "timer_label", "gameOver_label", "gameOver_anim")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iin16")
+menu_scene = ExtResource("2_3178q")
+score_label = NodePath("ScorePanel/Label")
+timer_label = NodePath("TimePanel/Label")
+gameOver_label = NodePath("GameOverPanel/Label")
+gameOver_anim = NodePath("AnimationPlayer")
+
+[node name="ScorePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="ScorePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_l1st6")
+theme_override_font_sizes/font_size = 36
+text = "Score: 0"
+vertical_alignment = 1
+
+[node name="TimePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 46.0
+offset_bottom = 86.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="TimePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_l1st6")
+theme_override_font_sizes/font_size = 36
+text = "Time: "
+vertical_alignment = 1
+
+[node name="GameOverPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 324)
+
+[node name="Label" type="Label" parent="GameOverPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_l1st6")
+theme_override_font_sizes/font_size = 100
+text = "YOU WIN"
+
+[node name="BackButton" type="TextureButton" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 503.0
+offset_top = 388.0
+offset_right = 653.0
+offset_bottom = 468.0
+size_flags_vertical = 3
+texture_normal = SubResource("AtlasTexture_3178q")
+texture_hover = SubResource("AtlasTexture_sseqv")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="GameOverPanel/BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.564706, 0.384314, 0.364706, 1)
+theme_override_fonts/font = ExtResource("1_l1st6")
+theme_override_font_sizes/font_size = 40
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_b5spy")
+}
+
+[connection signal="pressed" from="GameOverPanel/BackButton" to="." method="_on_back_button_pressed"]

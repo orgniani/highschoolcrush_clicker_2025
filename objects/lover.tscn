@@ -10,11 +10,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acjsf"]
 size = Vector2(20, 23)
 
-[node name="Lover" type="CharacterBody2D" node_paths=PackedStringArray("heart_bar") groups=["lovers"]]
+[node name="Lover" type="CharacterBody2D" node_paths=PackedStringArray("heart_bar", "state_machine", "follower") groups=["lovers"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_hj7k7")
 heart_bar = NodePath("HeartBar")
+state_machine = NodePath("LoverStateMachine")
+follower = NodePath("LoverFollower")
 
 [node name="HumanAnimator" parent="." instance=ExtResource("2_rmcuh")]
 

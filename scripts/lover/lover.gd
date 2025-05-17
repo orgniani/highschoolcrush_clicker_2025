@@ -6,8 +6,9 @@ extends CharacterBody2D
 @export var required_clicks: int = 10
 @export var fill_time: float = 3.0
 
-@onready var state_machine: LoverStateMachine = $LoverStateMachine
-@onready var follower: LoverFollower = $LoverFollower
+@export var state_machine: LoverStateMachine
+@export var follower: LoverFollower
+
 @onready var animator: HumanAnimator = $"HumanAnimator"
 
 func _ready():
@@ -44,3 +45,6 @@ func _on_romance_success():
 	
 	heart_bar.visible = false;
 	player.last_follower = self
+
+func get_state_machine():
+	return state_machine
