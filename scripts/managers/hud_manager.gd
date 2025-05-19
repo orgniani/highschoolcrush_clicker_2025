@@ -2,7 +2,7 @@ extends Control
 
 class_name HUD
 
-@export var menu_scene: PackedScene
+@export var menu_scene : PackedScene
 
 @export var score_label : Label
 @export var timer_label : Label

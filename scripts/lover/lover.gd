@@ -1,13 +1,18 @@
 extends CharacterBody2D
 
+#References
 @export var player : CharacterBody2D
 @export var config: HumanConfig
 @export var heart_bar : TextureProgressBar
-@export var required_clicks: int = 10
-@export var fill_time: float = 3.0
 
 @export var state_machine: LoverStateMachine
 @export var follower: LoverFollower
+
+@export var click_sound : AudioStream
+
+#Parameters
+@export var required_clicks: int = 10
+@export var fill_time: float = 3.0
 
 @onready var animator: HumanAnimator = $"HumanAnimator"
 
@@ -23,6 +28,8 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("click"):
+		AudioManager.play_sound(click_sound)
+		
 		var mouse_pos = get_global_mouse_position()
 		var space_state = get_world_2d().direct_space_state
 
@@ -40,6 +47,7 @@ func _process(delta):
 
 func _on_romance_success():
 	set_process(false)
+	
 	var follow_target = player.last_follower
 	follower.enable_follow(follow_target, animator)
 	

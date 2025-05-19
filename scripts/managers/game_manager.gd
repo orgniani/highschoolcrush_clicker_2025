@@ -2,6 +2,10 @@ extends Node
 
 class_name GameManager
 
+@export var game_lost_sound : AudioStream
+@export var game_won_sound : AudioStream
+@export var romance_success_sound : AudioStream
+
 @export var time_limit: float = 60.0
 @export var timer: Timer
 
@@ -45,7 +49,10 @@ func _on_lover_romanced():
 	emit_signal("updated_score", romanced_lovers, total_lovers)
 
 	if romanced_lovers >= total_lovers:
+		AudioManager.play_sound(game_won_sound)
 		_trigger_win()
+	else:
+		AudioManager.play_sound(romance_success_sound)
 
 func _trigger_win():
 	game_over = true
@@ -53,6 +60,7 @@ func _trigger_win():
 
 func _trigger_lose():
 	game_over = true
+	AudioManager.play_sound(game_lost_sound)
 	emit_signal("game_lost")
 
 func _on_timer_timeout():

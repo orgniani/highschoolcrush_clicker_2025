@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bp553va4wmaj3"]
+[gd_scene load_steps=9 format=3 uid="uid://bp553va4wmaj3"]
 
 [ext_resource type="Script" uid="uid://dspuclrb6fl6l" path="res://scripts/managers/hud_manager.gd" id="1_iin16"]
 [ext_resource type="FontFile" uid="uid://b8i3q121b40nv" path="res://art/fonts/MinimalPixelFont.ttf" id="1_l1st6"]
-[ext_resource type="PackedScene" uid="uid://be1xmgvuhyir7" path="res://scenes/menu_scene.tscn" id="2_3178q"]
 [ext_resource type="Texture2D" uid="uid://dgm58b4mycd6l" path="res://art/UI/menus/Square Buttons 26x19.png" id="3_sjfwy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3178q"]
@@ -82,7 +81,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iin16")
-menu_scene = ExtResource("2_3178q")
 score_label = NodePath("ScorePanel/Label")
 timer_label = NodePath("TimePanel/Label")
 gameOver_label = NodePath("GameOverPanel/Label")

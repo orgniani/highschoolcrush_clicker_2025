@@ -1,14 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dw3xvnexig6h5"]
+[gd_scene load_steps=9 format=3 uid="uid://dw3xvnexig6h5"]
 
 [ext_resource type="Script" uid="uid://b6ft0mm7ki03w" path="res://scripts/scenes/game_scene.gd" id="1_w5aja"]
 [ext_resource type="Script" uid="uid://dsk3j1p72jrer" path="res://scripts/managers/game_manager.gd" id="2_utbpp"]
-[ext_resource type="AudioStream" uid="uid://c23lyw8dpi04r" path="res://audio/sfx/game_lost.wav" id="3_mw25s"]
-[ext_resource type="AudioStream" uid="uid://babrqqe81ccq5" path="res://audio/sfx/game_won.wav" id="4_tcjrq"]
 [ext_resource type="PackedScene" uid="uid://q7ftv2y24aff" path="res://objects/wall.tscn" id="4_utbpp"]
-[ext_resource type="PackedScene" uid="uid://gbsphto4w7bn" path="res://objects/characters/player.tscn" id="5_rurhu"]
-[ext_resource type="AudioStream" uid="uid://bdhjldib5xawt" path="res://audio/sfx/romance_success.wav" id="5_tcjrq"]
+[ext_resource type="PackedScene" uid="uid://gbsphto4w7bn" path="res://objects/player.tscn" id="5_rurhu"]
 [ext_resource type="TileSet" uid="uid://dii5dkt7jw1jb" path="res://resources/tile_maps/default_tile_map.tres" id="5_utbpp"]
-[ext_resource type="PackedScene" uid="uid://buhsyo1luhxbm" path="res://objects/characters/lover.tscn" id="6_rurhu"]
+[ext_resource type="PackedScene" uid="uid://buhsyo1luhxbm" path="res://objects/lover.tscn" id="6_rurhu"]
 [ext_resource type="Resource" uid="uid://bngiiwwgchvd" path="res://resources/lover_curly_config.tres" id="7_kk2rg"]
 [ext_resource type="Resource" uid="uid://cn5h6psr23iow" path="res://resources/lover_long_hair_config.tres" id="8_b5spy"]
 
@@ -18,9 +15,6 @@ game_manager = NodePath("GameManager")
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("timer")]
 script = ExtResource("2_utbpp")
-game_lost_sound = ExtResource("3_mw25s")
-game_won_sound = ExtResource("4_tcjrq")
-romance_success_sound = ExtResource("5_tcjrq")
 time_limit = 5.0
 timer = NodePath("../Timer")
 metadata/_custom_type_script = "uid://dsk3j1p72jrer"
