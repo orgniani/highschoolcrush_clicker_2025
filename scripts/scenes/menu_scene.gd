@@ -1,6 +1,7 @@
 extends Control
 
 @export var game_scene : PackedScene
+@export var credits_panel : Control
 @export var main_theme : AudioStream
 @export var button_click_audio : AudioStream
 
@@ -15,6 +16,7 @@ func _on_start_button_pressed() -> void:
 
 func _on_credit_button_pressed() -> void:
 	_play_button_click_sound()
+	credits_panel.visible = true;
 	pass
 
 func _on_quit_button_pressed() -> void:

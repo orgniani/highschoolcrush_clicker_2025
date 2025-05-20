@@ -1,0 +1,156 @@
+[gd_scene load_steps=9 format=3 uid="uid://blg6upj6ug164"]
+
+[ext_resource type="Script" uid="uid://r8d2lex60x41" path="res://scripts/managers/credits_manager.gd" id="1_83m7f"]
+[ext_resource type="FontFile" uid="uid://b8i3q121b40nv" path="res://art/fonts/MinimalPixelFont.ttf" id="1_yddwo"]
+[ext_resource type="Texture2D" uid="uid://dgm58b4mycd6l" path="res://art/UI/menus/Square Buttons 26x19.png" id="2_83m7f"]
+[ext_resource type="AudioStream" uid="uid://boy5qiqf8viqd" path="res://audio/sfx/button_click.wav" id="2_xo1gm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xrc2"]
+atlas = ExtResource("2_83m7f")
+region = Rect2(11, 102, 26, 19)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u7efb"]
+texture = SubResource("AtlasTexture_1xrc2")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xo1gm"]
+atlas = ExtResource("2_83m7f")
+region = Rect2(11, 70, 26, 19)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gfmv"]
+atlas = ExtResource("2_83m7f")
+region = Rect2(59, 70, 26, 19)
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_83m7f")
+button_click_audio = ExtResource("2_xo1gm")
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+top_level = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 270.0
+offset_top = 42.0
+offset_right = -227.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 324)
+theme_override_styles/panel = SubResource("StyleBoxTexture_u7efb")
+
+[node name="TitleLabel" type="Label" parent="Panel"]
+modulate = Color(0.564706, 0.384314, 0.364706, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -217.0
+offset_right = 179.0
+offset_bottom = -150.333
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_yddwo")
+theme_override_font_sizes/font_size = 100
+text = "CREDITS"
+horizontal_alignment = 1
+
+[node name="CreditTitles" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -231.0
+offset_top = -119.0
+offset_right = 182.0
+offset_bottom = 131.333
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.564706, 0.384314, 0.364706, 1)
+theme_override_fonts/font = ExtResource("1_yddwo")
+theme_override_font_sizes/font_size = 50
+text = "developers ..........................
+
+art .........................................
+
+ui ...............................................
+
+audio ............................................."
+vertical_alignment = 1
+
+[node name="CreditNames" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -119.0
+offset_right = 234.0
+offset_bottom = 131.333
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.564706, 0.384314, 0.364706, 1)
+theme_override_fonts/font = ExtResource("1_yddwo")
+theme_override_font_sizes/font_size = 50
+text = "cata orgniani
+
+daniel diggle
+
+cup nooble
+
+pixel-boy"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 437.0
+offset_right = 392.0
+offset_bottom = 517.0
+size_flags_vertical = 3
+texture_normal = SubResource("AtlasTexture_xo1gm")
+texture_hover = SubResource("AtlasTexture_4gfmv")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Panel/BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.564706, 0.384314, 0.364706, 1)
+theme_override_fonts/font = ExtResource("1_yddwo")
+theme_override_font_sizes/font_size = 40
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Panel/BackButton" to="." method="_on_back_button_pressed"]

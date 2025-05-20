@@ -61,7 +61,11 @@ func _on_lover_failed():
 		return
 
 	finished_lovers += 1
-	AudioManager.play_sound(romance_failed_sound)
+	
+	if finished_lovers >= total_lovers:
+		_trigger_game_over()
+	else:
+		AudioManager.play_sound(romance_failed_sound)
 
 	_check_if_all_lovers_resolved()
 

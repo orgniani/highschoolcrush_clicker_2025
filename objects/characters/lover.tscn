@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://buhsyo1luhxbm"]
+[gd_scene load_steps=10 format=3 uid="uid://buhsyo1luhxbm"]
 
 [ext_resource type="Script" uid="uid://cm0yx5elt23ld" path="res://scripts/lover/lover.gd" id="1_hj7k7"]
 [ext_resource type="AudioStream" uid="uid://b2qi2esqtr5vq" path="res://audio/sfx/click.wav" id="2_670pt"]
@@ -6,19 +6,17 @@
 [ext_resource type="Script" uid="uid://bvoyt6bm5coqt" path="res://scripts/lover/lover_follower.gd" id="3_7mh6s"]
 [ext_resource type="Script" uid="uid://casnc1jootvaf" path="res://scripts/lover/lover_state_machine.gd" id="4_y040x"]
 [ext_resource type="Texture2D" uid="uid://dtso1iiu8g2wr" path="res://art/UI/HeartBorder.png" id="5_2jkde"]
+[ext_resource type="Script" uid="uid://d0koexjdo2axm" path="res://scripts/lover/lover_patrol.gd" id="6_670pt"]
 [ext_resource type="Texture2D" uid="uid://d1qvhhs1cputj" path="res://art/UI/HeartFill.png" id="6_b326f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acjsf"]
 size = Vector2(20, 23)
 
-[node name="Lover" type="CharacterBody2D" node_paths=PackedStringArray("heart_bar", "state_machine", "follower") groups=["lovers"]]
+[node name="Lover" type="CharacterBody2D" groups=["lovers"]]
 visibility_layer = 2
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_hj7k7")
-heart_bar = NodePath("HeartBar")
-state_machine = NodePath("LoverStateMachine")
-follower = NodePath("LoverFollower")
 click_sound = ExtResource("2_670pt")
 
 [node name="HumanAnimator" parent="." instance=ExtResource("2_rmcuh")]
@@ -31,6 +29,11 @@ metadata/_custom_type_script = "uid://bvoyt6bm5coqt"
 [node name="LoverStateMachine" type="Node" parent="."]
 script = ExtResource("4_y040x")
 metadata/_custom_type_script = "uid://casnc1jootvaf"
+
+[node name="LoverPatrol" type="Node" parent="."]
+script = ExtResource("6_670pt")
+wait_time = 2.0
+metadata/_custom_type_script = "uid://d0koexjdo2axm"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)

@@ -4,6 +4,7 @@ class_name LoverStateMachine
 
 signal romance_success
 signal romance_failed
+signal romance_started
 
 var _fill = 1.0
 var _active = false
@@ -42,6 +43,7 @@ func get_fill_percentage() -> float:
 	return _fill
 
 func _start_romance():
+	romance_started.emit()
 	_active = true
 	_fill = 0.5
 	print("Started romance!")

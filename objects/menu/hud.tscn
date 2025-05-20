@@ -74,7 +74,7 @@ _data = {
 &"pop_up": SubResource("Animation_rurhu")
 }
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("score_label", "timer_label", "romanced_label", "gameOver_anim")]
+[node name="HUD" type="Control" node_paths=PackedStringArray("score_label", "timer_label", "romanced_label", "ending_label", "gameOver_anim")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -83,9 +83,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iin16")
 button_click_audio = ExtResource("2_3178q")
-score_label = NodePath("ScorePanel/Label")
-timer_label = NodePath("TimePanel/Label")
+score_label = NodePath("ScorePanel/ScoreLabel")
+timer_label = NodePath("TimePanel/TimerLabel")
 romanced_label = NodePath("GameOverPanel/RomancedLabel")
+ending_label = NodePath("GameOverPanel/EndingLabel")
 gameOver_anim = NodePath("AnimationPlayer")
 
 [node name="ScorePanel" type="Panel" parent="."]
@@ -95,7 +96,7 @@ anchor_right = 1.0
 offset_bottom = 40.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="ScorePanel"]
+[node name="ScoreLabel" type="Label" parent="ScorePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,7 +117,7 @@ offset_top = 46.0
 offset_bottom = 86.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="TimePanel"]
+[node name="TimerLabel" type="Label" parent="TimePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -173,6 +174,24 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_l1st6")
 theme_override_font_sizes/font_size = 50
 text = "you romanced x out of x students"
+horizontal_alignment = 1
+
+[node name="EndingLabel" type="Label" parent="GameOverPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = 16.0
+offset_right = 207.0
+offset_bottom = 49.3334
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_l1st6")
+theme_override_font_sizes/font_size = 40
+text = "ending: heartbreaker"
 horizontal_alignment = 1
 
 [node name="BackButton" type="TextureButton" parent="GameOverPanel"]
