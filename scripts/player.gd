@@ -27,4 +27,9 @@ func _physics_process(delta: float) -> void:
 
 	var anim = "walk" if is_moving else "idle"
 	animator.play_animation(anim, velocity.x, true)
-pass
+	pass
+
+func on_game_over():
+	print("player game over")
+	set_physics_process(false)
+	animator.play_animation("idle", false)

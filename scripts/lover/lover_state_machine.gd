@@ -3,6 +3,7 @@ extends Node
 class_name LoverStateMachine
 
 signal romance_success
+signal romance_failed
 
 var _fill = 1.0
 var _active = false
@@ -21,8 +22,9 @@ func update(delta: float):
 		_fill = clamp(_fill, 0.0, 1.0)
 
 		if _fill <= 0.0:
+			_active = false
 			print("Romance failed!")
-			_reset()
+			romance_failed.emit();
 
 func register_click():
 	if not _active:
@@ -34,7 +36,7 @@ func register_click():
 	if _fill >= 1.0:
 		_active = false
 		print("Romance success!")
-		emit_signal("romance_success")
+		romance_success.emit()
 
 func get_fill_percentage() -> float:
 	return _fill
@@ -43,7 +45,3 @@ func _start_romance():
 	_active = true
 	_fill = 0.5
 	print("Started romance!")
-
-func _reset():
-	_active = false
-	_fill = 0.5

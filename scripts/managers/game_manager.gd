@@ -2,24 +2,27 @@ extends Node
 
 class_name GameManager
 
-@export var game_lost_sound : AudioStream
-@export var game_won_sound : AudioStream
+@export var game_over_sound : AudioStream
 @export var romance_success_sound : AudioStream
+@export var romance_failed_sound : AudioStream
 
 @export var time_limit: float = 60.0
 @export var timer: Timer
 
 var total_lovers := 0
 var romanced_lovers := 0
+var finished_lovers := 0
 var game_over := false
 
 signal updated_score(current: int, total: int)
 signal updated_timer(seconds_left: float)
-signal game_won
-signal game_lost
+signal game_over_signal()
 
 func _ready():
-	var lovers = get_tree().get_nodes_in_group("lovers")
+	timer.wait_time = time_limit
+	timer.start()
+
+func setup_lovers(lovers: Array[Node]):
 	total_lovers = lovers.size()
 
 	for lover in lovers:
@@ -28,41 +31,49 @@ func _ready():
 			
 			if state_machine:
 				state_machine.romance_success.connect(_on_lover_romanced)
-				
+				state_machine.romance_failed.connect(_on_lover_failed)	
 			else:
 				print("Warning: State machine was null")
 		else:
 			print("Warning: Lover missing get_state_machine().")
 
-	timer.wait_time = time_limit
-	timer.start()
-
 func _process(delta):
 	if not game_over:
-		emit_signal("updated_timer", timer.time_left)
+		updated_timer.emit(timer.time_left)
 
 func _on_lover_romanced():
 	if game_over:
 		return
 
 	romanced_lovers += 1
-	emit_signal("updated_score", romanced_lovers, total_lovers)
+	finished_lovers += 1
+	updated_score.emit(romanced_lovers, total_lovers)
 
 	if romanced_lovers >= total_lovers:
-		AudioManager.play_sound(game_won_sound)
-		_trigger_win()
+		_trigger_game_over()
 	else:
 		AudioManager.play_sound(romance_success_sound)
 
-func _trigger_win():
-	game_over = true
-	emit_signal("game_won")
+	_check_if_all_lovers_resolved()
 
-func _trigger_lose():
+func _on_lover_failed():
+	if game_over:
+		return
+
+	finished_lovers += 1
+	AudioManager.play_sound(romance_failed_sound)
+
+	_check_if_all_lovers_resolved()
+
+func _check_if_all_lovers_resolved():
+	if finished_lovers >= total_lovers and romanced_lovers < total_lovers:
+		_trigger_game_over()
+
+func _trigger_game_over():
 	game_over = true
-	AudioManager.play_sound(game_lost_sound)
-	emit_signal("game_lost")
+	AudioManager.play_sound(game_over_sound)
+	game_over_signal.emit()
 
 func _on_timer_timeout():
 	if not game_over:
-		_trigger_lose()
+		_trigger_game_over()

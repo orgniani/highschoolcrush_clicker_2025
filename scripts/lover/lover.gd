@@ -25,11 +25,10 @@ func _ready():
 	set_process(true)
 	state_machine.setup(required_clicks, fill_time)
 	state_machine.romance_success.connect(_on_romance_success)
+	state_machine.romance_failed.connect(_on_romance_failed)
 
 func _process(delta):
 	if Input.is_action_just_pressed("click"):
-		AudioManager.play_sound(click_sound)
-		
 		var mouse_pos = get_global_mouse_position()
 		var space_state = get_world_2d().direct_space_state
 
@@ -41,6 +40,7 @@ func _process(delta):
 		var results = space_state.intersect_point(query, 1)
 		if results.size() > 0 and results[0].get("collider") == self:
 			state_machine.register_click()
+			AudioManager.play_sound(click_sound)
 			
 	state_machine.update(delta)
 	heart_bar.value = state_machine.get_fill_percentage() * heart_bar.max_value
@@ -54,5 +54,14 @@ func _on_romance_success():
 	heart_bar.visible = false;
 	player.last_follower = self
 
+func _on_romance_failed():
+	set_process(false)
+	heart_bar.visible = false;
+
 func get_state_machine():
 	return state_machine
+
+func on_game_over():
+	print("lover game over")
+	set_process(false)
+	animator.play_animation("idle", false)

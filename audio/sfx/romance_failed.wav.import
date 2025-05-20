@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c23lyw8dpi04r"
-path="res://.godot/imported/game_lost.wav-d4d1403f20c0d7d3001035e15ee2a31a.sample"
+path="res://.godot/imported/romance_failed.wav-97724ff7b83087b7f6f7288217e8ae50.sample"
 
 [deps]
 
-source_file="res://audio/sfx/game_lost.wav"
-dest_files=["res://.godot/imported/game_lost.wav-d4d1403f20c0d7d3001035e15ee2a31a.sample"]
+source_file="res://audio/sfx/romance_failed.wav"
+dest_files=["res://.godot/imported/romance_failed.wav-97724ff7b83087b7f6f7288217e8ae50.sample"]
 
 [params]
 

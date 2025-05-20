@@ -35,7 +35,7 @@ grow_vertical = 2
 script = ExtResource("1_482oc")
 game_scene = ExtResource("2_520ac")
 main_theme = ExtResource("3_axson")
-button_click = ExtResource("4_1iahe")
+button_click_audio = ExtResource("4_1iahe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

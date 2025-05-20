@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bp553va4wmaj3"]
+[gd_scene load_steps=10 format=3 uid="uid://bp553va4wmaj3"]
 
 [ext_resource type="Script" uid="uid://dspuclrb6fl6l" path="res://scripts/managers/hud_manager.gd" id="1_iin16"]
 [ext_resource type="FontFile" uid="uid://b8i3q121b40nv" path="res://art/fonts/MinimalPixelFont.ttf" id="1_l1st6"]
+[ext_resource type="AudioStream" uid="uid://boy5qiqf8viqd" path="res://audio/sfx/button_click.wav" id="2_3178q"]
 [ext_resource type="Texture2D" uid="uid://dgm58b4mycd6l" path="res://art/UI/menus/Square Buttons 26x19.png" id="3_sjfwy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3178q"]
@@ -73,7 +74,7 @@ _data = {
 &"pop_up": SubResource("Animation_rurhu")
 }
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("score_label", "timer_label", "gameOver_label", "gameOver_anim")]
+[node name="HUD" type="Control" node_paths=PackedStringArray("score_label", "timer_label", "romanced_label", "gameOver_anim")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,9 +82,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iin16")
+button_click_audio = ExtResource("2_3178q")
 score_label = NodePath("ScorePanel/Label")
 timer_label = NodePath("TimePanel/Label")
-gameOver_label = NodePath("GameOverPanel/Label")
+romanced_label = NodePath("GameOverPanel/RomancedLabel")
 gameOver_anim = NodePath("AnimationPlayer")
 
 [node name="ScorePanel" type="Panel" parent="."]
@@ -137,22 +139,41 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(576, 324)
 
-[node name="Label" type="Label" parent="GameOverPanel"]
+[node name="GameOverLabel" type="Label" parent="GameOverPanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -178.0
+offset_top = -91.0
+offset_right = 179.0
+offset_bottom = -24.3333
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_l1st6")
 theme_override_font_sizes/font_size = 100
-text = "YOU WIN"
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="RomancedLabel" type="Label" parent="GameOverPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.5
+offset_top = -16.6667
+offset_right = 206.5
+offset_bottom = 16.6667
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_l1st6")
+theme_override_font_sizes/font_size = 50
+text = "you romanced x out of x students"
+horizontal_alignment = 1
 
 [node name="BackButton" type="TextureButton" parent="GameOverPanel"]
 layout_mode = 0
