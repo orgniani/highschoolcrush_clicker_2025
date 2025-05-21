@@ -4,10 +4,8 @@ class_name LoverPatrol
 
 @export var patrol_range_min: float = 10.0
 @export var patrol_range_max: float = 30.0
-
 @export var patrol_speed_min: float = 10.0
 @export var patrol_speed_max: float = 20.0
-
 @export var wait_time: float = 1.0
 
 var _lover: CharacterBody2D
@@ -16,8 +14,8 @@ var _animator: HumanAnimator
 var _left_limit: Vector2
 var _right_limit: Vector2
 
-var _patrol_range : float
-var _patrol_speed : float
+var _patrol_range: float
+var _patrol_speed: float
 
 var _direction: int = 1
 var _waiting: bool = false
@@ -41,11 +39,9 @@ func setup(animator: HumanAnimator):
 
 func stop():
 	_active = false
-	set_physics_process(false)
 
 func start():
 	_active = true
-	set_physics_process(true)
 
 func _physics_process(delta: float) -> void:
 	if not _active or _lover == null:

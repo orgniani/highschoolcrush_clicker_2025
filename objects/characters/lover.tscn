@@ -32,7 +32,6 @@ metadata/_custom_type_script = "uid://casnc1jootvaf"
 
 [node name="LoverPatrol" type="Node" parent="."]
 script = ExtResource("6_670pt")
-wait_time = 2.0
 metadata/_custom_type_script = "uid://d0koexjdo2axm"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -40,6 +39,7 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_acjsf")
 
 [node name="HeartBar" type="TextureProgressBar" parent="."]
+z_index = 5
 clip_contents = true
 anchors_preset = 8
 anchor_left = 0.5

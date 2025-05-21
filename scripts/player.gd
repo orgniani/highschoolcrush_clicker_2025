@@ -30,6 +30,5 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func on_game_over():
-	print("player game over")
 	set_physics_process(false)
 	animator.play_animation("idle", false)

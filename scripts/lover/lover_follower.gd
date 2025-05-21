@@ -29,6 +29,10 @@ func enable_follow(follow_target: CharacterBody2D, animator: HumanAnimator):
 
 	set_physics_process(true)
 
+func disable_follow():
+	_follow_target = null
+	set_physics_process(false)
+
 func _physics_process(delta):
 	if not _follow_target:
 		return

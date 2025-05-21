@@ -16,7 +16,7 @@
 
 [node name="GameScene" type="Node2D" node_paths=PackedStringArray("player", "game_manager", "hud")]
 script = ExtResource("1_w5aja")
-player = NodePath("Player")
+player = NodePath("CharactersYSort/Player")
 game_manager = NodePath("GameManager")
 hud = NodePath("HUD/HUD")
 
@@ -54,27 +54,33 @@ layer_3/tile_data = PackedInt32Array(327681, 786433, 13, 393214, 917505, 13, 393
 layer_4/name = "Props"
 layer_4/tile_data = PackedInt32Array(-131073, 3342337, 33, 327688, 3211265, 5, 393224, 3211265, 6, 327689, 3276801, 5, 393225, 3276801, 6, -196596, 3211265, 5, -131060, 3211265, 6, -196595, 3276801, 5, -131059, 3276801, 6, -65546, 3211265, 5, -10, 3211265, 6, -65545, 3276801, 5, -9, 3276801, 6, -196619, 3407873, 3, -131083, 3407873, 4, -65547, 3407873, 5, 131061, 3407873, 3, 196597, 3407873, 4, 262133, 3407873, 5, 262134, 3342337, 6, 327670, 3342337, 7, 393206, 3342337, 8, 262135, 3407873, 6, 327671, 3407873, 7, 393207, 3407873, 8, 196599, 3211265, 7, 196600, 3276801, 7, 131083, 3211265, 8, 196620, 3211265, 8, 12, 3211265, 3, 65548, 3211265, 4, 13, 3276801, 3, 65549, 3276801, 4, 65550, 3342337, 4, -65525, 3342337, 4, 65524, 3342337, 4, 458748, 3342337, 4, 131057, 2097153, 1, 131058, 2162689, 1, 196593, 2031617, 2, 393202, 2031617, 2, 327695, 2031617, 2, -65520, 2293761, 3, 65553, 2228225, 3, 262158, 2097153, 3, 262159, 2162689, 3, -65523, 2031617, 3, 196625, 2162689, 4, 262155, 2162689, 4, 131062, 2097153, 4, 327663, 2031617, 4, 393205, 2031617, 5)
 
-[node name="Player" parent="." instance=ExtResource("5_rurhu")]
+[node name="CharactersYSort" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="CharactersYSort" instance=ExtResource("5_rurhu")]
+top_level = false
 position = Vector2(134, 87)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="CharactersYSort/Player"]
 zoom = Vector2(4, 4)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="Lover" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_rurhu")]
-position = Vector2(222, 60)
+[node name="Lover" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("6_rurhu")]
+position = Vector2(206, 65)
 player = NodePath("../Player")
 config = ExtResource("7_kk2rg")
 
-[node name="Lover2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_rurhu")]
-position = Vector2(64, 119)
+[node name="Lover2" parent="CharactersYSort" node_paths=PackedStringArray("player", "jealous_partner") instance=ExtResource("6_rurhu")]
+position = Vector2(47, 118)
 player = NodePath("../Player")
+jealous_partner = NodePath("../Lover3")
 config = ExtResource("8_b5spy")
 
-[node name="Lover3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_rurhu")]
-position = Vector2(182, 103)
+[node name="Lover3" parent="CharactersYSort" node_paths=PackedStringArray("player", "jealous_partner") instance=ExtResource("6_rurhu")]
+position = Vector2(75, 115)
 player = NodePath("../Player")
+jealous_partner = NodePath("../Lover2")
 config = ExtResource("12_5ay1a")
 
 [node name="HUD" type="CanvasLayer" parent="."]
