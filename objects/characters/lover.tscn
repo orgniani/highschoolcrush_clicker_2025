@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://buhsyo1luhxbm"]
+[gd_scene load_steps=11 format=3 uid="uid://buhsyo1luhxbm"]
 
 [ext_resource type="Script" uid="uid://cm0yx5elt23ld" path="res://scripts/lover/lover.gd" id="1_hj7k7"]
 [ext_resource type="AudioStream" uid="uid://b2qi2esqtr5vq" path="res://audio/sfx/click.wav" id="2_670pt"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dtso1iiu8g2wr" path="res://art/UI/HeartBorder.png" id="5_2jkde"]
 [ext_resource type="Script" uid="uid://d0koexjdo2axm" path="res://scripts/lover/lover_patrol.gd" id="6_670pt"]
 [ext_resource type="Texture2D" uid="uid://d1qvhhs1cputj" path="res://art/UI/HeartFill.png" id="6_b326f"]
+[ext_resource type="Texture2D" uid="uid://dmgurgm2kv8a2" path="res://art/UI/expressions/expression_alerted.png" id="9_nusjl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acjsf"]
 size = Vector2(20, 23)
@@ -39,6 +40,7 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_acjsf")
 
 [node name="HeartBar" type="TextureProgressBar" parent="."]
+visible = false
 z_index = 5
 clip_contents = true
 anchors_preset = 8
@@ -57,3 +59,14 @@ fill_mode = 3
 nine_patch_stretch = true
 texture_under = ExtResource("5_2jkde")
 texture_progress = ExtResource("6_b326f")
+
+[node name="Expression" type="TextureRect" parent="."]
+visible = false
+z_index = 4
+offset_left = -4.0
+offset_top = -21.0
+offset_right = 4.0
+offset_bottom = -12.0
+texture = ExtResource("9_nusjl")
+expand_mode = 1
+stretch_mode = 3

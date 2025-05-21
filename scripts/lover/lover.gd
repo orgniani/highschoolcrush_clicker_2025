@@ -14,6 +14,8 @@ extends CharacterBody2D
 @onready var follower: LoverFollower = $"LoverFollower"
 @onready var patrol: LoverPatrol = $"LoverPatrol"
 @onready var animator: HumanAnimator = $"HumanAnimator"
+
+@onready var expression: TextureRect = $"Expression"
 @onready var heart_bar: TextureProgressBar = $"HeartBar"
 
 var _can_be_clicked := true
@@ -24,7 +26,8 @@ func _ready():
 	
 	heart_bar.max_value = required_clicks
 	heart_bar.visible = false
-		
+	expression.visible = false
+	
 	patrol.setup(animator)
 
 	set_process(true)
@@ -89,10 +92,12 @@ func _on_romance_failed():
 
 func _on_partner_romance_started(romanced_lover: CharacterBody2D):
 	patrol.stop()
+	expression.visible = true
 	follower.enable_follow(romanced_lover, animator)
 
 func _on_partner_romance_ended():
 	follower.disable_follow()
+	expression.visible = false
 	animator.play_animation("idle", false)
 	
 	patrol.start()
