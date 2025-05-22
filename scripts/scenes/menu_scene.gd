@@ -19,9 +19,8 @@ func _on_credit_button_pressed() -> void:
 	credits_panel.visible = true;
 	pass
 
-func _on_quit_button_pressed() -> void:
-	_play_button_click_sound()
-	get_tree().quit()
+func _on_mute_button_pressed() -> void:
+	AudioManager.toggle_mute()
 	pass
 
 func _play_button_click_sound() -> void:

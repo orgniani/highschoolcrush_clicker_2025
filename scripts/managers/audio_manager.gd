@@ -4,6 +4,8 @@ var music_player: AudioStreamPlayer
 var sfx_players: Array[AudioStreamPlayer] = []
 const MAX_SFX_PLAYERS := 5  # Number of simultaneous SFX allowed
 
+var is_muted := false
+
 func _ready():
 	music_player = AudioStreamPlayer.new()
 	music_player.bus = "Music"
@@ -31,3 +33,8 @@ func play_sound(sfx: AudioStream):
 			return
 
 	push_warning("All SFX players are busy — consider increasing MAX_SFX_PLAYERS.")
+
+func toggle_mute():
+	is_muted = !is_muted
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), is_muted)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), is_muted)

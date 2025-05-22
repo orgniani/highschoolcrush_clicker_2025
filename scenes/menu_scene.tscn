@@ -146,14 +146,14 @@ text = "Credit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QuitButton" type="TextureButton" parent="Panel/VBoxContainer"]
+[node name="MuteButton" type="TextureButton" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("AtlasTexture_482oc")
 texture_hover = SubResource("AtlasTexture_6od1f")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer/QuitButton"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/MuteButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,7 +163,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0.564706, 0.384314, 0.364706, 1)
 theme_override_fonts/font = ExtResource("2_o71fo")
 theme_override_font_sizes/font_size = 10
-text = "Quit"
+text = "Mute"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -191,4 +191,4 @@ offset_bottom = 2.0
 
 [connection signal="pressed" from="Panel/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/CreditButton" to="." method="_on_credit_button_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MuteButton" to="." method="_on_mute_button_pressed"]
