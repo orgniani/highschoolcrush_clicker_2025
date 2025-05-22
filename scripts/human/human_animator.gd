@@ -25,6 +25,10 @@ func play_animation(animation_name: String, direction_or_flip, remember_directio
 		flip = _last_flip_left
 	else:
 		flip = direction_or_flip
+		_last_flip_left = flip
 
 	for part in parts:
 		part.play(animation_name, flip)
+
+func is_facing_left() -> bool:
+	return _last_flip_left

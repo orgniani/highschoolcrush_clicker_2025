@@ -61,7 +61,7 @@ func _on_lover_failed():
 		return
 
 	finished_lovers += 1
-	
+	print("Lover failed. Finished lovers: %d / %d" % [finished_lovers, total_lovers])
 	if finished_lovers >= total_lovers:
 		_trigger_game_over()
 	else:

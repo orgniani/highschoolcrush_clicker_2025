@@ -19,6 +19,7 @@ extends CharacterBody2D
 @onready var heart_bar: TextureProgressBar = $"HeartBar"
 
 var _can_be_clicked := true
+var _has_failed := false
 
 func _ready():
 	animator.apply_config(config)
@@ -71,36 +72,44 @@ func _on_romance_success():
 	patrol.stop()
 
 	var follow_target = player.last_follower
-	follower.enable_follow(follow_target, animator)
+	follower.enable_follow(follow_target)
 	heart_bar.visible = false
 	player.last_follower = self
 
 	if jealous_partner:
 		jealous_partner._set_can_be_clicked(true)
+		jealous_partner._on_partner_romance_ended(false)
 		jealous_partner._partner_breakup()
-		jealous_partner._on_partner_romance_ended()
 
-func _on_romance_failed():
+func _on_romance_failed(from_partner: bool = false):
+	if _has_failed:
+		return
+	_has_failed = true
+
 	set_process(false)
 	patrol.start()
 	heart_bar.visible = false
 	_can_be_clicked = false
 
-	if jealous_partner:
+	if from_partner:
+		state_machine.romance_failed.emit()
+		
+	if jealous_partner and not from_partner:
 		jealous_partner._set_can_be_clicked(false)
-		jealous_partner._on_partner_romance_ended()
+		jealous_partner._on_partner_romance_ended(true)
 
 func _on_partner_romance_started(romanced_lover: CharacterBody2D):
 	patrol.stop()
 	expression.visible = true
-	follower.enable_follow(romanced_lover, animator)
+	follower.enable_follow(romanced_lover)
 
-func _on_partner_romance_ended():
+func _on_partner_romance_ended(failed: bool):
 	follower.disable_follow()
 	expression.visible = false
-	animator.play_animation("idle", false)
-	
 	patrol.start()
+	
+	if failed:
+		_on_romance_failed(true)
 
 func _partner_breakup():
 	jealous_partner = null

@@ -31,4 +31,5 @@ func _physics_process(delta: float) -> void:
 
 func on_game_over():
 	set_physics_process(false)
-	animator.play_animation("idle", false)
+	var is_facing_left = animator.is_facing_left()
+	animator.play_animation("idle", is_facing_left)
