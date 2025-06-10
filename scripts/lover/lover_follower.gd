@@ -12,13 +12,13 @@ var _follow_target_animator: HumanAnimator
 var _last_flip_left := false
 var _cached_offset := Vector2.ZERO
 
-func enable_follow(follow_target: CharacterBody2D):
+func enable_follow(follow_target: CharacterBody2D, lover: CharacterBody2D):
 	_follow_target = follow_target
-	_lover = get_parent()
+	_lover = lover
 	_animator = _lover.get_node("HumanAnimator")
 	_follow_target_animator = _follow_target.get_node("HumanAnimator")
 
-	_lover = get_parent()
+	_lover = lover
 
 	var desired_pos = _follow_target.global_position + follow_offset
 	var direction = desired_pos - _lover.global_position

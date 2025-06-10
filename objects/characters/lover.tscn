@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://buhsyo1luhxbm"]
+[gd_scene load_steps=15 format=3 uid="uid://buhsyo1luhxbm"]
 
 [ext_resource type="Script" uid="uid://cm0yx5elt23ld" path="res://scripts/lover/lover.gd" id="1_hj7k7"]
 [ext_resource type="AudioStream" uid="uid://b2qi2esqtr5vq" path="res://audio/sfx/click.wav" id="2_670pt"]
@@ -8,7 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://dtso1iiu8g2wr" path="res://art/UI/HeartBorder.png" id="5_2jkde"]
 [ext_resource type="Script" uid="uid://d0koexjdo2axm" path="res://scripts/lover/lover_patrol.gd" id="6_670pt"]
 [ext_resource type="Texture2D" uid="uid://d1qvhhs1cputj" path="res://art/UI/HeartFill.png" id="6_b326f"]
+[ext_resource type="Script" uid="uid://dvl11tcr2o1df" path="res://scripts/lover/lover_expressions.gd" id="7_ah3v8"]
 [ext_resource type="Texture2D" uid="uid://dmgurgm2kv8a2" path="res://art/UI/expressions/expression_alerted.png" id="9_nusjl"]
+[ext_resource type="Texture2D" uid="uid://jksmeolg7flo" path="res://art/UI/expressions/expression_love.png" id="9_phngk"]
+[ext_resource type="Texture2D" uid="uid://cbirjpvry33od" path="res://art/UI/expressions/expression_sad.png" id="10_jvr6k"]
+[ext_resource type="Script" uid="uid://ddocj6ctltjkb" path="res://scripts/lover/lover_partner_manager.gd" id="13_phngk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acjsf"]
 size = Vector2(20, 23)
@@ -21,19 +25,6 @@ script = ExtResource("1_hj7k7")
 click_sound = ExtResource("2_670pt")
 
 [node name="HumanAnimator" parent="." instance=ExtResource("2_rmcuh")]
-
-[node name="LoverFollower" type="Node" parent="."]
-script = ExtResource("3_7mh6s")
-follow_offset = Vector2(10, 0)
-metadata/_custom_type_script = "uid://bvoyt6bm5coqt"
-
-[node name="LoverStateMachine" type="Node" parent="."]
-script = ExtResource("4_y040x")
-metadata/_custom_type_script = "uid://casnc1jootvaf"
-
-[node name="LoverPatrol" type="Node" parent="."]
-script = ExtResource("6_670pt")
-metadata/_custom_type_script = "uid://d0koexjdo2axm"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)
@@ -61,7 +52,6 @@ texture_under = ExtResource("5_2jkde")
 texture_progress = ExtResource("6_b326f")
 
 [node name="Expression" type="TextureRect" parent="."]
-visible = false
 z_index = 4
 offset_left = -4.0
 offset_top = -21.0
@@ -70,3 +60,30 @@ offset_bottom = -12.0
 texture = ExtResource("9_nusjl")
 expand_mode = 1
 stretch_mode = 3
+
+[node name="Lover" type="Node" parent="."]
+
+[node name="LoverFollower" type="Node" parent="Lover"]
+script = ExtResource("3_7mh6s")
+follow_offset = Vector2(10, 0)
+metadata/_custom_type_script = "uid://bvoyt6bm5coqt"
+
+[node name="LoverStateMachine" type="Node" parent="Lover"]
+script = ExtResource("4_y040x")
+metadata/_custom_type_script = "uid://casnc1jootvaf"
+
+[node name="LoverPatrol" type="Node" parent="Lover"]
+script = ExtResource("6_670pt")
+metadata/_custom_type_script = "uid://d0koexjdo2axm"
+
+[node name="LoverExpressions" type="Node" parent="Lover" node_paths=PackedStringArray("expression_node")]
+script = ExtResource("7_ah3v8")
+expression_node = NodePath("../../Expression")
+alerted_sprite = ExtResource("9_nusjl")
+love_sprite = ExtResource("9_phngk")
+sad_sprite = ExtResource("10_jvr6k")
+metadata/_custom_type_script = "uid://dvl11tcr2o1df"
+
+[node name="LoverPartnerManager" type="Node" parent="Lover"]
+script = ExtResource("13_phngk")
+metadata/_custom_type_script = "uid://ddocj6ctltjkb"

@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 # References
 @export var player: CharacterBody2D
-@export var jealous_partner: CharacterBody2D
 @export var config: HumanConfig
 @export var click_sound: AudioStream
 
@@ -10,12 +9,14 @@ extends CharacterBody2D
 @export var required_clicks: int = 10
 @export var fill_time: float = 3.0
 
-@onready var state_machine: LoverStateMachine = $"LoverStateMachine"
-@onready var follower: LoverFollower = $"LoverFollower"
-@onready var patrol: LoverPatrol = $"LoverPatrol"
+@onready var state_machine: LoverStateMachine = $"Lover/LoverStateMachine"
+@onready var follower: LoverFollower = $"Lover/LoverFollower"
+@onready var patrol: LoverPatrol = $"Lover/LoverPatrol"
+@onready var expressions: LoverExpressions = $"Lover/LoverExpressions"
+@onready var partner_manager: LoverPartnerManager = $Lover/LoverPartnerManager
+
 @onready var animator: HumanAnimator = $"HumanAnimator"
 
-@onready var expression: TextureRect = $"Expression"
 @onready var heart_bar: TextureProgressBar = $"HeartBar"
 
 var _can_be_clicked := true
@@ -27,9 +28,10 @@ func _ready():
 	
 	heart_bar.max_value = required_clicks
 	heart_bar.visible = false
-	expression.visible = false
+	expressions.hide()
 	
-	patrol.setup(animator)
+	patrol.setup(animator, self)
+	partner_manager.owner_lover = self
 
 	set_process(true)
 	state_machine.setup(required_clicks, fill_time)
@@ -59,27 +61,28 @@ func _on_romance_start():
 	animator.play_animation("idle", false)
 	patrol.stop()
 	
-	state_machine._has_jealous_partner = jealous_partner != null
-	
 	heart_bar.visible = true
 	
-	if jealous_partner:
-		jealous_partner._set_can_be_clicked(false)
-		jealous_partner._on_partner_romance_started(self)
+	state_machine._has_jealous_partner = partner_manager.has_partners()
+
+	if partner_manager.has_partners():
+		partner_manager.notify_romance_started(self)
+
 
 func _on_romance_success():
 	set_process(false)
 	patrol.stop()
 
 	var follow_target = player.last_follower
-	follower.enable_follow(follow_target)
+	follower.enable_follow(follow_target, self)
 	heart_bar.visible = false
 	player.last_follower = self
-
-	if jealous_partner:
-		jealous_partner._set_can_be_clicked(true)
-		jealous_partner._on_partner_romance_ended(false)
-		jealous_partner._partner_breakup()
+	
+	expressions.hide()
+	
+	if partner_manager.has_partners():
+		partner_manager.notify_romance_ended(true)
+		partner_manager.clear_all_partners()
 
 func _on_romance_failed(from_partner: bool = false):
 	if _has_failed:
@@ -94,26 +97,28 @@ func _on_romance_failed(from_partner: bool = false):
 	if from_partner:
 		state_machine.romance_failed.emit()
 		
-	if jealous_partner and not from_partner:
-		jealous_partner._set_can_be_clicked(false)
-		jealous_partner._on_partner_romance_ended(true)
+	if partner_manager.has_partners() and not from_partner:
+		partner_manager.notify_romance_ended(false)
+		partner_manager.clear_all_partners()
+		expressions.show_love()
 
 func _on_partner_romance_started(romanced_lover: CharacterBody2D):
 	patrol.stop()
-	expression.visible = true
-	follower.enable_follow(romanced_lover)
+	expressions.show_alerted()
+	follower.enable_follow(romanced_lover, self)
 
 func _on_partner_romance_ended(failed: bool):
 	follower.disable_follow()
-	expression.visible = false
+	expressions.show_sad()
 	patrol.start()
 	
 	if failed:
 		_on_romance_failed(true)
 
-func _partner_breakup():
-	jealous_partner = null
-	
+func _on_breakup_from_partner():
+	expressions.show_sad()
+	follower.disable_follow()
+
 func _set_can_be_clicked(value: bool):
 	_can_be_clicked = value
 

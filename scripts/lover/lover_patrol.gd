@@ -22,8 +22,8 @@ var _waiting: bool = false
 var _wait_timer: float = 0.0
 var _active: bool = false
 
-func setup(animator: HumanAnimator):
-	_lover = get_parent()
+func setup(animator: HumanAnimator, lover: CharacterBody2D):
+	_lover = lover
 	_animator = animator
 
 	_patrol_range = randf_range(patrol_range_min, patrol_range_max)
