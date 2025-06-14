@@ -39,6 +39,7 @@ func setup(animator: HumanAnimator, lover: CharacterBody2D):
 
 func stop():
 	_active = false
+	_animator.play_animation("idle", _direction < 0)
 
 func start():
 	_active = true

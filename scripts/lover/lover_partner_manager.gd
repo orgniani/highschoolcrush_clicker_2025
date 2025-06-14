@@ -5,6 +5,7 @@ class_name LoverPartnerManager
 @export var partners: Array[CharacterBody2D] = []
 
 var owner_lover: CharacterBody2D = null
+var lover_target: CharacterBody2D = null
 
 func register_partner(partner: CharacterBody2D):
 	if not partners.has(partner):
@@ -22,7 +23,7 @@ func notify_romance_started(by: CharacterBody2D):
 			partner._set_can_be_clicked(false)
 			
 		if partner.has_method("_on_partner_romance_started"):
-			partner._on_partner_romance_started(by)
+			partner._on_partner_romance_started(lover_target)
 
 func notify_romance_ended(success: bool):
 	for partner in partners:
@@ -40,27 +41,21 @@ func has_partners() -> bool:
 
 func clear_all_partners():
 	if owner_lover == null:
-		print("❌ ERROR: LoverPartnerManager has no owner_lover set!")
+		print("[Partner Manager] ERROR: LoverPartnerManager has no owner_lover set!")
 		return
 
-	print("💔 Clearing partners for: ", owner_lover.name)
+	#print("[Partner Manager] Clearing partners for: ", owner_lover.name)
 
 	for partner in partners:
-		print(" → Breaking up with: ", partner.name)
+		#print("[Partner Manager] Breaking up with: ", partner.name)
 
-		# Ask partners manager to forget us
 		if partner.has_node("Lover/LoverPartnerManager"):
 			var their_manager = partner.get_node("Lover/LoverPartnerManager") as LoverPartnerManager
 			their_manager.unregister_partner(owner_lover)
 
-		# Stop them from following
 		if partner.has_node("Lover/LoverFollower"):
 			var their_follower = partner.get_node("Lover/LoverFollower") as LoverFollower
 			their_follower.disable_follow()
 
-		# Visual feedback
-		if partner.has_method("_on_breakup_from_partner"):
-			partner._on_breakup_from_partner()
-
 	partners.clear()
-	print("✔ Done clearing all partners for:", owner_lover.name)
+	#print("[Partner Manager] Done clearing all partners for:", owner_lover.name)

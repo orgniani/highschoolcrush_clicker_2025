@@ -16,11 +16,14 @@ extends CharacterBody2D
 @onready var partner_manager: LoverPartnerManager = $Lover/LoverPartnerManager
 
 @onready var animator: HumanAnimator = $"HumanAnimator"
+@onready var lightning: Node2D = $"LightningBeam"
+@onready var jealous_popup: Node2D = $"JealousPopup"
 
 @onready var heart_bar: TextureProgressBar = $"HeartBar"
 
 var _can_be_clicked := true
 var _has_failed := false
+var _current_lover: CharacterBody2D
 
 func _ready():
 	animator.apply_config(config)
@@ -29,9 +32,10 @@ func _ready():
 	heart_bar.max_value = required_clicks
 	heart_bar.visible = false
 	expressions.hide()
-	
+
 	patrol.setup(animator, self)
 	partner_manager.owner_lover = self
+	partner_manager.lover_target = self
 
 	set_process(true)
 	state_machine.setup(required_clicks, fill_time)
@@ -103,21 +107,26 @@ func _on_romance_failed(from_partner: bool = false):
 		expressions.show_love()
 
 func _on_partner_romance_started(romanced_lover: CharacterBody2D):
+	_current_lover = romanced_lover
 	patrol.stop()
 	expressions.show_alerted()
-	follower.enable_follow(romanced_lover, self)
+	
+	_spawn_lightning()
+	jealous_popup.activate()
+
+func _spawn_lightning():
+	lightning.to_node = _current_lover.get_node("BeamToNode")
+	lightning.activate()
 
 func _on_partner_romance_ended(failed: bool):
-	follower.disable_follow()
-	expressions.show_sad()
 	patrol.start()
+	lightning.deactivate()
 	
 	if failed:
 		_on_romance_failed(true)
-
-func _on_breakup_from_partner():
-	expressions.show_sad()
-	follower.disable_follow()
+		expressions.show_love()
+	else:
+		expressions.show_sad()
 
 func _set_can_be_clicked(value: bool):
 	_can_be_clicked = value
