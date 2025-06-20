@@ -1,18 +1,14 @@
 extends CharacterBody2D
 
-@export var config: HumanConfig
-@onready var animator: HumanAnimator = $HumanAnimator
-
 @export var speed: float = 100
+@export var config: HumanConfig
+
+@onready var animator: HumanAnimator = $HumanAnimator
+@onready var follower_container: Node = $FollowerContainer
 
 var last_follower: CharacterBody2D = self
 
 func _ready():
-	if GlobalGameState.player == null:
-		GlobalGameState.player = self
-	else:
-		queue_free()
-	
 	animator.apply_config(config)
 	animator.play_animation("idle", false)
 

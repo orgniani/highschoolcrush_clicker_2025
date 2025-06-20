@@ -18,3 +18,5 @@ position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_bxedw")
 
 [node name="HumanAnimator" parent="." instance=ExtResource("3_uxov2")]
+
+[node name="FollowerContainer" type="Node2D" parent="."]

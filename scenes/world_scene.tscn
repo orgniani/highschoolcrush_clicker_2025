@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://c43tvedcxcuvs"]
+
+[ext_resource type="PackedScene" uid="uid://dw3xvnexig6h5" path="res://scenes/level1_scene.tscn" id="1_jedrf"]
+[ext_resource type="PackedScene" uid="uid://blsyqhj7bfb87" path="res://objects/managers/game_manager.tscn" id="1_krmi5"]
+[ext_resource type="PackedScene" uid="uid://uwifnfy7hg4b" path="res://scenes/level2_scene.tscn" id="2_qiqor"]
+[ext_resource type="PackedScene" uid="uid://gbsphto4w7bn" path="res://objects/characters/player.tscn" id="3_ow06g"]
+[ext_resource type="Script" uid="uid://c3ubi7gssskbn" path="res://scripts/managers/level_manager.gd" id="4_ow06g"]
+[ext_resource type="PackedScene" uid="uid://q7ftv2y24aff" path="res://objects/wall.tscn" id="6_rckap"]
+[ext_resource type="PackedScene" uid="uid://bp553va4wmaj3" path="res://objects/menu/hud.tscn" id="7_wed4g"]
+
+[sub_resource type="Environment" id="Environment_n7tow"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
+[node name="WorldScene" type="Node2D"]
+
+[node name="GameManager" parent="." instance=ExtResource("1_krmi5")]
+
+[node name="LevelOne" parent="." node_paths=PackedStringArray("game_manager", "hud") instance=ExtResource("1_jedrf")]
+game_manager = NodePath("../GameManager")
+hud = NodePath("../HUD/HUD")
+
+[node name="LevelTwo" parent="." node_paths=PackedStringArray("game_manager", "hud") instance=ExtResource("2_qiqor")]
+game_manager = NodePath("../GameManager")
+hud = NodePath("../HUD/HUD")
+
+[node name="CharactersYSort" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="CharactersYSort" instance=ExtResource("3_ow06g")]
+position = Vector2(131, 87)
+
+[node name="Camera2D" type="Camera2D" parent="CharactersYSort/Player"]
+zoom = Vector2(4, 4)
+process_callback = 0
+position_smoothing_enabled = true
+
+[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("4_ow06g")
+player = NodePath("../CharactersYSort/Player")
+level_nodes = Array[NodePath]([NodePath("../LevelOne"), NodePath("../LevelTwo")])
+metadata/_custom_type_script = "uid://c3ubi7gssskbn"
+
+[node name="Wall" parent="." instance=ExtResource("6_rckap")]
+position = Vector2(13, 67)
+rotation = 1.5708
+
+[node name="Wall2" parent="." instance=ExtResource("6_rckap")]
+position = Vector2(526, 83)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n7tow")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="HUD" instance=ExtResource("7_wed4g")]

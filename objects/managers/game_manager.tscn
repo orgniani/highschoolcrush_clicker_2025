@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://blsyqhj7bfb87"]
 
-[ext_resource type="Script" uid="uid://dsk3j1p72jrer" path="res://scripts/singletons/game_manager.gd" id="1_hn526"]
+[ext_resource type="Script" uid="uid://dsk3j1p72jrer" path="res://scripts/managers/game_manager.gd" id="1_hn526"]
 [ext_resource type="AudioStream" uid="uid://babrqqe81ccq5" path="res://audio/sfx/game_over.wav" id="2_3vu21"]
 [ext_resource type="AudioStream" uid="uid://bdhjldib5xawt" path="res://audio/sfx/romance_success.wav" id="3_us1li"]
 [ext_resource type="AudioStream" uid="uid://c23lyw8dpi04r" path="res://audio/sfx/romance_failed.wav" id="4_gt4hv"]

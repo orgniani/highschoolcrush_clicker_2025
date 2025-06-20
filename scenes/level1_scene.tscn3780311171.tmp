@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dw3xvnexig6h5"]
+[gd_scene load_steps=9 format=3 uid="uid://dw3xvnexig6h5"]
 
 [ext_resource type="Script" uid="uid://b6ft0mm7ki03w" path="res://scripts/scenes/game_scene.gd" id="1_w5aja"]
 [ext_resource type="TileSet" uid="uid://dii5dkt7jw1jb" path="res://resources/tile_maps/default_tile_map.tres" id="5_utbpp"]
@@ -6,9 +6,16 @@
 [ext_resource type="Resource" uid="uid://bngiiwwgchvd" path="res://resources/lovers/lover_curly_config.tres" id="7_kk2rg"]
 [ext_resource type="Resource" uid="uid://cn5h6psr23iow" path="res://resources/lovers/lover_long_hair_config.tres" id="8_b5spy"]
 [ext_resource type="Resource" uid="uid://c34rqmpqvax7n" path="res://resources/lovers/lover_spikey_hair_config.tres" id="12_5ay1a"]
+[ext_resource type="PackedScene" uid="uid://bp553va4wmaj3" path="res://objects/menu/hud.tscn" id="12_tqxxy"]
 
-[node name="LevelOne" type="Node2D"]
+[sub_resource type="Environment" id="Environment_k1o8x"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
+[node name="LevelOne" type="Node2D" node_paths=PackedStringArray("hud")]
 script = ExtResource("1_w5aja")
+hud = NodePath("HUD/HUD")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(109, 67)
@@ -45,6 +52,13 @@ config = ExtResource("12_5ay1a")
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover3/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover2")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k1o8x")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="HUD" instance=ExtResource("12_tqxxy")]
 
 [editable path="CharactersYSort/Lover2"]
 [editable path="CharactersYSort/Lover3"]

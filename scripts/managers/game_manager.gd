@@ -1,4 +1,5 @@
 extends Node
+class_name GameManager
 
 @export var game_over_sound: AudioStream
 @export var romance_success_sound: AudioStream

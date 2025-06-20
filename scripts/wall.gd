@@ -1,33 +1,26 @@
 extends StaticBody2D
 
-@export var next_level_path: String = "res://scenes/level2_scene.tscn"
-@export var previous_level_path: String = "res://scenes/level1_scene.tscn"
+@onready var _button_container: VBoxContainer = $"VBoxContainer"
+@onready var _up_button: Button = $"VBoxContainer/UpButton"
+@onready var _down_button: Button = $"VBoxContainer/DownButton"
 
-@onready var _button_container : VBoxContainer = $"VBoxContainer"
-@onready var _up_button : Button = $"VBoxContainer/UpButton"
-@onready var _down_button : Button = $"VBoxContainer/DownButton"
+@export var level_manager : LevelManager
+@export var has_next_level: bool = true
+@export var has_previous_level: bool = false
 
 func _ready() -> void:
-	_up_button.visible = next_level_path != "" and ResourceLoader.exists(next_level_path)
-	_down_button.visible = previous_level_path != "" and ResourceLoader.exists(previous_level_path)
+	_up_button.visible = has_next_level
+	_down_button.visible = not has_previous_level
 	_button_container.visible = false
 
 func _on_up_button_pressed() -> void:
-	if next_level_path != "":
-		_transition_to_scene(next_level_path)
+	level_manager.next_level()
 
 func _on_down_button_pressed() -> void:
-	if previous_level_path != "":
-		_transition_to_scene(previous_level_path)
-
-func _transition_to_scene(path: String) -> void:
-	var persistent_nodes = [GlobalGameState.player] + GlobalGameState.romanced_lovers
-	SceneLoader.transition_to(path, persistent_nodes)
+	level_manager.previous_level()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body == GlobalGameState.player:
-		_button_container.visible = true
+	_button_container.visible = true
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body == GlobalGameState.player:
-		_button_container.visible = false
+	_button_container.visible = false
