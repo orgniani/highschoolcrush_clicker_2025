@@ -44,18 +44,14 @@ func clear_all_partners():
 		print("[Partner Manager] ERROR: LoverPartnerManager has no owner_lover set!")
 		return
 
-	#print("[Partner Manager] Clearing partners for: ", owner_lover.name)
+	print("[Partner Manager] Clearing partners for: ", owner_lover.name)
 
 	for partner in partners:
-		#print("[Partner Manager] Breaking up with: ", partner.name)
+		print("[Partner Manager] Breaking up with: ", partner.name)
 
 		if partner.has_node("Lover/LoverPartnerManager"):
 			var their_manager = partner.get_node("Lover/LoverPartnerManager") as LoverPartnerManager
 			their_manager.unregister_partner(owner_lover)
 
-		if partner.has_node("Lover/LoverFollower"):
-			var their_follower = partner.get_node("Lover/LoverFollower") as LoverFollower
-			their_follower.disable_follow()
-
 	partners.clear()
-	#print("[Partner Manager] Done clearing all partners for:", owner_lover.name)
+	print("[Partner Manager] Done clearing all partners for:", owner_lover.name)

@@ -1,10 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bi20hgct1h0qc"]
+[gd_scene load_steps=11 format=3 uid="uid://bi20hgct1h0qc"]
 
 [ext_resource type="Script" uid="uid://b6ft0mm7ki03w" path="res://scripts/scenes/game_scene.gd" id="1_7ktc1"]
-[ext_resource type="Script" uid="uid://dsk3j1p72jrer" path="res://scripts/managers/game_manager.gd" id="2_pw5wk"]
-[ext_resource type="AudioStream" uid="uid://babrqqe81ccq5" path="res://audio/sfx/game_over.wav" id="3_sqykb"]
-[ext_resource type="AudioStream" uid="uid://bdhjldib5xawt" path="res://audio/sfx/romance_success.wav" id="4_jfdkh"]
-[ext_resource type="AudioStream" uid="uid://c23lyw8dpi04r" path="res://audio/sfx/romance_failed.wav" id="5_8b5fr"]
 [ext_resource type="PackedScene" uid="uid://q7ftv2y24aff" path="res://objects/wall.tscn" id="6_m33yc"]
 [ext_resource type="TileSet" uid="uid://dii5dkt7jw1jb" path="res://resources/tile_maps/default_tile_map.tres" id="7_acylm"]
 [ext_resource type="PackedScene" uid="uid://gbsphto4w7bn" path="res://objects/characters/player.tscn" id="8_a3nyi"]
@@ -14,29 +10,16 @@
 [ext_resource type="Resource" uid="uid://c34rqmpqvax7n" path="res://resources/lovers/lover_spikey_hair_config.tres" id="12_ejxj8"]
 [ext_resource type="PackedScene" uid="uid://bp553va4wmaj3" path="res://objects/menu/hud.tscn" id="13_iyfyi"]
 
-[node name="GameScene" type="Node2D" node_paths=PackedStringArray("player", "game_manager", "hud")]
+[sub_resource type="Environment" id="Environment_7ktc1"]
+background_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_blend_mode = 1
+
+[node name="GameScene" type="Node2D" node_paths=PackedStringArray("player", "hud")]
 script = ExtResource("1_7ktc1")
 player = NodePath("CharactersYSort/Player")
-game_manager = NodePath("GameManager")
 hud = NodePath("HUD/HUD")
-
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("timer")]
-script = ExtResource("2_pw5wk")
-game_over_sound = ExtResource("3_sqykb")
-romance_success_sound = ExtResource("4_jfdkh")
-romance_failed_sound = ExtResource("5_8b5fr")
-timer = NodePath("Timer")
-metadata/_custom_type_script = "uid://dsk3j1p72jrer"
-
-[node name="Timer" type="Timer" parent="GameManager"]
-
-[node name="Wall" parent="." instance=ExtResource("6_m33yc")]
-position = Vector2(13, 67)
-rotation = 1.5708
-
-[node name="Wall2" parent="." instance=ExtResource("6_m33yc")]
-position = Vector2(252, 88)
-rotation = -1.5708
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(109, 67)
@@ -51,14 +34,14 @@ layer_2/tile_data = PackedInt32Array(327677, 327681, 10, 327678, 327681, 10, 327
 layer_3/name = "Library"
 layer_3/tile_data = PackedInt32Array(327681, 786433, 13, 393214, 917505, 13, 393211, 917505, 13, 327684, 917505, 13, 327687, 917505, 13, 65532, 2621441, 35, 131068, 2621441, 36, 196604, 2621441, 37, 65533, 2686977, 35, 131069, 2686977, 36, 196605, 2686977, 37, 65534, 2686977, 35, 131070, 2686977, 36, 196606, 2686977, 37, 4, 2686977, 35, 65540, 2686977, 36, 131076, 2686977, 37, 5, 2686977, 35, 65541, 2686977, 36, 131077, 2686977, 37, 6, 2752513, 35, 65542, 2752513, 36, 131078, 2752513, 37, 65535, 2686977, 35, 131071, 2686977, 36, 196607, 2686977, 37, 0, 2686977, 35, 65536, 2686977, 36, 131072, 2686977, 37, 1, 2686977, 35, 65537, 2686977, 36, 131073, 2686977, 37, 2, 2686977, 35, 65538, 2686977, 36, 131074, 2686977, 37, 3, 2686977, 35, 65539, 2686977, 36, 131075, 2686977, 37, -131078, 2752513, 33, -65542, 2752513, 34, -131077, 2949121, 33, -65541, 2949121, 34, -131074, 2752513, 33, -65538, 2752513, 34, -1, 2621441, 38, -65536, 2686977, 38, -65535, 2752513, 38, -196599, 2752513, 33, -131063, 2752513, 34, -196600, 2752513, 33, -131064, 2752513, 34, -196603, 2752513, 33, -131067, 2752513, 34, -196602, 2949121, 33, -131066, 2949121, 34, -196605, 2949121, 33, -131069, 2949121, 34, -196607, 2949121, 33, -131071, 2949121, 34, -5, 2621441, 38, -4, 2686977, 38, -3, 2752513, 38, -131073, 3276801, 33, -65537, 3276801, 34, -131076, 3211265, 33, -65540, 3211265, 34, -196601, 3538945, 33, -65533, 2621441, 38, -65532, 2686977, 38, -65531, 2752513, 38)
 layer_4/name = "Props"
-layer_4/tile_data = PackedInt32Array(-131073, 3342337, 33, 327688, 3211265, 5, 393224, 3211265, 6, 327689, 3276801, 5, 393225, 3276801, 6, -196596, 3211265, 5, -131060, 3211265, 6, -196595, 3276801, 5, -131059, 3276801, 6, -65546, 3211265, 5, -10, 3211265, 6, -65545, 3276801, 5, -9, 3276801, 6, -196619, 3407873, 3, -131083, 3407873, 4, -65547, 3407873, 5, 131061, 3407873, 3, 196597, 3407873, 4, 262133, 3407873, 5, 262134, 3342337, 6, 327670, 3342337, 7, 393206, 3342337, 8, 262135, 3407873, 6, 327671, 3407873, 7, 393207, 3407873, 8, 196599, 3211265, 7, 196600, 3276801, 7, 131083, 3211265, 8, 196620, 3211265, 8, 12, 3211265, 3, 65548, 3211265, 4, 13, 3276801, 3, 65549, 3276801, 4, 65550, 3342337, 4, -65525, 3342337, 4, 65524, 3342337, 4, 458748, 3342337, 4, 131057, 2097153, 1, 131058, 2162689, 1, 196593, 2031617, 2, 393202, 2031617, 2, 327695, 2031617, 2, -65520, 2293761, 3, 65553, 2228225, 3, 262158, 2097153, 3, 262159, 2162689, 3, -65523, 2031617, 3, 196625, 2162689, 4, 262155, 2162689, 4, 131062, 2097153, 4, 327663, 2031617, 4, 393205, 2031617, 5)
+layer_4/tile_data = PackedInt32Array(327688, 3211265, 5, 393224, 3211265, 6, 327689, 3276801, 5, 393225, 3276801, 6, -196596, 3211265, 5, -131060, 3211265, 6, -196595, 3276801, 5, -131059, 3276801, 6, -65546, 3211265, 5, -10, 3211265, 6, -65545, 3276801, 5, -9, 3276801, 6, -196619, 3407873, 3, -131083, 3407873, 4, -65547, 3407873, 5, 131061, 3407873, 3, 196597, 3407873, 4, 262133, 3407873, 5, 262134, 3342337, 6, 327670, 3342337, 7, 393206, 3342337, 8, 262135, 3407873, 6, 327671, 3407873, 7, 393207, 3407873, 8, 196599, 3211265, 7, 196600, 3276801, 7, 131083, 3211265, 8, 196620, 3211265, 8, 12, 3211265, 3, 65548, 3211265, 4, 13, 3276801, 3, 65549, 3276801, 4, 65550, 3342337, 4, -65525, 3342337, 4, 65524, 3342337, 4, 458748, 3342337, 4, 131057, 2097153, 1, 131058, 2162689, 1, 196593, 2031617, 2, 393202, 2031617, 2, 327695, 2031617, 2, -65520, 2293761, 3, 65553, 2228225, 3, 262158, 2097153, 3, 262159, 2162689, 3, -65523, 2031617, 3, 196625, 2162689, 4, 262155, 2162689, 4, 131062, 2097153, 4, 327663, 2031617, 4, 393205, 2031617, 5)
 
 [node name="CharactersYSort" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Player" parent="CharactersYSort" instance=ExtResource("8_a3nyi")]
 top_level = false
-position = Vector2(134, 87)
+position = Vector2(240, 87)
 
 [node name="Camera2D" type="Camera2D" parent="CharactersYSort/Player"]
 zoom = Vector2(4, 4)
@@ -83,10 +66,20 @@ position = Vector2(164, 117)
 player = NodePath("../Player")
 config = ExtResource("12_ejxj8")
 
+[node name="Wall" parent="." instance=ExtResource("6_m33yc")]
+position = Vector2(13, 67)
+rotation = 1.5708
+next_level_path = ""
+previous_level_path = ""
+
+[node name="Wall2" parent="." instance=ExtResource("6_m33yc")]
+position = Vector2(252, 88)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7ktc1")
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="HUD" instance=ExtResource("13_iyfyi")]
-
-[connection signal="timeout" from="GameManager/Timer" to="GameManager" method="_on_timer_timeout"]
 
 [editable path="CharactersYSort/Boss"]

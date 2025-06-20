@@ -102,6 +102,7 @@ segments = 5
 jaggedness = 5.0
 
 [node name="Line2D" type="Line2D" parent="LightningBeam"]
+self_modulate = Color(3, 3, 3, 1)
 points = PackedVector2Array(0, 0, 15, 0)
 width = 1.0
 default_color = Color(0.669804, 0.0159284, 5.29438e-07, 1)

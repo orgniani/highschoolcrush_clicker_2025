@@ -24,8 +24,14 @@ extends CharacterBody2D
 var _can_be_clicked := true
 var _has_failed := false
 var _current_lover: CharacterBody2D
+var _has_succeeded := false
+
+var _lover_id: String = ""
 
 func _ready():
+	_assign_lover_id()
+	GameManagerSingleton.register_lover(self)
+	
 	animator.apply_config(config)
 	animator.play_animation("idle", false)
 	
@@ -42,6 +48,15 @@ func _ready():
 	state_machine.romance_success.connect(_on_romance_success)
 	state_machine.romance_failed.connect(_on_romance_failed)
 	state_machine.romance_started.connect(_on_romance_start)
+
+func _assign_lover_id():
+	var scene_path := "unknown_scene"
+	var current_scene = get_tree().current_scene
+	if current_scene != null:
+		scene_path = current_scene.scene_file_path
+
+	_lover_id = "%s::%s" % [scene_path, str(get_instance_id())]
+	set_meta("lover_id", _lover_id)
 
 func _process(delta):
 	if Input.is_action_just_pressed("click") and _can_be_clicked:
@@ -74,6 +89,8 @@ func _on_romance_start():
 
 
 func _on_romance_success():
+	_has_succeeded = true
+	
 	set_process(false)
 	patrol.stop()
 
@@ -107,9 +124,16 @@ func _on_romance_failed(from_partner: bool = false):
 		expressions.show_love()
 
 func _on_partner_romance_started(romanced_lover: CharacterBody2D):
+	if _has_succeeded:
+		return
+	
 	_current_lover = romanced_lover
 	patrol.stop()
 	expressions.show_alerted()
+	
+	var direction = _current_lover.global_position - global_position
+	var flip_left = direction.x < 0
+	animator.play_animation("idle", flip_left)
 	
 	_spawn_lightning()
 	jealous_popup.activate()
@@ -119,6 +143,9 @@ func _spawn_lightning():
 	lightning.activate()
 
 func _on_partner_romance_ended(failed: bool):
+	if _has_succeeded:
+		return
+
 	patrol.start()
 	lightning.deactivate()
 	
