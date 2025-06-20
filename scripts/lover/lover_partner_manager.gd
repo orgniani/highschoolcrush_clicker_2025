@@ -1,5 +1,4 @@
 extends Node
-
 class_name LoverPartnerManager
 
 @export var partners: Array[CharacterBody2D] = []
@@ -10,48 +9,60 @@ var lover_target: CharacterBody2D = null
 func register_partner(partner: CharacterBody2D):
 	if not partners.has(partner):
 		partners.append(partner)
-		print(owner_lover.name, " registered ", partner.name)
+		_update_tracker()
 
 func unregister_partner(partner: CharacterBody2D):
 	if partners.has(partner):
 		partners.erase(partner)
-		print(owner_lover.name, " unregistered ", partner.name)
+		_update_tracker()
 
 func notify_romance_started(by: CharacterBody2D):
-	for partner in partners:
-		if partner.has_method("_set_can_be_clicked"):
-			partner._set_can_be_clicked(false)
-			
-		if partner.has_method("_on_partner_romance_started"):
-			partner._on_partner_romance_started(lover_target)
+	var i := partners.size() - 1
+	while i >= 0:
+		var partner = partners[i]
+		if not is_instance_valid(partner):
+			partners.remove_at(i)
+		else:
+			if partner.has_method("_set_can_be_clicked"):
+				partner._set_can_be_clicked(false)
+			if partner.has_method("_on_partner_romance_started"):
+				partner._on_partner_romance_started(lover_target)
+		i -= 1
 
 func notify_romance_ended(success: bool):
-	for partner in partners:
-		if partner.has_method("_set_can_be_clicked"):
-			partner._set_can_be_clicked(true)
-
-		if partner.has_method("_on_partner_romance_ended"):
-			partner._on_partner_romance_ended(!success)
-
-		if success and partner.has_method("_on_breakup_from_partner"):
-			partner._on_breakup_from_partner()
+	var i := partners.size() - 1
+	while i >= 0:
+		var partner = partners[i]
+		if not is_instance_valid(partner):
+			partners.remove_at(i)
+		else:
+			if partner.has_method("_set_can_be_clicked"):
+				partner._set_can_be_clicked(true)
+			if partner.has_method("_on_partner_romance_ended"):
+				partner._on_partner_romance_ended(!success)
+			if success and partner.has_method("_on_breakup_from_partner"):
+				partner._on_breakup_from_partner()
+		i -= 1
 
 func has_partners() -> bool:
 	return partners.size() > 0
 
 func clear_all_partners():
 	if owner_lover == null:
-		print("[Partner Manager] ERROR: LoverPartnerManager has no owner_lover set!")
+		print("[PartnerManager] ERROR: missing owner_lover")
 		return
 
-	print("[Partner Manager] Clearing partners for: ", owner_lover.name)
-
 	for partner in partners:
-		print("[Partner Manager] Breaking up with: ", partner.name)
-
-		if partner.has_node("Lover/LoverPartnerManager"):
-			var their_manager = partner.get_node("Lover/LoverPartnerManager") as LoverPartnerManager
-			their_manager.unregister_partner(owner_lover)
-
+		var partner_manager = partner.get_node_or_null("Lover/LoverPartnerManager")
+		if partner_manager:
+			partner_manager.unregister_partner(owner_lover)
 	partners.clear()
-	print("[Partner Manager] Done clearing all partners for:", owner_lover.name)
+	_update_tracker()
+
+func _update_tracker():
+	if owner_lover and owner_lover.has_meta("lover_id"):
+		var ids: Array[String] = []
+		for partner in partners:
+			if partner.has_meta("lover_id"):
+				ids.append(partner.get_meta("lover_id"))
+		LoverStateTracker.set_partners(owner_lover.get_meta("lover_id"), ids)

@@ -1,11 +1,8 @@
 extends CharacterBody2D
 
-# References
 @export var player: CharacterBody2D
 @export var config: HumanConfig
 @export var click_sound: AudioStream
-
-# Parameters
 @export var required_clicks: int = 10
 @export var fill_time: float = 3.0
 
@@ -18,19 +15,27 @@ extends CharacterBody2D
 @onready var animator: HumanAnimator = $"HumanAnimator"
 @onready var lightning: Node2D = $"LightningBeam"
 @onready var jealous_popup: Node2D = $"JealousPopup"
-
 @onready var heart_bar: TextureProgressBar = $"HeartBar"
 
 var _can_be_clicked := true
 var _has_failed := false
-var _current_lover: CharacterBody2D
 var _has_succeeded := false
-
+var _current_lover: CharacterBody2D
 var _lover_id: String = ""
 
 func _ready():
 	_assign_lover_id()
+	_restore_state()
+	_setup_lifecycle()
+	_setup_state_machine()
 
+func _assign_lover_id():
+	var scene_path := get_tree().current_scene.scene_file_path if get_tree().current_scene else "unknown_scene"
+	var node_path = get_path()
+	_lover_id = "%s::%s" % [scene_path, node_path]
+	set_meta("lover_id", _lover_id)
+
+func _restore_state():
 	var status = LoverStateTracker.get_status(_lover_id)
 
 	if status == LoverStateTracker.LoverStatus.SUCCEEDED:
@@ -39,32 +44,34 @@ func _ready():
 	elif status == LoverStateTracker.LoverStatus.FAILED:
 		_restore_failed_state()
 
+	_can_be_clicked = LoverStateTracker.get_can_be_clicked(_lover_id)
+
+	for partner_id in LoverStateTracker.get_partners(_lover_id):
+		var partner = GlobalGameState.find_lover_by_id(partner_id)
+		if partner:
+			partner_manager.register_partner(partner)
+
+	match LoverStateTracker.get_expression(_lover_id):
+		"love": expressions.show_love()
+		"sad": expressions.show_sad()
+		"alerted": expressions.show_alerted()
+		_: expressions.hide()
+
+func _setup_lifecycle():
 	animator.apply_config(config)
 	animator.play_animation("idle", false)
-
 	heart_bar.max_value = required_clicks
 	heart_bar.visible = false
-	expressions.hide()
-
 	patrol.setup(animator, self)
 	partner_manager.owner_lover = self
 	partner_manager.lover_target = self
-
 	set_process(true)
+
+func _setup_state_machine():
 	state_machine.setup(required_clicks, fill_time)
 	state_machine.romance_success.connect(_on_romance_success)
 	state_machine.romance_failed.connect(_on_romance_failed)
 	state_machine.romance_started.connect(_on_romance_start)
-
-func _assign_lover_id():
-	var scene_path := "unknown_scene"
-	var current_scene = get_tree().current_scene
-	if current_scene != null:
-		scene_path = current_scene.scene_file_path
-
-	var node_path = get_path()
-	_lover_id = "%s::%s" % [scene_path, node_path]
-	set_meta("lover_id", _lover_id)
 
 func _restore_failed_state():
 	_has_failed = true
@@ -75,15 +82,11 @@ func _restore_failed_state():
 func _process(delta):
 	if Input.is_action_just_pressed("click") and _can_be_clicked:
 		var mouse_pos = get_global_mouse_position()
-		var space_state = get_world_2d().direct_space_state
-
 		var query := PhysicsPointQueryParameters2D.new()
 		query.position = mouse_pos
 		query.collide_with_areas = true
-		query.exclude = []
-
-		var results = space_state.intersect_point(query, 1)
-		if results.size() > 0 and results[0].get("collider") == self:
+		var result = get_world_2d().direct_space_state.intersect_point(query, 1)
+		if result and result[0].get("collider") == self:
 			state_machine.register_click()
 			AudioManager.play_sound(click_sound)
 
@@ -114,10 +117,12 @@ func _on_romance_success():
 		partner_manager.notify_romance_ended(true)
 		partner_manager.clear_all_partners()
 
-func _on_romance_failed(from_partner: bool = false):
+func _on_romance_failed(from_partner := false):
 	if _has_failed:
 		return
 	LoverStateTracker.mark_failed(_lover_id)
+	LoverStateTracker.set_expression(_lover_id, "love")
+	LoverStateTracker.set_can_be_clicked(_lover_id, false)
 	_has_failed = true
 	set_process(false)
 	patrol.start()
@@ -136,15 +141,11 @@ func _on_partner_romance_started(romanced_lover: CharacterBody2D):
 	_current_lover = romanced_lover
 	patrol.stop()
 	expressions.show_alerted()
-	var direction = _current_lover.global_position - global_position
-	var flip_left = direction.x < 0
-	animator.play_animation("idle", flip_left)
+	LoverStateTracker.set_expression(_lover_id, "alerted")
+	var flip = (_current_lover.global_position - global_position).x < 0
+	animator.play_animation("idle", flip)
 	_spawn_lightning()
 	jealous_popup.activate()
-
-func _spawn_lightning():
-	lightning.to_node = _current_lover.get_node("BeamToNode")
-	lightning.activate()
 
 func _on_partner_romance_ended(failed: bool):
 	if _has_succeeded:
@@ -154,11 +155,18 @@ func _on_partner_romance_ended(failed: bool):
 	if failed:
 		_on_romance_failed(true)
 		expressions.show_love()
+		LoverStateTracker.set_expression(_lover_id, "love")
 	else:
 		expressions.show_sad()
+		LoverStateTracker.set_expression(_lover_id, "sad")
+
+func _spawn_lightning():
+	lightning.to_node = _current_lover.get_node("BeamToNode")
+	lightning.activate()
 
 func _set_can_be_clicked(value: bool):
 	_can_be_clicked = value
+	LoverStateTracker.set_can_be_clicked(_lover_id, value)
 
 func get_state_machine():
 	return state_machine

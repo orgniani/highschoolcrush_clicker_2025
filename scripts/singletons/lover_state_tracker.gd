@@ -1,27 +1,47 @@
 extends Node
 
-enum LoverStatus { FAILED, SUCCEEDED }
+enum LoverStatus { UNSET = -1, FAILED, SUCCEEDED }
+
+class LoverState:
+	var status: int = LoverStatus.UNSET
+	var can_be_clicked: bool = true
+	var partner_ids: Array[String] = []
+	var current_expression: String = ""
 
 var _lover_states: Dictionary = {}
 
+func _get_or_create_state(lover_id: String) -> LoverState:
+	if not _lover_states.has(lover_id):
+		_lover_states[lover_id] = LoverState.new()
+	return _lover_states[lover_id]
+
 func mark_failed(lover_id: String):
-	_lover_states[lover_id] = LoverStatus.FAILED
+	_get_or_create_state(lover_id).status = LoverStatus.FAILED
 
 func mark_succeeded(lover_id: String):
-	_lover_states[lover_id] = LoverStatus.SUCCEEDED
+	_get_or_create_state(lover_id).status = LoverStatus.SUCCEEDED
 
 func get_status(lover_id: String) -> int:
-	# Return -1 if lover_id is unknown
-	return _lover_states.get(lover_id, -1)
+	return _get_or_create_state(lover_id).status
+
+func set_can_be_clicked(lover_id: String, value: bool):
+	_get_or_create_state(lover_id).can_be_clicked = value
+
+func get_can_be_clicked(lover_id: String) -> bool:
+	return _get_or_create_state(lover_id).can_be_clicked
+
+func set_partners(lover_id: String, ids: Array[String]):
+	_get_or_create_state(lover_id).partner_ids = ids.duplicate()
+
+func get_partners(lover_id: String) -> Array[String]:
+	return _get_or_create_state(lover_id).partner_ids.duplicate()
+
+func set_expression(lover_id: String, value: String):
+	_get_or_create_state(lover_id).current_expression = value
+
+func get_expression(lover_id: String) -> String:
+	return _get_or_create_state(lover_id).current_expression
 
 func has_resolved(lover_id: String) -> bool:
-	return _lover_states.has(lover_id)
-
-func get_total_registered() -> int:
-	return _lover_states.size()
-
-func get_total_succeeded() -> int:
-	return _lover_states.values().count(LoverStatus.SUCCEEDED)
-
-func get_total_failed() -> int:
-	return _lover_states.values().count(LoverStatus.FAILED)
+	var state = _lover_states.get(lover_id)
+	return state != null and state.status != LoverStatus.UNSET
