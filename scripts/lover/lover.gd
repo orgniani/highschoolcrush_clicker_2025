@@ -30,11 +30,18 @@ var _lover_id: String = ""
 
 func _ready():
 	_assign_lover_id()
-	GameManager.register_lover(self)
-	
+
+	var status = LoverStateTracker.get_status(_lover_id)
+
+	if status == LoverStateTracker.LoverStatus.SUCCEEDED:
+		queue_free()
+		return
+	elif status == LoverStateTracker.LoverStatus.FAILED:
+		_restore_failed_state()
+
 	animator.apply_config(config)
 	animator.play_animation("idle", false)
-	
+
 	heart_bar.max_value = required_clicks
 	heart_bar.visible = false
 	expressions.hide()
@@ -54,11 +61,16 @@ func _assign_lover_id():
 	var current_scene = get_tree().current_scene
 	if current_scene != null:
 		scene_path = current_scene.scene_file_path
-	
+
 	var node_path = get_path()
-	
 	_lover_id = "%s::%s" % [scene_path, node_path]
 	set_meta("lover_id", _lover_id)
+
+func _restore_failed_state():
+	_has_failed = true
+	_can_be_clicked = false
+	patrol.start()
+	expressions.show_love()
 
 func _process(delta):
 	if Input.is_action_just_pressed("click") and _can_be_clicked:
@@ -81,31 +93,23 @@ func _process(delta):
 func _on_romance_start():
 	animator.play_animation("idle", false)
 	patrol.stop()
-	
 	heart_bar.visible = true
-	
 	state_machine._has_jealous_partner = partner_manager.has_partners()
-
 	if partner_manager.has_partners():
 		partner_manager.notify_romance_started(self)
 
-
 func _on_romance_success():
+	LoverStateTracker.mark_succeeded(_lover_id)
 	_has_succeeded = true
-	
 	set_process(false)
 	patrol.stop()
-
 	var follow_target = GlobalGameState.player.last_follower
 	follower.enable_follow(follow_target, self)
 	heart_bar.visible = false
-	
 	GlobalGameState.player.last_follower = self
 	GlobalGameState.romanced_lovers.append(self)
 	GlobalGameState.romanced_ids.append(_lover_id)
-	
 	expressions.hide()
-	
 	if partner_manager.has_partners():
 		partner_manager.notify_romance_ended(true)
 		partner_manager.clear_all_partners()
@@ -113,16 +117,14 @@ func _on_romance_success():
 func _on_romance_failed(from_partner: bool = false):
 	if _has_failed:
 		return
+	LoverStateTracker.mark_failed(_lover_id)
 	_has_failed = true
-
 	set_process(false)
 	patrol.start()
 	heart_bar.visible = false
 	_can_be_clicked = false
-
 	if from_partner:
 		state_machine.romance_failed.emit()
-		
 	if partner_manager.has_partners() and not from_partner:
 		partner_manager.notify_romance_ended(false)
 		partner_manager.clear_all_partners()
@@ -131,15 +133,12 @@ func _on_romance_failed(from_partner: bool = false):
 func _on_partner_romance_started(romanced_lover: CharacterBody2D):
 	if _has_succeeded:
 		return
-	
 	_current_lover = romanced_lover
 	patrol.stop()
 	expressions.show_alerted()
-	
 	var direction = _current_lover.global_position - global_position
 	var flip_left = direction.x < 0
 	animator.play_animation("idle", flip_left)
-	
 	_spawn_lightning()
 	jealous_popup.activate()
 
@@ -150,10 +149,8 @@ func _spawn_lightning():
 func _on_partner_romance_ended(failed: bool):
 	if _has_succeeded:
 		return
-
 	patrol.start()
 	lightning.deactivate()
-	
 	if failed:
 		_on_romance_failed(true)
 		expressions.show_love()

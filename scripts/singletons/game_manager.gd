@@ -27,13 +27,9 @@ func _process(delta):
 		updated_timer.emit(timer.time_left)
 
 func register_lover(lover: Node):
-	if not lover.has_meta("lover_id"):
-		push_warning("Lover missing 'lover_id' meta!")
+	var id = lover.get_meta("lover_id")
+	if LoverStateTracker.has_resolved(id):
 		return
-
-	var id: String = lover.get_meta("lover_id")
-	if _registered_lovers.has(id):
-		return  # Already registered
 
 	_registered_lovers[id] = {
 		"node": lover,

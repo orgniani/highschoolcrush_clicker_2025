@@ -14,20 +14,14 @@ func _ready() -> void:
 
 func _on_up_button_pressed() -> void:
 	if next_level_path != "":
-		_transition_to_scene(next_level_path)
+		GameFlowManager.load_next_level(next_level_path)
 
 func _on_down_button_pressed() -> void:
 	if previous_level_path != "":
-		_transition_to_scene(previous_level_path)
-
-func _transition_to_scene(path: String) -> void:
-	var persistent_nodes = [GlobalGameState.player] + GlobalGameState.romanced_lovers
-	SceneLoader.transition_to(path, persistent_nodes)
+		GameFlowManager.load_next_level(previous_level_path)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body == GlobalGameState.player:
-		_button_container.visible = true
+	_button_container.visible = true
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body == GlobalGameState.player:
-		_button_container.visible = false
+	_button_container.visible = false
