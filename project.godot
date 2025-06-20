@@ -23,7 +23,6 @@ GlobalGameState="*res://scripts/singletons/global_game_state.gd"
 SceneLoader="*res://scripts/singletons/scene_loader.gd"
 GameFlowManager="*res://scripts/singletons/game_flow_manager.gd"
 LoverStateTracker="*res://scripts/singletons/lover_state_tracker.gd"
-TimerManager="*res://scripts/singletons/timer_manager.gd"
 
 [file_customization]
 

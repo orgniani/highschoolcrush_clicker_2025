@@ -5,7 +5,6 @@ var persistent_nodes := []  # Player + romanced lovers
 
 func init_game():
 	current_scene_path = "res://scenes/level1_scene.tscn"
-	TimerManager.start_timer(60)
 	load_scene(current_scene_path)
 
 func load_next_level(path: String):

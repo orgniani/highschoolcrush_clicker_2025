@@ -45,3 +45,6 @@ func get_expression(lover_id: String) -> String:
 func has_resolved(lover_id: String) -> bool:
 	var state = _lover_states.get(lover_id)
 	return state != null and state.status != LoverStatus.UNSET
+
+func reset():
+	_lover_states.clear()

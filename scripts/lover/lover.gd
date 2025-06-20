@@ -112,6 +112,7 @@ func _on_romance_success():
 	GlobalGameState.player.last_follower = self
 	GlobalGameState.romanced_lovers.append(self)
 	GlobalGameState.romanced_ids.append(_lover_id)
+	GameManager.handle_lover_success(self)
 	expressions.hide()
 	if partner_manager.has_partners():
 		partner_manager.notify_romance_ended(true)
@@ -123,6 +124,7 @@ func _on_romance_failed(from_partner := false):
 	LoverStateTracker.mark_failed(_lover_id)
 	LoverStateTracker.set_expression(_lover_id, "love")
 	LoverStateTracker.set_can_be_clicked(_lover_id, false)
+	GameManager.handle_lover_failed(self)
 	_has_failed = true
 	set_process(false)
 	patrol.start()

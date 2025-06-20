@@ -7,11 +7,13 @@ extends Control
 
 func _ready():
 	AudioManager.play_music(main_theme)
-	
+
 func _on_start_button_pressed() -> void:
 	print("Start Game!")
 	_play_button_click_sound()
 	get_tree().change_scene_to_packed(game_scene)
+	
+	GameManager.start_game()
 	pass
 
 func _on_credit_button_pressed() -> void:
