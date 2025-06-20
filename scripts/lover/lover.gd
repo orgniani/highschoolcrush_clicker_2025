@@ -30,7 +30,7 @@ var _lover_id: String = ""
 
 func _ready():
 	_assign_lover_id()
-	GameManagerSingleton.register_lover(self)
+	GameManager.register_lover(self)
 	
 	animator.apply_config(config)
 	animator.play_animation("idle", false)
@@ -54,8 +54,10 @@ func _assign_lover_id():
 	var current_scene = get_tree().current_scene
 	if current_scene != null:
 		scene_path = current_scene.scene_file_path
-
-	_lover_id = "%s::%s" % [scene_path, str(get_instance_id())]
+	
+	var node_path = get_path()
+	
+	_lover_id = "%s::%s" % [scene_path, node_path]
 	set_meta("lover_id", _lover_id)
 
 func _process(delta):
@@ -94,10 +96,13 @@ func _on_romance_success():
 	set_process(false)
 	patrol.stop()
 
-	var follow_target = player.last_follower
+	var follow_target = GlobalGameState.player.last_follower
 	follower.enable_follow(follow_target, self)
 	heart_bar.visible = false
-	player.last_follower = self
+	
+	GlobalGameState.player.last_follower = self
+	GlobalGameState.romanced_lovers.append(self)
+	GlobalGameState.romanced_ids.append(_lover_id)
 	
 	expressions.hide()
 	

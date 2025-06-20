@@ -10,23 +10,24 @@ extends StaticBody2D
 func _ready() -> void:
 	_up_button.visible = next_level_path != "" and ResourceLoader.exists(next_level_path)
 	_down_button.visible = previous_level_path != "" and ResourceLoader.exists(previous_level_path)
-	
 	_button_container.visible = false
 
 func _on_up_button_pressed() -> void:
-	print("Up pressed!")
 	if next_level_path != "":
-		get_tree().change_scene_to_file(next_level_path)
+		_transition_to_scene(next_level_path)
 
 func _on_down_button_pressed() -> void:
-	print("Down pressed!")
 	if previous_level_path != "":
-		get_tree().change_scene_to_file(previous_level_path)
+		_transition_to_scene(previous_level_path)
 
+func _transition_to_scene(path: String) -> void:
+	var persistent_nodes = [GlobalGameState.player] + GlobalGameState.romanced_lovers
+	SceneLoader.transition_to(path, persistent_nodes)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	_button_container.visible = true
-
+	if body == GlobalGameState.player:
+		_button_container.visible = true
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	_button_container.visible = false
+	if body == GlobalGameState.player:
+		_button_container.visible = false

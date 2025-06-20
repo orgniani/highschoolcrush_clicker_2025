@@ -17,8 +17,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-AudioManager="*res://scripts/managers/audio_manager.gd"
-GameManagerSingleton="*res://objects/managers/game_manager.tscn"
+AudioManager="*res://scripts/singletons/audio_manager.gd"
+GameManager="*res://objects/managers/game_manager.tscn"
+GlobalGameState="*res://scripts/singletons/global_game_state.gd"
+SceneLoader="*res://scripts/singletons/scene_loader.gd"
 
 [file_customization]
 

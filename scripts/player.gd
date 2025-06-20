@@ -8,6 +8,11 @@ extends CharacterBody2D
 var last_follower: CharacterBody2D = self
 
 func _ready():
+	if GlobalGameState.player == null:
+		GlobalGameState.player = self
+	else:
+		queue_free()
+	
 	animator.apply_config(config)
 	animator.play_animation("idle", false)
 
