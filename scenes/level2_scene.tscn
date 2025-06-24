@@ -51,6 +51,8 @@ position_smoothing_enabled = true
 position = Vector2(138, 115)
 player = NodePath("../Player")
 config = ExtResource("10_54bob")
+is_boss = true
+lover_id = "loverBoss1"
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover2"), NodePath("../../../Lover3")]
@@ -59,11 +61,13 @@ partners = [NodePath("../../../Lover2"), NodePath("../../../Lover3")]
 position = Vector2(55, 118)
 player = NodePath("../Player")
 config = ExtResource("11_slq1h")
+lover_id = "lover4"
 
 [node name="Lover3" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("9_xv7ld")]
 position = Vector2(196, 121)
 player = NodePath("../Player")
 config = ExtResource("12_ejxj8")
+lover_id = "lover5"
 
 [node name="Wall" parent="." instance=ExtResource("6_m33yc")]
 position = Vector2(13, 67)

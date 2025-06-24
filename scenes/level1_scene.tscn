@@ -51,11 +51,13 @@ position_smoothing_enabled = true
 position = Vector2(206, 65)
 player = NodePath("../Player")
 config = ExtResource("7_kk2rg")
+lover_id = "lover1"
 
 [node name="Lover2" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("6_rurhu")]
 position = Vector2(47, 118)
 player = NodePath("../Player")
 config = ExtResource("8_b5spy")
+lover_id = "lover2"
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover2/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover3")]
@@ -64,6 +66,7 @@ partners = [NodePath("../../../Lover3")]
 position = Vector2(75, 115)
 player = NodePath("../Player")
 config = ExtResource("12_5ay1a")
+lover_id = "lover3"
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover3/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover2")]

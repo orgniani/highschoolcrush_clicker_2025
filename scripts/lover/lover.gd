@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export var click_sound: AudioStream
 @export var required_clicks: int = 10
 @export var fill_time: float = 3.0
+@export var is_boss: bool = false
+@export var lover_id: String = ""
 
 @onready var state_machine: LoverStateMachine = $"Lover/LoverStateMachine"
 @onready var follower: LoverFollower = $"Lover/LoverFollower"
@@ -20,6 +22,8 @@ extends CharacterBody2D
 var _can_be_clicked := true
 var _has_failed := false
 var _has_succeeded := false
+var _state_machine_connected := false
+
 var _current_lover: CharacterBody2D
 var _lover_id: String = ""
 
@@ -27,24 +31,33 @@ func _ready():
 	_assign_lover_id()
 	_restore_state()
 	_setup_lifecycle()
-	_setup_state_machine()
+	
+	if !is_boss:
+		animator.modulate = Color.WHITE
 
 func _assign_lover_id():
-	var scene_path := get_tree().current_scene.scene_file_path if get_tree().current_scene else "unknown_scene"
-	var node_path = get_path()
-	_lover_id = "%s::%s" % [scene_path, node_path]
+	if lover_id.is_empty():
+		push_error("Lover has no lover_id assigned!")
+		lover_id = name
+
+	_lover_id = lover_id
 	set_meta("lover_id", _lover_id)
 
 func _restore_state():
 	var status = LoverStateTracker.get_status(_lover_id)
 
-	if status == LoverStateTracker.LoverStatus.SUCCEEDED:
-		queue_free()
-		return
-	elif status == LoverStateTracker.LoverStatus.FAILED:
-		_restore_failed_state()
+	match status:
+		LoverStateTracker.LoverStatus.SUCCEEDED:
+			_has_succeeded = true
+			queue_free()
+			return
+		LoverStateTracker.LoverStatus.FAILED:
+			_has_failed = true
+			_restore_failed_state()
 
-	_can_be_clicked = LoverStateTracker.get_can_be_clicked(_lover_id)
+	var can_click = LoverStateTracker.get_can_be_clicked(_lover_id)
+	_can_be_clicked = can_click
+	_set_can_be_clicked(can_click)
 
 	for partner_id in LoverStateTracker.get_partners(_lover_id):
 		var partner = GlobalGameState.find_lover_by_id(partner_id)
@@ -56,6 +69,8 @@ func _restore_state():
 		"sad": expressions.show_sad()
 		"alerted": expressions.show_alerted()
 		_: expressions.hide()
+
+	_setup_state_machine()
 
 func _setup_lifecycle():
 	animator.apply_config(config)
@@ -80,15 +95,24 @@ func _restore_failed_state():
 	expressions.show_love()
 
 func _process(delta):
-	if Input.is_action_just_pressed("click") and _can_be_clicked:
+	if not _state_machine_connected:
+		if not state_machine.romance_failed.is_connected(_on_romance_failed):
+			_setup_state_machine()
+			_state_machine_connected = true
+
+	var status = LoverStateTracker.get_status(_lover_id)
+	if Input.is_action_just_pressed("click") and _can_be_clicked and status != LoverStateTracker.LoverStatus.FAILED:
 		var mouse_pos = get_global_mouse_position()
 		var query := PhysicsPointQueryParameters2D.new()
 		query.position = mouse_pos
 		query.collide_with_areas = true
 		var result = get_world_2d().direct_space_state.intersect_point(query, 1)
+
 		if result and result[0].get("collider") == self:
 			state_machine.register_click()
 			AudioManager.play_sound(click_sound)
+
+	heart_bar.value = state_machine.get_fill_percentage() * heart_bar.max_value
 
 	state_machine.update(delta)
 	heart_bar.value = state_machine.get_fill_percentage() * heart_bar.max_value
@@ -102,14 +126,15 @@ func _on_romance_start():
 		partner_manager.notify_romance_started(self)
 
 func _on_romance_success():
+	print("Romance success for:", _lover_id)
 	LoverStateTracker.mark_succeeded(_lover_id)
 	_has_succeeded = true
 	set_process(false)
 	patrol.stop()
 	var follow_target = GlobalGameState.player.last_follower
 	follower.enable_follow(follow_target, self)
-	heart_bar.visible = false
 	GlobalGameState.player.last_follower = self
+	heart_bar.visible = false
 	GlobalGameState.romanced_lovers.append(self)
 	GlobalGameState.romanced_ids.append(_lover_id)
 	GameManager.handle_lover_success(self)
@@ -118,24 +143,40 @@ func _on_romance_success():
 		partner_manager.notify_romance_ended(true)
 		partner_manager.clear_all_partners()
 
+	if state_machine.romance_failed.is_connected(_on_romance_failed):
+		state_machine.romance_failed.disconnect(_on_romance_failed)
+	if state_machine.romance_success.is_connected(_on_romance_success):
+		state_machine.romance_success.disconnect(_on_romance_success)
+
 func _on_romance_failed(from_partner := false):
 	if _has_failed:
 		return
+	_has_failed = true
+
+	print("Romance failed for:", _lover_id)
+
 	LoverStateTracker.mark_failed(_lover_id)
-	LoverStateTracker.set_expression(_lover_id, "love")
 	LoverStateTracker.set_can_be_clicked(_lover_id, false)
 	GameManager.handle_lover_failed(self)
-	_has_failed = true
+
 	set_process(false)
 	patrol.start()
 	heart_bar.visible = false
 	_can_be_clicked = false
-	if from_partner:
-		state_machine.romance_failed.emit()
-	if partner_manager.has_partners() and not from_partner:
+
+	var had_partners = partner_manager.has_partners()
+
+	if had_partners:
 		partner_manager.notify_romance_ended(false)
 		partner_manager.clear_all_partners()
 		expressions.show_love()
+		LoverStateTracker.set_expression(_lover_id, "love")
+	else:
+		expressions.hide()
+		LoverStateTracker.set_expression(_lover_id, "")
+
+	if from_partner:
+		return
 
 func _on_partner_romance_started(romanced_lover: CharacterBody2D):
 	if _has_succeeded:

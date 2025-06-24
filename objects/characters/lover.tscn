@@ -29,6 +29,7 @@ script = ExtResource("1_hj7k7")
 click_sound = ExtResource("2_670pt")
 
 [node name="HumanAnimator" parent="." instance=ExtResource("2_rmcuh")]
+modulate = Color(2, 2, 2, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)
