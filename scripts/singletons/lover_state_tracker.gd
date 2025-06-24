@@ -46,12 +46,5 @@ func has_resolved(lover_id: String) -> bool:
 	var state = _lover_states.get(lover_id)
 	return state != null and state.status != LoverStatus.UNSET
 
-func mark_all_unresolved_lovers_as_failed():
-	for lover in get_tree().get_nodes_in_group("lovers"):
-		if lover.has_meta("lover_id"):
-			var id = lover.get_meta("lover_id")
-			if not has_resolved(id):
-				mark_failed(id)
-
 func reset():
 	_lover_states.clear()
