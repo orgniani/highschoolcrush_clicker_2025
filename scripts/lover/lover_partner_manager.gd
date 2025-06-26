@@ -6,11 +6,6 @@ class_name LoverPartnerManager
 var owner_lover: CharacterBody2D = null
 var lover_target: CharacterBody2D = null
 
-func register_partner(partner: CharacterBody2D):
-	if not partners.has(partner):
-		partners.append(partner)
-		_update_tracker()
-
 func unregister_partner(partner: CharacterBody2D):
 	if partners.has(partner):
 		partners.erase(partner)

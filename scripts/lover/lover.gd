@@ -58,11 +58,13 @@ func _restore_state():
 	var can_click = LoverStateTracker.get_can_be_clicked(_lover_id)
 	_can_be_clicked = can_click
 	_set_can_be_clicked(can_click)
+	print("[RESTORE_CLICK] Lover:", _lover_id, " => ", can_click)
 
-	for partner_id in LoverStateTracker.get_partners(_lover_id):
-		var partner = GlobalGameState.find_lover_by_id(partner_id)
-		if partner:
-			partner_manager.register_partner(partner)
+	if is_boss:
+		for partner in partner_manager.partners:
+			if partner.has_method("_set_can_be_clicked"):
+				partner._set_can_be_clicked(false)
+				print("partner set click set to false")
 
 	match LoverStateTracker.get_expression(_lover_id):
 		"love": expressions.show_love()
@@ -210,6 +212,8 @@ func _spawn_lightning():
 func _set_can_be_clicked(value: bool):
 	_can_be_clicked = value
 	LoverStateTracker.set_can_be_clicked(_lover_id, value)
+	print("[SET_CLICK] Lover:", _lover_id, " => ", value)
+
 
 func get_state_machine():
 	return state_machine
