@@ -74,7 +74,7 @@ _data = {
 &"pop_up": SubResource("Animation_rurhu")
 }
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("score_label", "timer_label", "romanced_label", "ending_label", "gameOver_anim")]
+[node name="HUD" type="Control" node_paths=PackedStringArray("score_label", "timer_label", "points_label", "romanced_label", "ending_label", "gameOver_anim")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,13 +84,14 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_iin16")
 button_click_audio = ExtResource("2_3178q")
-score_label = NodePath("ScorePanel/ScoreLabel")
+score_label = NodePath("LoversPanel/LoversLabel")
 timer_label = NodePath("TimePanel/TimerLabel")
+points_label = NodePath("PointsPanel/PointsLabel")
 romanced_label = NodePath("GameOverPanel/RomancedLabel")
 ending_label = NodePath("GameOverPanel/EndingLabel")
 gameOver_anim = NodePath("AnimationPlayer")
 
-[node name="ScorePanel" type="Panel" parent="."]
+[node name="LoversPanel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -98,7 +99,7 @@ offset_bottom = 40.0
 grow_horizontal = 2
 mouse_filter = 2
 
-[node name="ScoreLabel" type="Label" parent="ScorePanel"]
+[node name="LoversLabel" type="Label" parent="LoversPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,6 +132,30 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_l1st6")
 theme_override_font_sizes/font_size = 36
 text = "Time: "
+vertical_alignment = 1
+
+[node name="PointsPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="PointsLabel" type="Label" parent="PointsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_l1st6")
+theme_override_font_sizes/font_size = 36
+text = "Points:"
 vertical_alignment = 1
 
 [node name="GameOverPanel" type="Panel" parent="."]

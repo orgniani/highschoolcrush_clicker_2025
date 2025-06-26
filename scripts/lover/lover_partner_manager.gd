@@ -42,6 +42,9 @@ func notify_romance_ended(success: bool):
 func has_partners() -> bool:
 	return partners.size() > 0
 
+func get_partner_count() -> int:
+	return partners.size()
+
 func clear_all_partners():
 	if owner_lover == null:
 		print("[PartnerManager] ERROR: missing owner_lover")

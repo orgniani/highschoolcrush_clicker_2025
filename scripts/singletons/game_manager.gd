@@ -13,7 +13,10 @@ var romanced_lovers := 0
 var finished_lovers := 0
 var game_over := false
 
+var total_points: int = 0
+
 signal updated_score(current: int, total: int)
+signal updated_points(current: int)
 signal updated_timer(seconds_left: float)
 signal game_over_signal()
 
@@ -27,7 +30,10 @@ func _process(delta):
 func start_game():
 	romanced_lovers = 0
 	finished_lovers = 0
+	
 	_resolved_lovers.clear()
+	
+	total_points = 0
 	game_over = false
 
 	timer.stop()
@@ -36,6 +42,7 @@ func start_game():
 	timer.start()
 
 	updated_score.emit(romanced_lovers, total_lovers)
+	updated_points.emit(total_points)
 
 func handle_lover_success(lover: Node):
 	if not lover.has_meta("lover_id"):
@@ -49,8 +56,17 @@ func handle_lover_success(lover: Node):
 	_resolved_lovers[id] = true
 	romanced_lovers += 1
 	finished_lovers += 1
-
+	
+	var points := 1
+	if lover.has_node("Lover/LoverPartnerManager"):
+		var partner_manager = lover.get_node("Lover/LoverPartnerManager")
+		if partner_manager.has_method("get_partner_count"):
+			points += partner_manager.get_partner_count()
+	
+	total_points += points
+	updated_points.emit(total_points)
 	updated_score.emit(romanced_lovers, total_lovers)
+	
 	AudioManager.play_sound(romance_success_sound)
 
 	if finished_lovers >= total_lovers:

@@ -6,6 +6,7 @@ class_name HUD
 
 @export var score_label : Label
 @export var timer_label : Label
+@export var points_label: Label
 
 @export var romanced_label : Label
 @export var ending_label : Label
@@ -13,6 +14,9 @@ class_name HUD
 
 var _current_lovers : int
 var _total_lovers : int
+
+var _current_points : int
+var max_possible_points := _total_lovers * 6
 
 func update_timer(seconds: float):
 	timer_label.text = "Time Left: " + str(int(seconds))
@@ -22,13 +26,19 @@ func update_score(current: int, total: int):
 	_total_lovers = total
 	score_label.text = "Romanced: %d / %d" % [current, total]
 
-func show_game_over():
-	var percentage: float = float(_current_lovers) / float(_total_lovers)
-	var ending_title: String
+func update_points(current_points: int):
+	_current_points = current_points
+	points_label.text = "Points: " + str(int(current_points))
 
-	if percentage >= 0.8:
+func show_game_over():
+	var romance_ratio := float(_current_lovers) / float(_total_lovers)
+	var points_ratio := float(_current_points) / float(max_possible_points)
+	var combined_score := (romance_ratio + points_ratio) / 2.0
+
+	var ending_title: String
+	if combined_score >= 0.8:
 		ending_title = "ending: heartbreaker"
-	elif percentage >= 0.3:
+	elif combined_score >= 0.3:
 		ending_title = "ending: drama Maker"
 	else:
 		ending_title = "ending: flop Era"
