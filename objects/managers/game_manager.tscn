@@ -10,7 +10,7 @@ script = ExtResource("1_hn526")
 game_over_sound = ExtResource("2_3vu21")
 romance_success_sound = ExtResource("3_us1li")
 romance_failed_sound = ExtResource("4_gt4hv")
-time_limit = 120.0
+time_limit = 600.0
 timer = NodePath("Timer")
 metadata/_custom_type_script = "uid://dsk3j1p72jrer"
 

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://gbsphto4w7bn" path="res://objects/characters/player.tscn" id="5_rurhu"]
 [ext_resource type="TileSet" uid="uid://dii5dkt7jw1jb" path="res://resources/tile_maps/default_tile_map.tres" id="5_utbpp"]
 [ext_resource type="PackedScene" uid="uid://buhsyo1luhxbm" path="res://objects/characters/lover.tscn" id="6_rurhu"]
-[ext_resource type="Resource" uid="uid://bngiiwwgchvd" path="res://resources/lovers/lover_curly_config.tres" id="7_kk2rg"]
+[ext_resource type="Resource" uid="uid://bngiiwwgchvd" path="res://resources/lovers/lover_curly_hair_config.tres" id="7_kk2rg"]
 [ext_resource type="Resource" uid="uid://cn5h6psr23iow" path="res://resources/lovers/lover_long_hair_config.tres" id="8_b5spy"]
 [ext_resource type="Resource" uid="uid://c34rqmpqvax7n" path="res://resources/lovers/lover_spikey_hair_config.tres" id="12_5ay1a"]
 [ext_resource type="PackedScene" uid="uid://bp553va4wmaj3" path="res://objects/menu/hud.tscn" id="12_tqxxy"]

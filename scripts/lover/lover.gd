@@ -123,7 +123,7 @@ func _on_romance_start():
 	animator.play_animation("idle", false)
 	patrol.stop()
 	heart_bar.visible = true
-	state_machine._has_jealous_partner = partner_manager.has_partners()
+	state_machine.set_jealous_partner_count(partner_manager.get_partner_count())
 	if partner_manager.has_partners():
 		partner_manager.notify_romance_started(self)
 

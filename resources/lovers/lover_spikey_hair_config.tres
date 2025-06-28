@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="HumanConfig" load_steps=5 format=3 uid="uid://c34rqmpqvax7n"]
 
-[ext_resource type="SpriteFrames" uid="uid://ba2ukg1t80qp8" path="res://resources/animations/body/body_default.tres" id="1_d773q"]
+[ext_resource type="SpriteFrames" uid="uid://n01fn0cswdkm" path="res://resources/animations/body/body_pale.tres" id="1_d773q"]
 [ext_resource type="SpriteFrames" uid="uid://clu5tgsk7bp1m" path="res://resources/animations/hair/spikey_hair.tres" id="2_7vdv7"]
-[ext_resource type="SpriteFrames" uid="uid://b8u488b4bodne" path="res://resources/animations/hand/empty_hand.tres" id="3_revwd"]
+[ext_resource type="SpriteFrames" uid="uid://bb03glb87xsgv" path="res://resources/animations/hand/empty_hand_pale.tres" id="3_7vdv7"]
 [ext_resource type="Script" uid="uid://3k8h5kgo1iid" path="res://scripts/human/human_config.gd" id="4_6doqq"]
 
 [resource]
 script = ExtResource("4_6doqq")
 body_sprite_frames = ExtResource("1_d773q")
 hair_sprite_frames = ExtResource("2_7vdv7")
-hand_sprite_frames = ExtResource("3_revwd")
+hand_sprite_frames = ExtResource("3_7vdv7")
 metadata/_custom_type_script = "uid://3k8h5kgo1iid"

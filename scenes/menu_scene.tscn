@@ -9,7 +9,7 @@
 [ext_resource type="TileSet" uid="uid://dii5dkt7jw1jb" path="res://resources/tile_maps/default_tile_map.tres" id="4_6od1f"]
 [ext_resource type="PackedScene" uid="uid://cfg8u10fcljld" path="res://objects/menu/human_menu.tscn" id="6_yfxa8"]
 [ext_resource type="Resource" uid="uid://prxuqwniotqm" path="res://resources/player_config.tres" id="7_520ac"]
-[ext_resource type="Resource" uid="uid://bngiiwwgchvd" path="res://resources/lovers/lover_curly_config.tres" id="7_vjll7"]
+[ext_resource type="Resource" uid="uid://bngiiwwgchvd" path="res://resources/lovers/lover_curly_hair_config.tres" id="7_vjll7"]
 [ext_resource type="Resource" uid="uid://cn5h6psr23iow" path="res://resources/lovers/lover_long_hair_config.tres" id="8_520ac"]
 [ext_resource type="PackedScene" uid="uid://blg6upj6ug164" path="res://objects/menu/credits.tscn" id="12_my6g0"]
 

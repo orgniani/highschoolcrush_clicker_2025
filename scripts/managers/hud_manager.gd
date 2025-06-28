@@ -19,7 +19,9 @@ var _current_points : int
 var max_possible_points := _total_lovers * 6
 
 func update_timer(seconds: float):
-	timer_label.text = "Time Left: " + str(int(seconds))
+	var minutes := int(seconds) / 60
+	var secs := int(seconds) % 60
+	timer_label.text = "Time Left: %02d:%02d" % [minutes, secs]
 
 func update_score(current: int, total: int):
 	_current_lovers = current
