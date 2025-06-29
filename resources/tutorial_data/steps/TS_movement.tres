@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TutorialStepData" load_steps=2 format=3 uid="uid://b3b81me8qr7si"]
+
+[ext_resource type="Script" uid="uid://dkghsclg518so" path="res://scripts/tutorial/tutorial_step_data.gd" id="1_fifso"]
+
+[resource]
+script = ExtResource("1_fifso")
+id = "movement"
+text = "Try using the A and D keys to move around! Go ahead!"
+requires_continue = true
+allow_player_movement = true
+wait_for_romance = false
+spawn_easy_lover = false
+spawn_hard_lover = false
+metadata/_custom_type_script = "uid://dkghsclg518so"

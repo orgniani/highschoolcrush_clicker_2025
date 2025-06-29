@@ -98,9 +98,9 @@ func _trigger_game_over():
 	AudioManager.play_sound(game_over_sound)
 	game_over_signal.emit()
 
-	_reset_game_state()
+	reset_game_state()
 
-func _reset_game_state():
+func reset_game_state():
 	timer.paused = true
 
 	GlobalGameState.romanced_lovers.clear()

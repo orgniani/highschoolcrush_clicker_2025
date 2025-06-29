@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TutorialStepData" load_steps=2 format=3 uid="uid://dmtbxobfnkoi8"]
+
+[ext_resource type="Script" uid="uid://dkghsclg518so" path="res://scripts/tutorial/tutorial_step_data.gd" id="1_54oa0"]
+
+[resource]
+script = ExtResource("1_54oa0")
+id = "intro"
+text = "Welcome to highschool crush! A game where you have to romance everybody in your school!"
+requires_continue = true
+allow_player_movement = false
+wait_for_romance = false
+spawn_easy_lover = false
+spawn_hard_lover = false
+metadata/_custom_type_script = "uid://dkghsclg518so"

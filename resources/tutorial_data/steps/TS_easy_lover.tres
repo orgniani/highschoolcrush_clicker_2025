@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TutorialStepData" load_steps=2 format=3 uid="uid://cj1hqeccml64b"]
+
+[ext_resource type="Script" uid="uid://dkghsclg518so" path="res://scripts/tutorial/tutorial_step_data.gd" id="1_hkna1"]
+
+[resource]
+script = ExtResource("1_hkna1")
+id = "easy_lover"
+text = "Try clicking on this lover to romance them."
+requires_continue = false
+allow_player_movement = false
+wait_for_romance = true
+spawn_easy_lover = true
+spawn_hard_lover = false
+metadata/_custom_type_script = "uid://dkghsclg518so"

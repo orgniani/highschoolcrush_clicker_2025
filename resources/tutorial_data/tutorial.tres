@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TutorialData" load_steps=7 format=3 uid="uid://c4bmvwlhfs2rn"]
+
+[ext_resource type="Script" uid="uid://dhna2ytrqwm1v" path="res://scripts/tutorial/tutorial_data.gd" id="1_q02eh"]
+[ext_resource type="Script" uid="uid://dkghsclg518so" path="res://scripts/tutorial/tutorial_step_data.gd" id="2_6y3v1"]
+[ext_resource type="Resource" uid="uid://dmtbxobfnkoi8" path="res://resources/tutorial_data/steps/TS_intro.tres" id="3_i3kvo"]
+[ext_resource type="Resource" uid="uid://b3b81me8qr7si" path="res://resources/tutorial_data/steps/TS_movement.tres" id="4_kvgkg"]
+[ext_resource type="Resource" uid="uid://cj1hqeccml64b" path="res://resources/tutorial_data/steps/TS_easy_lover.tres" id="5_g1wyq"]
+[ext_resource type="Resource" uid="uid://cpv8ic81kss1a" path="res://resources/tutorial_data/steps/TS_end.tres" id="6_hg3a8"]
+
+[resource]
+script = ExtResource("1_q02eh")
+steps = Array[ExtResource("2_6y3v1")]([ExtResource("3_i3kvo"), ExtResource("4_kvgkg"), ExtResource("5_g1wyq"), ExtResource("6_hg3a8")])
+metadata/_custom_type_script = "uid://dhna2ytrqwm1v"
