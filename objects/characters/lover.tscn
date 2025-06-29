@@ -39,7 +39,6 @@ shape = SubResource("RectangleShape2D_acjsf")
 position = Vector2(0, -16)
 
 [node name="HeartBar" type="TextureProgressBar" parent="."]
-visible = false
 z_index = 5
 clip_contents = true
 anchors_preset = 8

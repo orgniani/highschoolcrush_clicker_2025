@@ -2,12 +2,12 @@
 
 [ext_resource type="SpriteFrames" uid="uid://ba2ukg1t80qp8" path="res://resources/animations/body/body_default.tres" id="1_p7eoi"]
 [ext_resource type="SpriteFrames" uid="uid://cvegm7aqor2ak" path="res://resources/animations/hair/long_hair.tres" id="2_yj7i5"]
-[ext_resource type="SpriteFrames" uid="uid://b8u488b4bodne" path="res://resources/animations/hand/empty_hand.tres" id="3_sfl2g"]
+[ext_resource type="SpriteFrames" uid="uid://bb03glb87xsgv" path="res://resources/animations/hand/empty_hand_pale.tres" id="3_nwull"]
 [ext_resource type="Script" uid="uid://3k8h5kgo1iid" path="res://scripts/human/human_config.gd" id="4_5y2dc"]
 
 [resource]
 script = ExtResource("4_5y2dc")
 body_sprite_frames = ExtResource("1_p7eoi")
 hair_sprite_frames = ExtResource("2_yj7i5")
-hand_sprite_frames = ExtResource("3_sfl2g")
+hand_sprite_frames = ExtResource("3_nwull")
 metadata/_custom_type_script = "uid://3k8h5kgo1iid"

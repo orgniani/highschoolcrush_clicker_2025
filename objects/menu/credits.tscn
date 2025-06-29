@@ -51,7 +51,11 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(576, 324)
 texture = SubResource("AtlasTexture_1xrc2")
-region_rect = Rect2(7, 7, 12, 4)
+region_rect = Rect2(0, 0, 26, 18)
+patch_margin_left = 5
+patch_margin_top = 4
+patch_margin_right = 7
+patch_margin_bottom = 7
 
 [node name="TitleLabel" type="Label" parent="Panel"]
 modulate = Color(0.564706, 0.384314, 0.364706, 1)
