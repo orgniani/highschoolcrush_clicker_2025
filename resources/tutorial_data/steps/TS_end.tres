@@ -5,11 +5,8 @@
 [resource]
 script = ExtResource("1_pc7ot")
 id = "end"
-text = "That’s it! Ready?"
+text = "Romance as many students as you can before the timer runs out! Are you ready?"
 requires_continue = true
 allow_player_movement = false
-wait_for_player_move = false
 wait_for_romance = false
-spawn_easy_lover = false
-spawn_hard_lover = false
 metadata/_custom_type_script = "uid://dkghsclg518so"

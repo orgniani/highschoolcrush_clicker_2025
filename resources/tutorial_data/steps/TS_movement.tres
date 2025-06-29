@@ -5,10 +5,8 @@
 [resource]
 script = ExtResource("1_fifso")
 id = "movement"
-text = "Try using the A and D keys to move around! Go ahead!"
+text = "You can move around by using the A and D keys... Go ahead!"
 requires_continue = true
 allow_player_movement = true
 wait_for_romance = false
-spawn_easy_lover = false
-spawn_hard_lover = false
 metadata/_custom_type_script = "uid://dkghsclg518so"

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dkghsclg518so" path="res://scripts/tutorial/tutorial_step_data.gd" id="2_6y3v1"]
 [ext_resource type="Resource" uid="uid://dmtbxobfnkoi8" path="res://resources/tutorial_data/steps/TS_intro.tres" id="3_i3kvo"]
 [ext_resource type="Resource" uid="uid://b3b81me8qr7si" path="res://resources/tutorial_data/steps/TS_movement.tres" id="4_kvgkg"]
-[ext_resource type="Resource" uid="uid://cj1hqeccml64b" path="res://resources/tutorial_data/steps/TS_easy_lover.tres" id="5_g1wyq"]
+[ext_resource type="Resource" uid="uid://cj1hqeccml64b" path="res://resources/tutorial_data/steps/TS_lover.tres" id="5_g1wyq"]
 [ext_resource type="Resource" uid="uid://cpv8ic81kss1a" path="res://resources/tutorial_data/steps/TS_end.tres" id="6_hg3a8"]
 
 [resource]
