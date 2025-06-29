@@ -76,7 +76,7 @@ config = ExtResource("9_fn7ul")
 lover_id = "girlfriend"
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Girlfriend/Lover" index="4" node_paths=PackedStringArray("partners")]
-partners = [NodePath("")]
+partners = [null]
 
 [node name="Boyfriend" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_iarw2")]
 position = Vector2(276, 115)
@@ -85,7 +85,7 @@ config = ExtResource("10_ntiyy")
 lover_id = "boyfriend"
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Boyfriend/Lover" index="4" node_paths=PackedStringArray("partners")]
-partners = [NodePath("")]
+partners = [null]
 
 [node name="Jealousy1" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_iarw2")]
 position = Vector2(507, 117)

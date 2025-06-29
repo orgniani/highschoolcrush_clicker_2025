@@ -27,11 +27,6 @@ func _process_current_step():
 	show_text.emit(step.text)
 	allow_player_movement.emit(step.allow_player_movement)
 
-	if step.spawn_easy_lover:
-		_spawn_easy_lover()
-	if step.spawn_hard_lover:
-		_spawn_hard_lover()
-
 	if step.wait_for_romance:
 		await _wait_for_romance()
 		_next_step()
@@ -53,14 +48,6 @@ func _next_step():
 	_process_current_step()
 
 func _wait_for_romance() -> void:
-	var previous_count = GameManager.romanced_lovers
-	while GameManager.romanced_lovers <= previous_count:
+	var previous_count = GameManager.finished_lovers
+	while GameManager.finished_lovers <= previous_count:
 		await get_tree().process_frame
-
-func _spawn_easy_lover():
-	# emit a signal here or instance one manually
-	pass
-
-func _spawn_hard_lover():
-	# Same as above
-	pass
