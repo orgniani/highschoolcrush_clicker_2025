@@ -1,6 +1,6 @@
 extends Control
 
-@export var tutorial_scene : PackedScene
+@export var tutorial_scene_path : String
 @export var credits_panel : Control
 @export var main_theme : AudioStream
 @export var button_click_audio : AudioStream
@@ -11,7 +11,7 @@ func _ready():
 func _on_start_button_pressed() -> void:
 	print("Start Game!")
 	_play_button_click_sound()
-	get_tree().change_scene_to_packed(tutorial_scene)
+	GameFlowManager.load_scene(tutorial_scene_path)
 	pass
 
 func _on_credit_button_pressed() -> void:
