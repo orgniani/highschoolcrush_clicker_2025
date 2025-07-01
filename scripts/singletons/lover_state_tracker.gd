@@ -46,5 +46,10 @@ func has_resolved(lover_id: String) -> bool:
 	var state = _lover_states.get(lover_id)
 	return state != null and state.status != LoverStatus.UNSET
 
+func lock_all_lovers():
+	print("[LOVER TRACKER] Locking lovers:", _lover_states.keys())
+	for id in _lover_states.keys():
+		set_can_be_clicked(id, false)
+
 func reset():
 	_lover_states.clear()

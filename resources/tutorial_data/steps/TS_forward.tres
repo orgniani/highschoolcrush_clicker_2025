@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TutorialStepData" load_steps=2 format=3 uid="uid://dq75yerahk3jd"]
+
+[ext_resource type="Script" uid="uid://dkghsclg518so" path="res://scripts/tutorial/tutorial_step_data.gd" id="1_drnlu"]
+
+[resource]
+script = ExtResource("1_drnlu")
+id = "forward"
+text = "Come on, lets move! →"
+requires_continue = true
+allow_player_movement = true
+wait_for_romance = false
+clickable_lover_ids = Array[String]([])
+blocker_group = ""
+wait_for_area_trigger = true
+metadata/_custom_type_script = "uid://dkghsclg518so"

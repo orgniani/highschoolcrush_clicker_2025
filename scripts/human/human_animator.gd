@@ -20,8 +20,9 @@ func play_animation(animation_name: String, direction_or_flip, remember_directio
 	var flip: bool
 
 	if remember_direction:
-		if abs(direction_or_flip) > 0.01:
-			_last_flip_left = direction_or_flip < 0
+		if direction_or_flip is float or direction_or_flip is int:
+			if abs(direction_or_flip) > 0.01:
+				_last_flip_left = direction_or_flip < 0
 		flip = _last_flip_left
 	else:
 		flip = direction_or_flip

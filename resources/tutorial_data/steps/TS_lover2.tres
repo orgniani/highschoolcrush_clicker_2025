@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TutorialStepData" load_steps=2 format=3 uid="uid://cao8vdod6dlx5"]
+
+[ext_resource type="Script" uid="uid://dkghsclg518so" path="res://scripts/tutorial/tutorial_step_data.gd" id="1_ej88o"]
+
+[resource]
+script = ExtResource("1_ej88o")
+id = "lover2"
+text = "If you successfully romance a student, they will start following you! But careful! No second chances... if you fail, there's no change you can try again!"
+requires_continue = true
+allow_player_movement = false
+wait_for_romance = false
+clickable_lover_ids = Array[String]([])
+blocker_group = ""
+wait_for_area_trigger = false
+metadata/_custom_type_script = "uid://dkghsclg518so"
