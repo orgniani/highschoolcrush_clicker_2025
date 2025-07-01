@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var game_scene : PackedScene
+@export var game_scene_path : String
 @export var player: CharacterBody2D
 @export var hud: TutorialHUD
 @export var tutorial_manager: TutorialManager
@@ -19,9 +19,12 @@ func _ready():
 	tutorial_manager.start_tutorial()
 
 func _skip_tutorial():
-	get_tree().change_scene_to_packed(game_scene)
 	GameManager.reset_game_state()
 	GameManager.start_game()
+	
+	tutorial_manager.queue_free()
+	player._on_allow_movement(true)
+	GameFlowManager.load_scene(game_scene_path)
 	
 func _wait_for_all_lovers() -> void:
 	var lovers := get_tree().get_nodes_in_group("lovers")

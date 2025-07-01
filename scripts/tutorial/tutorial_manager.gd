@@ -34,22 +34,33 @@ func _process_current_step():
 	allow_player_movement.emit(step.allow_player_movement)
 	clickable_lovers_changed.emit(step.clickable_lover_ids)
 
-	# Romance step
+	if step.wait_for_romance and step.requires_continue:
+		_waiting_for_continue = true
+		await _wait_for_continue_or_romance()
+		_next_step()
+		return
+
 	if step.wait_for_romance:
 		await _wait_for_romance()
 		_next_step()
 		return
 
-	# Area step
 	if step.wait_for_area_trigger:
-		# Waits for external call to `on_area_trigger_entered()`
 		return
 
-	# Continue-button step
 	if step.requires_continue:
 		_waiting_for_continue = true
 	else:
 		_next_step()
+
+func _wait_for_continue_or_romance() -> void:
+	var previous_count = GameManager.finished_lovers
+	while is_inside_tree():
+		if not _waiting_for_continue:
+			break
+		if GameManager.finished_lovers > previous_count:
+			break
+		await get_tree().process_frame
 
 func _next_step():
 	_waiting_for_continue = false
@@ -68,5 +79,5 @@ func on_area_trigger_entered():
 
 func _wait_for_romance() -> void:
 	var previous_count = GameManager.finished_lovers
-	while GameManager.finished_lovers <= previous_count:
+	while is_inside_tree() and GameManager.finished_lovers <= previous_count:
 		await get_tree().process_frame

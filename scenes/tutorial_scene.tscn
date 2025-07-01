@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://dub75jifaaqin"]
+[gd_scene load_steps=16 format=3 uid="uid://dub75jifaaqin"]
 
 [ext_resource type="Script" uid="uid://dbom4dbh0ih5l" path="res://scripts/scenes/tutorial_scene.gd" id="1_tr4y6"]
 [ext_resource type="Script" uid="uid://detbn4jfm5rp5" path="res://scripts/tutorial/tutorial_manager.gd" id="2_0vn6l"]
-[ext_resource type="PackedScene" uid="uid://dw3xvnexig6h5" path="res://scenes/level1_scene.tscn" id="2_4yomp"]
 [ext_resource type="TileSet" uid="uid://dii5dkt7jw1jb" path="res://resources/tile_maps/default_tile_map.tres" id="2_ki3mu"]
 [ext_resource type="PackedScene" uid="uid://gbsphto4w7bn" path="res://objects/characters/player.tscn" id="3_0vn6l"]
 [ext_resource type="Resource" uid="uid://c4bmvwlhfs2rn" path="res://resources/tutorial_data/tutorial.tres" id="3_iarw2"]
@@ -23,7 +22,7 @@ glow_blend_mode = 1
 
 [node name="TutorialScene" type="Node2D" node_paths=PackedStringArray("player", "hud", "tutorial_manager")]
 script = ExtResource("1_tr4y6")
-game_scene = ExtResource("2_4yomp")
+game_scene_path = "res://scenes/level1_scene.tscn"
 player = NodePath("CharactersYSort/Player")
 hud = NodePath("HUD/TutorialHUD")
 tutorial_manager = NodePath("TutorialManager")
@@ -130,6 +129,10 @@ next_level_path = ""
 previous_level_path = ""
 
 [node name="AreaTrigger" parent="." node_paths=PackedStringArray("tutorial_manager") instance=ExtResource("15_ntiyy")]
+position = Vector2(73, 91)
+tutorial_manager = NodePath("../TutorialManager")
+
+[node name="AreaTrigger4" parent="." node_paths=PackedStringArray("tutorial_manager") instance=ExtResource("15_ntiyy")]
 position = Vector2(73, 91)
 tutorial_manager = NodePath("../TutorialManager")
 
