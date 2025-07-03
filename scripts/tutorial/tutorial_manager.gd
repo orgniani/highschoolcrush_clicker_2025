@@ -11,6 +11,7 @@ signal clickable_lovers_changed(ids: Array[String])
 
 var _current_step := 0
 var _waiting_for_continue := false
+var _waiting_for_area_trigger := false
 
 func start_tutorial():
 	print("Tutorial steps count:", tutorial_data.steps.size())
@@ -19,6 +20,9 @@ func start_tutorial():
 	_process_current_step()
 
 func _process_current_step():
+	_waiting_for_continue = false
+	_waiting_for_area_trigger = false
+
 	if _current_step >= tutorial_data.steps.size():
 		tutorial_finished.emit()
 		return
@@ -29,55 +33,62 @@ func _process_current_step():
 	var step = load(original_step.resource_path) as TutorialStepData
 	print("[TUTORIAL] Step:", step.id)
 	print("[TUTORIAL] Text:", step.text)
+	print("[TUTORIAL] wait_for_romance:", step.wait_for_romance)
+	print("[TUTORIAL] requires_continue:", step.requires_continue)
+	print("[TUTORIAL] wait_for_area_trigger:", step.wait_for_area_trigger)
 
 	show_text.emit(step.text)
 	allow_player_movement.emit(step.allow_player_movement)
 	clickable_lovers_changed.emit(step.clickable_lover_ids)
 
-	if step.wait_for_romance and step.requires_continue:
-		_waiting_for_continue = true
-		await _wait_for_continue_or_romance()
-		_next_step()
-		return
-
-	if step.wait_for_romance:
-		await _wait_for_romance()
-		_next_step()
-		return
-
 	if step.wait_for_area_trigger:
-		return
+		print("[TUTORIAL] Setting _waiting_for_area_trigger = true — expecting trigger")
+		_waiting_for_area_trigger = true
 
 	if step.requires_continue:
 		_waiting_for_continue = true
-	else:
-		_next_step()
 
-func _wait_for_continue_or_romance() -> void:
-	var previous_count = GameManager.finished_lovers
-	while is_inside_tree():
-		if not _waiting_for_continue:
-			break
-		if GameManager.finished_lovers > previous_count:
-			break
-		await get_tree().process_frame
+	# Start the waiting logic (run separately)
+	_wait_for_step_conditions(step)
 
-func _next_step():
-	_waiting_for_continue = false
-	_current_step += 1
-	_process_current_step()
+func _wait_for_step_conditions(step: TutorialStepData) -> void:
+	# Use a coroutine (run in background)
+	call_deferred("_wait_for_step_conditions_internal", step)
+
+func _wait_for_step_conditions_internal(step: TutorialStepData) -> void:
+	if step.wait_for_romance:
+		var previous_count = GameManager.finished_lovers
+		while is_inside_tree() and GameManager.finished_lovers <= previous_count:
+			if step.requires_continue and not _waiting_for_continue:
+				break
+			await get_tree().process_frame
+	elif step.requires_continue:
+		while is_inside_tree() and _waiting_for_continue:
+			await get_tree().process_frame
+	elif step.wait_for_area_trigger:
+		while is_inside_tree() and _waiting_for_area_trigger:
+			await get_tree().process_frame
+
+	_next_step()
 
 func on_continue_pressed():
 	if _waiting_for_continue:
-		_next_step()
+		print("[TUTORIAL] Continue pressed")
+		_waiting_for_continue = false
 
 func on_area_trigger_entered():
-	var step = load(tutorial_data.steps[_current_step].resource_path) as TutorialStepData
-	if step.wait_for_area_trigger:
-		print("[TUTORIAL] Area trigger activated, continuing step:", step.id)
-		_next_step()
+	print("[DEBUG] Trigger fired — _waiting_for_area_trigger =", _waiting_for_area_trigger)
+	if not _waiting_for_area_trigger:
+		print("[TUTORIAL] Ignored area trigger — not waiting at this step.")
+		return
 
-func _wait_for_romance() -> void:
-	var previous_count = GameManager.finished_lovers
-	while is_inside_tree() and GameManager.finished_lovers <= previous_count:
-		await get_tree().process_frame
+	var step = load(tutorial_data.steps[_current_step].resource_path) as TutorialStepData
+	print("[TUTORIAL] Area trigger activated, continuing step:", step.id)
+
+	_waiting_for_area_trigger = false
+
+func _next_step():
+	_waiting_for_continue = false
+	_waiting_for_area_trigger = false
+	_current_step += 1
+	_process_current_step()

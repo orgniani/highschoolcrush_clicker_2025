@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TutorialData" load_steps=11 format=3 uid="uid://c4bmvwlhfs2rn"]
+[gd_resource type="Resource" script_class="TutorialData" load_steps=14 format=3 uid="uid://c4bmvwlhfs2rn"]
 
 [ext_resource type="Script" uid="uid://dhna2ytrqwm1v" path="res://scripts/tutorial/tutorial_data.gd" id="1_q02eh"]
 [ext_resource type="Script" uid="uid://dkghsclg518so" path="res://scripts/tutorial/tutorial_step_data.gd" id="2_6y3v1"]
@@ -10,8 +10,11 @@
 [ext_resource type="Resource" uid="uid://dq75yerahk3jd" path="res://resources/tutorial_data/steps/TS_forward.tres" id="7_hg3a8"]
 [ext_resource type="Resource" uid="uid://b8akngq8y81ts" path="res://resources/tutorial_data/steps/TS_partners.tres" id="9_hg3a8"]
 [ext_resource type="Resource" uid="uid://d3ddehscp2lwd" path="res://resources/tutorial_data/steps/TS_partners2.tres" id="9_sn5sv"]
+[ext_resource type="Resource" uid="uid://duwx0g15kmoos" path="res://resources/tutorial_data/steps/TS_boss.tres" id="10_bklou"]
+[ext_resource type="Resource" uid="uid://booeiqh14cv11" path="res://resources/tutorial_data/steps/TS_forward2.tres" id="10_cac27"]
+[ext_resource type="Resource" uid="uid://7hrkqb1fpvwn" path="res://resources/tutorial_data/steps/TS_boss2.tres" id="11_h458i"]
 
 [resource]
 script = ExtResource("1_q02eh")
-steps = Array[ExtResource("2_6y3v1")]([ExtResource("3_i3kvo"), ExtResource("4_kvgkg"), ExtResource("5_g1wyq"), ExtResource("6_g1wyq"), ExtResource("7_hg3a8"), ExtResource("9_hg3a8"), ExtResource("9_sn5sv"), ExtResource("6_hg3a8")])
+steps = Array[ExtResource("2_6y3v1")]([ExtResource("3_i3kvo"), ExtResource("4_kvgkg"), ExtResource("5_g1wyq"), ExtResource("6_g1wyq"), ExtResource("7_hg3a8"), ExtResource("9_hg3a8"), ExtResource("9_sn5sv"), ExtResource("10_cac27"), ExtResource("10_bklou"), ExtResource("11_h458i"), ExtResource("6_hg3a8")])
 metadata/_custom_type_script = "uid://dhna2ytrqwm1v"

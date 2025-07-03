@@ -6,10 +6,9 @@
 script = ExtResource("1_drnlu")
 id = "forward"
 text = "Come on, lets move! →"
-requires_continue = true
+requires_continue = false
 allow_player_movement = true
 wait_for_romance = false
 clickable_lover_ids = Array[String]([])
-blocker_group = ""
 wait_for_area_trigger = true
 metadata/_custom_type_script = "uid://dkghsclg518so"
