@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_qge62")
 id = "partners2"
-text = "If you fail to romance one of them, both of them will block out! But if you romance one, you can try romance whos left!"
+text = "Be careful! If you fail to romance one of them, both will shut you out. But succeed, and you will still have a shot at the other!"
 requires_continue = true
 allow_player_movement = false
 wait_for_romance = true

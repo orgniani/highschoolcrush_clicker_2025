@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_ty3ie")
 id = "boss"
-text = "Woah, check it out! That glow can only mean one thing... this is a POPULAR student! POPULARS are the crush of many students... which mean everybody close to them will fight you for their love! Try it out, and be fast!!!"
+text = "Whoa... see that glow? Thats a POPULAR student! Theyre super desirable, so everyone nearby will fight you for their love. Click fast and show them whos boss!"
 requires_continue = false
 allow_player_movement = false
 wait_for_romance = true

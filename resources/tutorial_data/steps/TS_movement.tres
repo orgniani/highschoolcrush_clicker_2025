@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_fifso")
 id = "movement"
-text = "You can move around using the A and D keys... Go ahead, try moving towards that book over there!"
+text = "Lets get moving. Use the A and D keys to walk left and right. Try heading over to that book!"
 requires_continue = false
 allow_player_movement = true
 wait_for_romance = false

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_hkna1")
 id = "easy_lover"
-text = "Awesome! Now try clicking on that guy before the timer runs out! Click as fast as you can!!"
+text = "Nice moves! Now click on that student as fast as you can before the timer runs out!"
 requires_continue = false
 allow_player_movement = false
 wait_for_romance = true

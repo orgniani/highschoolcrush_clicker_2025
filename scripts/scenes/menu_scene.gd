@@ -8,18 +8,15 @@ func _ready():
 
 func _on_start_button_pressed() -> void:
 	print("Start Game!")
-	_play_button_click_sound()
+	AudioManager.play_sfx_by_key(AudioKeys.SFX.BUTTON_CLICK)
 	GameFlowManager.load_scene(tutorial_scene_path)
 	pass
 
 func _on_credit_button_pressed() -> void:
-	_play_button_click_sound()
+	AudioManager.play_sfx_by_key(AudioKeys.SFX.BUTTON_CLICK)
 	credits_panel.visible = true;
 	pass
 
 func _on_mute_button_pressed() -> void:
 	AudioManager.toggle_mute()
 	pass
-
-func _play_button_click_sound() -> void:
-	AudioManager.play_sfx_by_key(AudioKeys.SFX.BUTTON_CLICK)

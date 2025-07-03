@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_jhy80")
 id = "partners"
-text = "Check it out! Two students walking close together COULD mean they're together! Try to romance one of them!"
+text = "See those two walking together? That might mean they are a couple! Try romancing one and see what happens..."
 requires_continue = false
 allow_player_movement = false
 wait_for_romance = true

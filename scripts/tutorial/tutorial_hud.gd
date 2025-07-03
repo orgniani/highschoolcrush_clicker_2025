@@ -5,7 +5,6 @@ signal continue_pressed
 signal skip_pressed
 
 @export var dialogue_label: Label
-@export var button_click_audio : AudioStream
 
 var _typing := false
 var _skip_requested := false
@@ -35,7 +34,6 @@ func on_show_text(text: String) -> void:
 	_current_text = text
 	dialogue_label.text = ""
 
-	AudioManager.play_sfx_by_key(AudioKeys.SFX.BUTTON_CLICK)
 	await _type_text(text)
 
 	_typing = false
@@ -47,6 +45,3 @@ func _type_text(text: String) -> void:
 			return
 		dialogue_label.text += text[i]
 		await get_tree().create_timer(0.03).timeout
-
-func _play_button_click_sound() -> void:
-	AudioManager.play_sound(button_click_audio)

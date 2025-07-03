@@ -5,10 +5,11 @@
 [resource]
 script = ExtResource("1_54oa0")
 id = "intro"
-text = "Welcome to highschool crush! A game where you have to romance everybody in your school!"
+text = "Welcome to Highschool Crush! Your mission? Win the heart of every student in school!"
 requires_continue = true
 allow_player_movement = false
 wait_for_romance = false
-spawn_easy_lover = false
-spawn_hard_lover = false
+wait_for_seconds = -1.0
+wait_for_area_trigger = false
+clickable_lover_ids = Array[String]([])
 metadata/_custom_type_script = "uid://dkghsclg518so"

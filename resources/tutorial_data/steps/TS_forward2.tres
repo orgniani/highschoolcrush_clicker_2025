@@ -5,10 +5,11 @@
 [resource]
 script = ExtResource("1_bc3qt")
 id = "forward2"
-text = "Come on, lets move! →"
+text = "Lets keep going! Head over to the next area."
 requires_continue = false
 allow_player_movement = true
 wait_for_romance = false
-clickable_lover_ids = Array[String]([])
+wait_for_seconds = -1.0
 wait_for_area_trigger = true
+clickable_lover_ids = Array[String]([])
 metadata/_custom_type_script = "uid://dkghsclg518so"

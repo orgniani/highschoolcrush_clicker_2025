@@ -42,10 +42,15 @@ func play_sfx_by_key(name: String):
 
 func play_sound(sfx: AudioStream):
 	for player in sfx_players:
+		if player.playing and player.stream == sfx:
+			return
+
+	for player in sfx_players:
 		if not player.playing:
 			player.stream = sfx
 			player.play()
 			return
+
 	push_warning("All SFX players are busy — consider increasing MAX_SFX_PLAYERS.")
 
 # --- MUTE ---

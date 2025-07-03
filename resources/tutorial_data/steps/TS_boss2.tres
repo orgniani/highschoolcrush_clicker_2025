@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_ien4x")
 id = "boss2"
-text = "POPULARs work similar to couples! If you succeed, everyone around them will be yours to romance, but fail, and lose them all for good!"
+text = "POPULARs are special. If you succeed, everyone around them becomes fair game. But fail... and you lose them and their fans too."
 requires_continue = true
 allow_player_movement = false
 wait_for_romance = true
