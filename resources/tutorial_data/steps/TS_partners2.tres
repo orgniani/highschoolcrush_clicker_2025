@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TutorialStepData" load_steps=2 format=3 uid="uid://d3ddehscp2lwd"]
+
+[ext_resource type="Script" uid="uid://dkghsclg518so" path="res://scripts/tutorial/tutorial_step_data.gd" id="1_qge62"]
+
+[resource]
+script = ExtResource("1_qge62")
+id = "partners2"
+text = "If you fail to romance one of them, both of them will block out! But if you romance one, you can try romance whos left!"
+requires_continue = true
+allow_player_movement = false
+wait_for_romance = true
+wait_for_seconds = -1.0
+wait_for_area_trigger = false
+clickable_lover_ids = Array[String](["boyfriend", "girlfriend"])
+metadata/_custom_type_script = "uid://dkghsclg518so"

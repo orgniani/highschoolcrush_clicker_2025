@@ -72,7 +72,6 @@ atlas = ExtResource("2_ca1l0")
 region = Rect2(672, 0, 96, 64)
 
 [resource]
-resource_name = "hair"
 animations = [{
 "frames": [{
 "duration": 1.0,

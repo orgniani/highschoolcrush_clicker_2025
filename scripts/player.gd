@@ -6,12 +6,23 @@ extends CharacterBody2D
 @export var speed: float = 100
 
 var last_follower: CharacterBody2D = self
+var _can_move := true
 
 func _ready():
+	if GlobalGameState.player == null:
+		GlobalGameState.player = self
+	else:
+		queue_free()
+	
 	animator.apply_config(config)
 	animator.play_animation("idle", false)
 
 func _physics_process(delta: float) -> void:
+	if not _can_move:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+	
 	var input_vector = Vector2.ZERO
 
 	if Input.is_action_pressed("move_left"):
@@ -33,3 +44,9 @@ func on_game_over():
 	set_physics_process(false)
 	var is_facing_left = animator.is_facing_left()
 	animator.play_animation("idle", is_facing_left)
+	
+func on_allow_movement(allowed: bool):
+	_can_move = allowed
+	if not allowed:
+		velocity = Vector2.ZERO
+		animator.play_animation("idle", animator.is_facing_left(), true)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TutorialStepData" load_steps=2 format=3 uid="uid://duwx0g15kmoos"]
+
+[ext_resource type="Script" uid="uid://dkghsclg518so" path="res://scripts/tutorial/tutorial_step_data.gd" id="1_ty3ie"]
+
+[resource]
+script = ExtResource("1_ty3ie")
+id = "boss"
+text = "Woah, check it out! That glow can only mean one thing... this is a POPULAR student! POPULARS are the crush of many students... which mean everybody close to them will fight you for their love! Try it out, and be fast!!!"
+requires_continue = false
+allow_player_movement = false
+wait_for_romance = true
+wait_for_seconds = -1.0
+wait_for_area_trigger = false
+clickable_lover_ids = Array[String](["loverBossTutorial"])
+metadata/_custom_type_script = "uid://dkghsclg518so"

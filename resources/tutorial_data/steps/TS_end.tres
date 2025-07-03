@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TutorialStepData" load_steps=2 format=3 uid="uid://cpv8ic81kss1a"]
+
+[ext_resource type="Script" uid="uid://dkghsclg518so" path="res://scripts/tutorial/tutorial_step_data.gd" id="1_pc7ot"]
+
+[resource]
+script = ExtResource("1_pc7ot")
+id = "end"
+text = "Romance as many students as you can before the timer runs out! And remember: the more people that fight you for them, the more points you will get! Are you ready?"
+requires_continue = true
+allow_player_movement = false
+wait_for_romance = false
+wait_for_seconds = -1.0
+wait_for_area_trigger = false
+clickable_lover_ids = Array[String]([])
+metadata/_custom_type_script = "uid://dkghsclg518so"

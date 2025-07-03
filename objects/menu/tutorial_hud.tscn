@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://b75k0cktlddlg"]
+
+[ext_resource type="Script" uid="uid://djleqh3a4nqqo" path="res://scripts/tutorial/tutorial_hud.gd" id="1_jisvd"]
+[ext_resource type="FontFile" uid="uid://b8i3q121b40nv" path="res://art/fonts/MinimalPixelFont.ttf" id="2_asbp4"]
+
+[node name="TutorialHUD" type="Control" node_paths=PackedStringArray("dialogue_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jisvd")
+dialogue_label = NodePath("DialoguePanel/DialogueLabel")
+
+[node name="DialoguePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 811.0
+offset_bottom = 216.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="DialogueLabel" type="Label" parent="DialoguePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 19.0
+offset_right = -20.0
+offset_bottom = -91.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_asbp4")
+theme_override_font_sizes/font_size = 36
+text = "Welcome to highschool crush! A game where you have to romance everybody in your school!"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ContinueButton" type="Button" parent="DialoguePanel"]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 158.0
+offset_right = 240.0
+offset_bottom = 197.0
+theme_override_fonts/font = ExtResource("2_asbp4")
+theme_override_font_sizes/font_size = 36
+text = "Continue"
+
+[node name="SkipButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 999.0
+offset_top = 584.0
+offset_right = 1126.0
+offset_bottom = 623.0
+theme_override_fonts/font = ExtResource("2_asbp4")
+theme_override_font_sizes/font_size = 36
+text = "Skip"
+
+[connection signal="pressed" from="DialoguePanel/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

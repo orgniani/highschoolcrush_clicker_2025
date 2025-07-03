@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://blsyqhj7bfb87"]
+
+[ext_resource type="Script" uid="uid://dsk3j1p72jrer" path="res://scripts/singletons/game_manager.gd" id="1_hn526"]
+
+[node name="GameManager" type="Node" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_hn526")
+time_limit = 600.0
+timer = NodePath("Timer")
+metadata/_custom_type_script = "uid://dsk3j1p72jrer"
+
+[node name="Timer" type="Timer" parent="."]
