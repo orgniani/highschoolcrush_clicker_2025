@@ -1,9 +1,5 @@
 extends Node
 
-@export var game_over_sound: AudioStream
-@export var romance_success_sound: AudioStream
-@export var romance_failed_sound: AudioStream
-
 @export var total_lovers: int = 6
 @export var time_limit: float = 60.0
 @export var timer: Timer
@@ -67,7 +63,7 @@ func handle_lover_success(lover: Node):
 	updated_points.emit(total_points)
 	updated_score.emit(romanced_lovers, total_lovers)
 	
-	AudioManager.play_sound(romance_success_sound)
+	AudioManager.play_sfx_by_key(AudioKeys.SFX.ROMANCE_SUCCESS)
 
 	if finished_lovers >= total_lovers:
 		_trigger_game_over()
@@ -85,7 +81,7 @@ func handle_lover_failed(lover: Node):
 	finished_lovers += 1
 
 	print("Lover %s failed. Finished lovers: %d / %d" % [id, finished_lovers, total_lovers])
-	AudioManager.play_sound(romance_failed_sound)
+	AudioManager.play_sfx_by_key(AudioKeys.SFX.ROMANCE_FAIL)
 
 	if finished_lovers >= total_lovers:
 		_trigger_game_over()
@@ -95,7 +91,7 @@ func _trigger_game_over():
 		return
 	game_over = true
 
-	AudioManager.play_sound(game_over_sound)
+	AudioManager.play_sfx_by_key(AudioKeys.SFX.GAME_OVER)
 	game_over_signal.emit()
 
 	reset_game_state()
@@ -105,7 +101,8 @@ func reset_game_state():
 
 	GlobalGameState.romanced_lovers.clear()
 	GlobalGameState.romanced_ids.clear()
-
+	GlobalGameState.reset_player_last_follower()
+	
 	LoverStateTracker.reset()
 	
 	game_over = false

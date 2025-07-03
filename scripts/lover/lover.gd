@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @export var player: CharacterBody2D
 @export var config: HumanConfig
-@export var click_sound: AudioStream
 @export var required_clicks: int = 10
 @export var fill_time: float = 3.0
 @export var is_boss: bool = false
@@ -115,7 +114,7 @@ func _process(delta):
 
 		if result and result[0].get("collider") == self:
 			state_machine.register_click()
-			AudioManager.play_sound(click_sound)
+			AudioManager.play_sfx_by_key(AudioKeys.SFX.CLICK)
 
 	heart_bar.value = state_machine.get_fill_percentage() * heart_bar.max_value
 

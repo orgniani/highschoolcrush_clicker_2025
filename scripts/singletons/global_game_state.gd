@@ -9,3 +9,6 @@ func find_lover_by_id(id: String) -> CharacterBody2D:
 		if node.has_meta("lover_id") and node.get_meta("lover_id") == id:
 			return node
 	return null
+
+func reset_player_last_follower():
+	player.last_follower = player

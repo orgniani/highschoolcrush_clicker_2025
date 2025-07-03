@@ -48,7 +48,6 @@ func _process_current_step():
 	if step.requires_continue:
 		_waiting_for_continue = true
 
-	# Start the waiting logic (run separately)
 	_wait_for_step_conditions(step)
 
 func _wait_for_step_conditions(step: TutorialStepData) -> void:

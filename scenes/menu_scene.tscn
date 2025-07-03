@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://be1xmgvuhyir7"]
+[gd_scene load_steps=12 format=3 uid="uid://be1xmgvuhyir7"]
 
 [ext_resource type="Script" uid="uid://blgegqc6nlc7u" path="res://scripts/scenes/menu_scene.gd" id="1_482oc"]
 [ext_resource type="Texture2D" uid="uid://dgm58b4mycd6l" path="res://art/UI/menus/Square Buttons 26x19.png" id="2_6wmco"]
 [ext_resource type="FontFile" uid="uid://b8i3q121b40nv" path="res://art/fonts/MinimalPixelFont.ttf" id="2_o71fo"]
-[ext_resource type="AudioStream" uid="uid://cjnuuowevuewb" path="res://audio/music/main_theme.ogg" id="3_axson"]
-[ext_resource type="AudioStream" uid="uid://boy5qiqf8viqd" path="res://audio/sfx/button_click.wav" id="4_1iahe"]
 [ext_resource type="TileSet" uid="uid://dii5dkt7jw1jb" path="res://resources/tile_maps/default_tile_map.tres" id="4_6od1f"]
 [ext_resource type="PackedScene" uid="uid://cfg8u10fcljld" path="res://objects/menu/human_menu.tscn" id="6_yfxa8"]
 [ext_resource type="Resource" uid="uid://prxuqwniotqm" path="res://resources/player_config.tres" id="7_520ac"]
@@ -35,8 +33,6 @@ grow_vertical = 2
 script = ExtResource("1_482oc")
 tutorial_scene_path = "res://scenes/tutorial_scene.tscn"
 credits_panel = NodePath("CanvasLayer/Credits")
-main_theme = ExtResource("3_axson")
-button_click_audio = ExtResource("4_1iahe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

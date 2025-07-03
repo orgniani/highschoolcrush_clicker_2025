@@ -9,7 +9,7 @@ var _lover_map: Dictionary = {}
 
 func _ready():
 	tutorial_manager.show_text.connect(hud.on_show_text)
-	tutorial_manager.allow_player_movement.connect(player._on_allow_movement)
+	tutorial_manager.allow_player_movement.connect(player.on_allow_movement)
 	tutorial_manager.tutorial_finished.connect(hud.on_tutorial_finished)
 	hud.continue_pressed.connect(tutorial_manager.on_continue_pressed)
 	hud.skip_pressed.connect(_skip_tutorial)
@@ -23,7 +23,7 @@ func _skip_tutorial():
 	GameManager.start_game()
 	
 	tutorial_manager.queue_free()
-	player._on_allow_movement(true)
+	player.on_allow_movement(true)
 	GameFlowManager.load_scene(game_scene_path)
 	
 func _wait_for_all_lovers() -> void:

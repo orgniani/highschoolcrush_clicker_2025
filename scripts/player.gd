@@ -45,7 +45,7 @@ func on_game_over():
 	var is_facing_left = animator.is_facing_left()
 	animator.play_animation("idle", is_facing_left)
 	
-func _on_allow_movement(allowed: bool):
+func on_allow_movement(allowed: bool):
 	_can_move = allowed
 	if not allowed:
 		velocity = Vector2.ZERO
