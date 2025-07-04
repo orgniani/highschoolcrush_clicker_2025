@@ -4,7 +4,7 @@
 
 [node name="GameManager" type="Node" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_hn526")
-total_lovers = 45
+total_lovers = 50
 time_limit = 600.0
 timer = NodePath("Timer")
 metadata/_custom_type_script = "uid://dsk3j1p72jrer"

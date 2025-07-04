@@ -17,6 +17,8 @@ func start_tutorial():
 	_current_step = 0
 	LoverStateTracker.lock_all_lovers()
 	_process_current_step()
+	
+	print("[TUTORIAL] START!")
 
 func _process_current_step():
 	_waiting_for_continue = false

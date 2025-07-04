@@ -34,7 +34,7 @@ func _wait_for_all_lovers() -> void:
 		for lover in lovers:
 			if not lover.has_method("get"):
 				continue
-			var id = lover.get("lover_id")
+			var id = lover.get("_lover_id")
 			if id == "" or not LoverStateTracker._lover_states.has(id):
 				all_ready = false
 				break
@@ -47,7 +47,7 @@ func _wait_for_all_lovers() -> void:
 func _register_lovers_by_id():
 	for lover in get_tree().get_nodes_in_group("lovers"):
 		if lover.has_method("get"):
-			var id = lover.get("lover_id")
+			var id = lover.get("_lover_id")
 			if id != "":
 				_lover_map[id] = lover
 
