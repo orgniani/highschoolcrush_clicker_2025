@@ -22,7 +22,7 @@ glow_blend_mode = 1
 
 [node name="TutorialScene" type="Node2D" node_paths=PackedStringArray("player", "hud", "tutorial_manager")]
 script = ExtResource("1_tr4y6")
-game_scene_path = "res://scenes/level1_scene.tscn"
+game_scene_path = "res://scenes/levels/level1_scene.tscn"
 player = NodePath("CharactersYSort/Player")
 hud = NodePath("HUD/TutorialHUD")
 tutorial_manager = NodePath("TutorialManager")
@@ -64,13 +64,11 @@ position_smoothing_enabled = true
 position = Vector2(83, 117)
 player = NodePath("../Player")
 config = ExtResource("5_4yomp")
-lover_id = "easyLover"
 
 [node name="Girlfriend" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_iarw2")]
 position = Vector2(230, 119)
 player = NodePath("../Player")
 config = ExtResource("9_fn7ul")
-lover_id = "girlfriend"
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Girlfriend/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Boyfriend")]
@@ -79,7 +77,6 @@ partners = [NodePath("../../../Boyfriend")]
 position = Vector2(276, 115)
 player = NodePath("../Player")
 config = ExtResource("10_ntiyy")
-lover_id = "boyfriend"
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Boyfriend/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Girlfriend")]
@@ -88,32 +85,27 @@ partners = [NodePath("../../../Girlfriend")]
 position = Vector2(507, 117)
 player = NodePath("../Player")
 config = ExtResource("12_mt5cw")
-lover_id = "jealousy1"
 
 [node name="Jealousy2" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_iarw2")]
 position = Vector2(409, 118)
 player = NodePath("../Player")
 config = ExtResource("11_f4sb6")
-lover_id = "jealousy2"
 
 [node name="Jealousy3" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_iarw2")]
 position = Vector2(505, 58)
 player = NodePath("../Player")
 config = ExtResource("10_ntiyy")
-lover_id = "jealousy3"
 
 [node name="Jealousy4" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_iarw2")]
 position = Vector2(457, 58)
 player = NodePath("../Player")
 config = ExtResource("9_fn7ul")
-lover_id = "jealousy4"
 
 [node name="LoverBossTutorial" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_iarw2")]
 position = Vector2(464, 113)
 player = NodePath("../Player")
 config = ExtResource("9_fn7ul")
 is_boss = true
-lover_id = "loverBossTutorial"
 
 [node name="LoverPartnerManager" parent="CharactersYSort/LoverBossTutorial/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Jealousy1"), NodePath("../../../Jealousy2"), NodePath("../../../Jealousy3"), NodePath("../../../Jealousy4")]
@@ -122,14 +114,10 @@ partners = [NodePath("../../../Jealousy1"), NodePath("../../../Jealousy2"), Node
 visible = false
 position = Vector2(13, 67)
 rotation = 1.5708
-next_level_path = ""
-previous_level_path = ""
 
 [node name="Wall2" parent="." instance=ExtResource("6_8ox5i")]
 visible = false
 position = Vector2(526, 83)
-next_level_path = ""
-previous_level_path = ""
 
 [node name="AreaTrigger" parent="." node_paths=PackedStringArray("tutorial_manager") instance=ExtResource("15_ntiyy")]
 position = Vector2(73, 91)

@@ -1,7 +1,7 @@
 extends StaticBody2D
 
-@export var next_level_path: String = "res://scenes/level2_scene.tscn"
-@export var previous_level_path: String = "res://scenes/level1_scene.tscn"
+@export var next_level_path: String = ""
+@export var previous_level_path: String = ""
 
 @onready var _button_container : VBoxContainer = $"VBoxContainer"
 @onready var _up_button : Button = $"VBoxContainer/UpButton"

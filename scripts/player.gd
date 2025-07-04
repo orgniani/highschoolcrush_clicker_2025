@@ -12,6 +12,7 @@ func _ready():
 	if GlobalGameState.player == null:
 		GlobalGameState.player = self
 	else:
+		GlobalGameState.player.global_position = global_position
 		queue_free()
 	
 	animator.apply_config(config)

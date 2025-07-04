@@ -5,7 +5,6 @@ extends CharacterBody2D
 @export var required_clicks: int = 10
 @export var fill_time: float = 3.0
 @export var is_boss: bool = false
-@export var lover_id: String = ""
 
 @onready var state_machine: LoverStateMachine = $"Lover/LoverStateMachine"
 @onready var follower: LoverFollower = $"Lover/LoverFollower"
@@ -27,20 +26,14 @@ var _current_lover: CharacterBody2D
 var _lover_id: String = ""
 
 func _ready():
-	_assign_lover_id()
+	_lover_id = name
+	set_meta("lover_id", _lover_id)
+	
 	_restore_state()
 	_setup_lifecycle()
 	
 	if !is_boss:
 		animator.modulate = Color.WHITE
-
-func _assign_lover_id():
-	if lover_id.is_empty():
-		push_error("Lover has no lover_id assigned!")
-		lover_id = name
-
-	_lover_id = lover_id
-	set_meta("lover_id", _lover_id)
 
 func _restore_state():
 	var status = LoverStateTracker.get_status(_lover_id)
