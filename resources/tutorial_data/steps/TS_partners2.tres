@@ -11,5 +11,5 @@ allow_player_movement = false
 wait_for_romance = true
 wait_for_seconds = -1.0
 wait_for_area_trigger = false
-clickable_lover_ids = Array[String](["boyfriend", "girlfriend"])
+clickable_lover_ids = Array[String](["Boyfriend", "Girlfriend"])
 metadata/_custom_type_script = "uid://dkghsclg518so"

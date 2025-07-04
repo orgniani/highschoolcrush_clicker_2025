@@ -54,6 +54,8 @@ position_smoothing_enabled = true
 position = Vector2(126, 67)
 player = NodePath("../Player")
 config = ExtResource("5_vmrxj")
+required_clicks = null
+fill_time = null
 is_boss = true
 
 [node name="LoverPartnerManager" parent="CharactersYSort/LoverBoss3/Lover" index="4" node_paths=PackedStringArray("partners")]
@@ -63,31 +65,49 @@ partners = [NodePath("../../../Lover40"), NodePath("../../../Lover41"), NodePath
 position = Vector2(70, 118)
 player = NodePath("../Player")
 config = ExtResource("6_2w6b0")
+required_clicks = null
+fill_time = null
+is_boss = null
 
 [node name="Lover41" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_gejle")]
 position = Vector2(123, 115)
 player = NodePath("../Player")
 config = ExtResource("7_2ukku")
+required_clicks = null
+fill_time = null
+is_boss = null
 
 [node name="Lover42" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_gejle")]
 position = Vector2(192, 117)
 player = NodePath("../Player")
 config = ExtResource("8_vjuj4")
+required_clicks = null
+fill_time = null
+is_boss = null
 
 [node name="Lover48" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_gejle")]
 position = Vector2(90, 45)
 player = NodePath("../Player")
-config = ExtResource("8_vjuj4")
+config = ExtResource("5_aw0oa")
+required_clicks = null
+fill_time = null
+is_boss = null
 
 [node name="Lover49" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_gejle")]
 position = Vector2(173, 46)
 player = NodePath("../Player")
-config = ExtResource("8_vjuj4")
+config = ExtResource("9_28bym")
+required_clicks = null
+fill_time = null
+is_boss = null
 
 [node name="Lover43" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_gejle")]
 position = Vector2(315, 117)
 player = NodePath("../Player")
 config = ExtResource("9_28bym")
+required_clicks = null
+fill_time = null
+is_boss = null
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover43/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover44")]
@@ -96,6 +116,9 @@ partners = [NodePath("../../../Lover44")]
 position = Vector2(349, 117)
 player = NodePath("../Player")
 config = ExtResource("6_2w6b0")
+required_clicks = null
+fill_time = null
+is_boss = null
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover44/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover43")]
@@ -104,25 +127,31 @@ partners = [NodePath("../../../Lover43")]
 position = Vector2(417, 47)
 player = NodePath("../Player")
 config = ExtResource("7_2ukku")
+required_clicks = null
+fill_time = null
+is_boss = null
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover45/Lover" index="4" node_paths=PackedStringArray("partners")]
-partners = [NodePath("../../../Lover46"), NodePath("../../../Lover47")]
+partners = [NodePath("../../../Lover46")]
 
 [node name="Lover46" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_gejle")]
 position = Vector2(454, 44)
 player = NodePath("../Player")
 config = ExtResource("5_aw0oa")
+required_clicks = null
+fill_time = null
+is_boss = null
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover46/Lover" index="4" node_paths=PackedStringArray("partners")]
-partners = [NodePath("../../../Lover45"), NodePath("../../../Lover47")]
+partners = [NodePath("../../../Lover45")]
 
 [node name="Lover47" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_gejle")]
-position = Vector2(483, 47)
+position = Vector2(506, 47)
 player = NodePath("../Player")
 config = ExtResource("9_28bym")
-
-[node name="LoverPartnerManager" parent="CharactersYSort/Lover47/Lover" index="4" node_paths=PackedStringArray("partners")]
-partners = [NodePath("../../../Lover46"), NodePath("../../../Lover45")]
+required_clicks = null
+fill_time = null
+is_boss = null
 
 [node name="Wall" parent="." instance=ExtResource("10_jrua1")]
 position = Vector2(13, 67)
@@ -144,4 +173,3 @@ environment = SubResource("Environment_k1o8x")
 [editable path="CharactersYSort/Lover44"]
 [editable path="CharactersYSort/Lover45"]
 [editable path="CharactersYSort/Lover46"]
-[editable path="CharactersYSort/Lover47"]

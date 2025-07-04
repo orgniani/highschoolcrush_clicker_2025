@@ -53,12 +53,13 @@ func _restore_state():
 	else:
 		_can_be_clicked = true
 		LoverStateTracker.set_can_be_clicked(_lover_id, true)
+		print("[RESTORE_CLICK] Lover:", _lover_id, " => default true")
 
 	if is_boss:
 		for partner in partner_manager.partners:
-			if partner.has_method("_set_can_be_clicked"):
-				partner._set_can_be_clicked(false)
-				print("partner set click set to false")
+			var partner_id := partner.name
+			LoverStateTracker.set_can_be_clicked(partner_id, false)
+			print("→ Boss set click=false for partner:", partner_id)
 
 	match LoverStateTracker.get_expression(_lover_id):
 		"love": expressions.show_love()
@@ -67,7 +68,6 @@ func _restore_state():
 		_: expressions.hide()
 
 	_setup_state_machine()
-
 
 func _setup_lifecycle():
 	animator.apply_config(config)
@@ -206,8 +206,10 @@ func _spawn_lightning():
 
 func _set_can_be_clicked(value: bool):
 	_can_be_clicked = value
-	if LoverStateTracker.get_can_be_clicked(_lover_id) != value:
+	if !_lover_id.is_empty():
 		LoverStateTracker.set_can_be_clicked(_lover_id, value)
+	else:
+		push_warning("Tried to set clickability but lover_id not ready!")
 
 func get_state_machine():
 	return state_machine

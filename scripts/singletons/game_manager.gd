@@ -53,6 +53,8 @@ func handle_lover_success(lover: Node):
 	romanced_lovers += 1
 	finished_lovers += 1
 	
+	print("Lover %s succeeded. Finished lovers: %d / %d" % [id, finished_lovers, total_lovers])
+	
 	var points := 1
 	if lover.has_node("Lover/LoverPartnerManager"):
 		var partner_manager = lover.get_node("Lover/LoverPartnerManager")
@@ -70,7 +72,7 @@ func handle_lover_success(lover: Node):
 
 func handle_lover_failed(lover: Node):
 	if not lover.has_meta("lover_id"):
-		push_warning("Lover missing lover_id on failure!")
+		push_warning("Lover missing _lover_id on failure!")
 		return
 
 	var id = lover.get_meta("lover_id")
