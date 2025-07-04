@@ -1,6 +1,7 @@
 extends Node
 
 @export var total_lovers: int = 6
+@export var max_possible_points: int = 128
 @export var time_limit: float = 60.0
 @export var timer: Timer
 
@@ -24,17 +25,16 @@ func _process(delta):
 		updated_timer.emit(timer.time_left)
 
 func start_game():
+	reset_game_state()
+
 	romanced_lovers = 0
 	finished_lovers = 0
-	
 	_resolved_lovers.clear()
-	
 	total_points = 0
 	game_over = false
 
-	timer.stop()
-	timer.paused = false
 	timer.wait_time = time_limit
+	timer.paused = false # <-- asegúrate de despausar
 	timer.start()
 
 	updated_score.emit(romanced_lovers, total_lovers)
@@ -96,10 +96,9 @@ func _trigger_game_over():
 	AudioManager.play_sfx_by_key(AudioKeys.SFX.GAME_OVER)
 	game_over_signal.emit()
 
-	reset_game_state()
-
 func reset_game_state():
-	timer.paused = true
+	timer.stop()
+	timer.paused = false
 
 	GlobalGameState.romanced_lovers.clear()
 	GlobalGameState.romanced_ids.clear()

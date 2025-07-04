@@ -16,7 +16,6 @@ var _current_lovers : int
 var _total_lovers : int
 
 var _current_points : int
-var max_possible_points := _total_lovers * 6
 
 func update_timer(seconds: float):
 	var minutes := int(seconds) / 60
@@ -34,7 +33,7 @@ func update_points(current_points: int):
 
 func show_game_over():
 	var romance_ratio := float(_current_lovers) / float(_total_lovers)
-	var points_ratio := float(_current_points) / float(max_possible_points)
+	var points_ratio := float(_current_points) / float(GameManager.max_possible_points)
 	var combined_score := (romance_ratio + points_ratio) / 2.0
 
 	var ending_title: String
