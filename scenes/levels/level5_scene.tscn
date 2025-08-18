@@ -159,7 +159,6 @@ rotation = 1.5708
 
 [node name="Wall2" parent="." instance=ExtResource("10_jrua1")]
 position = Vector2(572, 83)
-next_level_path = "res://scenes/levels/level6_scene.tscn"
 previous_level_path = "res://scenes/levels/level4_scene.tscn"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
