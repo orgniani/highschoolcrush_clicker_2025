@@ -94,25 +94,20 @@ player = NodePath("../Player")
 config = ExtResource("8_ejhgl")
 
 [node name="Lover37" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_nlqp7")]
-position = Vector2(473, 60)
-player = NodePath("../Player")
-config = ExtResource("9_xuhfb")
-
-[node name="Lover38" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_nlqp7")]
 position = Vector2(422, 116)
 player = NodePath("../Player")
 config = ExtResource("9_xuhfb")
 
-[node name="LoverPartnerManager" parent="CharactersYSort/Lover38/Lover" index="4" node_paths=PackedStringArray("partners")]
-partners = [NodePath("../../../Lover39")]
+[node name="LoverPartnerManager" parent="CharactersYSort/Lover37/Lover" index="4" node_paths=PackedStringArray("partners")]
+partners = [NodePath("../../../Lover38")]
 
-[node name="Lover39" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_nlqp7")]
+[node name="Lover38" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_nlqp7")]
 position = Vector2(451, 112)
 player = NodePath("../Player")
 config = ExtResource("7_hemhd")
 
-[node name="LoverPartnerManager" parent="CharactersYSort/Lover39/Lover" index="4" node_paths=PackedStringArray("partners")]
-partners = [NodePath("../../../Lover38")]
+[node name="LoverPartnerManager" parent="CharactersYSort/Lover38/Lover" index="4" node_paths=PackedStringArray("partners")]
+partners = [NodePath("../../../Lover37")]
 
 [node name="Wall" parent="." instance=ExtResource("10_xa440")]
 position = Vector2(13, 67)
@@ -131,5 +126,5 @@ environment = SubResource("Environment_k1o8x")
 [node name="HUD" parent="HUD" instance=ExtResource("11_r70qe")]
 
 [editable path="CharactersYSort/LoverBoss2"]
+[editable path="CharactersYSort/Lover37"]
 [editable path="CharactersYSort/Lover38"]
-[editable path="CharactersYSort/Lover39"]

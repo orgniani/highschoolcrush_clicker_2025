@@ -116,11 +116,6 @@ config = ExtResource("5_aw0oa")
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover46/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover45")]
 
-[node name="Lover47" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_gejle")]
-position = Vector2(506, 47)
-player = NodePath("../Player")
-config = ExtResource("9_28bym")
-
 [node name="Wall" parent="." instance=ExtResource("10_jrua1")]
 position = Vector2(13, 67)
 rotation = 1.5708

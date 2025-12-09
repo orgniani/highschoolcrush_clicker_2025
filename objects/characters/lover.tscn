@@ -41,6 +41,7 @@ shape = SubResource("RectangleShape2D_acjsf")
 position = Vector2(0, -16)
 
 [node name="Bar" type="TextureRect" parent="."]
+z_index = 5
 offset_left = -8.0
 offset_top = -26.0
 offset_right = 8.0

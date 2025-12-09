@@ -1,8 +1,8 @@
 extends Node
 
-@export var total_lovers: int = 6
-@export var max_possible_points: int = 128
-@export var time_limit: float = 60.0
+@export var total_lovers: int = 50
+@export var max_possible_points: int = 70
+@export var time_limit: float = 300.0
 @export var timer: Timer
 
 var _resolved_lovers: Dictionary = {}
@@ -63,6 +63,7 @@ func handle_lover_success(lover: Node):
 	
 	total_points += points
 	updated_points.emit(total_points)
+	
 	updated_score.emit(romanced_lovers, total_lovers)
 	
 	AudioManager.play_sfx_by_key(AudioKeys.SFX.ROMANCE_SUCCESS)

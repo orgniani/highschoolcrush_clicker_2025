@@ -38,11 +38,11 @@ func show_game_over():
 
 	var ending_title: String
 	if combined_score >= 0.8:
-		ending_title = "ending: heartbreaker"
+		ending_title = "ending: love god"
 	elif combined_score >= 0.3:
-		ending_title = "ending: drama Maker"
+		ending_title = "ending: drama maker"
 	else:
-		ending_title = "ending: flop Era"
+		ending_title = "ending: flop era"
 
 	romanced_label.text = "You romanced %d out of %d students!" % [_current_lovers, _total_lovers]
 	ending_label.text = ending_title
