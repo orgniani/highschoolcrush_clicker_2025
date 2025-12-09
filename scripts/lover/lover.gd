@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 @export var player: CharacterBody2D
 @export var config: HumanConfig
-@export var required_clicks: int = 10
-@export var fill_time: float = 3.0
+@export var required_clicks: int = 6
+@export var fill_time: float = 2.0
 @export var is_boss: bool = false
 
 @onready var state_machine: LoverStateMachine = $"Lover/LoverStateMachine"
@@ -15,7 +15,8 @@ extends CharacterBody2D
 @onready var animator: HumanAnimator = $"HumanAnimator"
 @onready var lightning: Node2D = $"LightningBeam"
 @onready var jealous_popup: Node2D = $"JealousPopup"
-@onready var heart_bar: TextureProgressBar = $"HeartBar"
+@onready var bar: TextureRect = $"Bar"
+@onready var heart_bar: TextureProgressBar = $"Bar/HeartBar"
 
 var _can_be_clicked := true
 var _has_failed := false
@@ -73,7 +74,7 @@ func _setup_lifecycle():
 	animator.apply_config(config)
 	animator.play_animation("idle", false)
 	heart_bar.max_value = required_clicks
-	heart_bar.visible = false
+	bar.visible = false
 	patrol.setup(animator, self)
 	partner_manager.owner_lover = self
 	partner_manager.lover_target = self
@@ -117,7 +118,7 @@ func _process(delta):
 func _on_romance_start():
 	animator.play_animation("idle", false)
 	patrol.stop()
-	heart_bar.visible = true
+	bar.visible = true
 	state_machine.set_jealous_partner_count(partner_manager.get_partner_count())
 	if partner_manager.has_partners():
 		partner_manager.notify_romance_started(self)
@@ -131,7 +132,7 @@ func _on_romance_success():
 	var follow_target = GlobalGameState.player.last_follower
 	follower.enable_follow(follow_target, self)
 	GlobalGameState.player.last_follower = self
-	heart_bar.visible = false
+	bar.visible = false
 	GlobalGameState.romanced_lovers.append(self)
 	GlobalGameState.romanced_ids.append(_lover_id)
 	GameManager.handle_lover_success(self)
@@ -158,7 +159,7 @@ func _on_romance_failed(from_partner := false):
 
 	set_process(false)
 	patrol.start()
-	heart_bar.visible = false
+	bar.visible = false
 	_can_be_clicked = false
 
 	var had_partners = partner_manager.has_partners()
@@ -216,4 +217,4 @@ func get_state_machine():
 
 func on_game_over():
 	set_process(false)
-	heart_bar.visible = false
+	bar.visible = false
