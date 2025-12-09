@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bx6xlwr4mu8af"]
+
+[ext_resource type="Script" uid="uid://cxso2lps45q8s" path="res://scripts/items/pickup_item.gd" id="1_23kri"]
+[ext_resource type="Texture2D" uid="uid://cgt4c4x8tm04b" path="res://art/sprites/beet.png" id="1_xbejn"]
+[ext_resource type="Resource" uid="uid://d2pp7o7mhjkfs" path="res://resources/items/item_fish.tres" id="2_rsfrm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06lye"]
+size = Vector2(12, 16)
+
+[node name="PickupItem" type="Node2D"]
+z_index = 10
+script = ExtResource("1_23kri")
+config = ExtResource("2_rsfrm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1.5229772, 1.5229772, 1.5229772, 1)
+texture = ExtResource("1_xbejn")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_06lye")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

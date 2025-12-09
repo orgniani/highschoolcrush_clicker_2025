@@ -7,6 +7,7 @@ class_name HUD
 @export var score_label : Label
 @export var timer_label : Label
 @export var points_label: Label
+@export var floor_label: Label
 
 @export var romanced_label : Label
 @export var ending_label : Label
@@ -30,6 +31,9 @@ func update_score(current: int, total: int):
 func update_points(current_points: int):
 	_current_points = current_points
 	points_label.text = "Points: " + str(int(current_points))
+	
+func update_floor_name(name: String):
+	floor_label.text = name
 
 func show_game_over():
 	var romance_ratio := float(_current_lovers) / float(_total_lovers)

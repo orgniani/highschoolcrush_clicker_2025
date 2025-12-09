@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PickupConfig" load_steps=3 format=3 uid="uid://c1lfwgnqwlv4j"]
+
+[ext_resource type="Script" uid="uid://cvqr58y2kaq80" path="res://scripts/items/pickup_config.gd" id="1_avhl0"]
+[ext_resource type="Texture2D" uid="uid://c64tnh5byfyto" path="res://art/sprites/clock.png" id="1_ryclw"]
+
+[resource]
+script = ExtResource("1_avhl0")
+name = "clock"
+icon = ExtResource("1_ryclw")
+drop_chance = 0.3
+pickup_type = "CLOCK"
+metadata/_custom_type_script = "uid://cvqr58y2kaq80"

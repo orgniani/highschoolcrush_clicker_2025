@@ -21,6 +21,7 @@ glow_blend_mode = 1
 script = ExtResource("1_ija6c")
 player = NodePath("CharactersYSort/Player")
 hud = NodePath("HUD/HUD")
+floor_name = "first floor"
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(109, 67)
