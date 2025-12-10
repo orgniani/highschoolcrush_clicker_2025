@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_d88l2")
-name = "beet"
+name = "eat your beets!"
+description = "+50% click bonus for 10 seconds!"
 icon = ExtResource("1_whffj")
 drop_chance = 0.25
 pickup_type = "BEET"

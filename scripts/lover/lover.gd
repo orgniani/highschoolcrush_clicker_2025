@@ -68,7 +68,34 @@ func _restore_state():
 		"alerted": expressions.show_alerted()
 		_: expressions.hide()
 
+	_restore_partners()
 	_setup_state_machine()
+
+func _restore_partners():
+	if is_boss:
+		return
+
+	var has_override := LoverStateTracker.has_partner_override(_lover_id)
+	if not has_override:
+		return
+
+	var saved_ids := LoverStateTracker.get_partners(_lover_id)
+
+	partner_manager.partners.clear()
+
+	if saved_ids.is_empty():
+		print("[RESTORE_PARTNERS] Lover:", _lover_id, " -> no partners (override)")
+		return
+
+	var scene := get_tree().get_current_scene()
+	for partner_id in saved_ids:
+		var partner_node := scene.get_node_or_null(partner_id)
+		if partner_node and partner_node != self:
+			partner_manager.partners.append(partner_node)
+
+	if partner_manager.partners.size() > 0:
+		_can_be_clicked = false
+		LoverStateTracker.set_can_be_clicked(_lover_id, false)
 
 func _setup_lifecycle():
 	animator.apply_config(config)

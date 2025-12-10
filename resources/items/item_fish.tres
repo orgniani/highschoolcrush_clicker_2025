@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_brdmp")
-name = "fish"
+name = "fish bomb!"
+description = "all the couples on this floor break up!"
 icon = ExtResource("1_u6rvg")
 drop_chance = 0.2
 pickup_type = "FISH"

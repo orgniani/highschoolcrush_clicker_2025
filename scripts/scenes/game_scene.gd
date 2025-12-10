@@ -17,6 +17,8 @@ func _ready():
 
 	GameManager.game_over_signal.connect(hud.show_game_over)
 	GameManager.game_over_signal.connect(player.on_game_over)
+	
+	GameManager.click_bonus_over_signal.connect(hud.show_click_bonus_over)
 
 	hud.update_points(GameManager.total_points)
 	hud.update_score(GameManager.romanced_lovers, GameManager.total_lovers)
@@ -47,6 +49,8 @@ func try_spawn_pickup():
 			item.config = config
 			item.position = drop_point.position
 			add_child(item)
+			
+			item.picked_up.connect(hud.show_pickup_popup)
 			return
 
 		cumulative = next

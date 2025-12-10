@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_avhl0")
-name = "clock"
+name = "snack time!"
+description = "30 bonus seconds added to your timer!"
 icon = ExtResource("1_ryclw")
 drop_chance = 0.3
 pickup_type = "CLOCK"

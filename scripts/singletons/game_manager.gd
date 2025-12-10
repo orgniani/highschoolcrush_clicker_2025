@@ -12,10 +12,15 @@ var game_over := false
 
 var total_points: int = 0
 
+var _click_bonus_active := false
+var _click_bonus_multiplier := 1.0
+var _click_bonus_timer := 0.0
+
 signal updated_score(current: int, total: int)
 signal updated_points(current: int)
 signal updated_timer(seconds_left: float)
 signal game_over_signal()
+signal click_bonus_over_signal()
 
 func _ready():
 	timer.timeout.connect(_on_timer_timeout)
@@ -23,6 +28,13 @@ func _ready():
 func _process(delta):
 	if not game_over:
 		updated_timer.emit(timer.time_left)
+
+		if _click_bonus_active:
+			_click_bonus_timer -= delta
+			if _click_bonus_timer <= 0.0:
+				_click_bonus_multiplier = 1.0
+				_click_bonus_active = false
+				click_bonus_over_signal.emit()
 
 func start_game():
 	reset_game_state()
@@ -112,3 +124,32 @@ func reset_game_state():
 func _on_timer_timeout():
 	if not game_over:
 		_trigger_game_over()
+
+# ---------------------------------------------------------
+# PICKUP EFFECTS
+# ---------------------------------------------------------
+
+func add_click_bonus(bonus: float, duration: float):
+	_click_bonus_multiplier += bonus
+	_click_bonus_timer = duration
+	_click_bonus_active = true
+	print("Click bonus activated: +", bonus, " for ", duration, " seconds")
+
+func add_time(seconds: float):
+	timer.start(timer.time_left + seconds)
+	print("Added time:", seconds)
+
+func break_all_partners():
+	print("Breaking all partners!")
+	
+	var lovers = get_tree().get_nodes_in_group("lovers")
+	for lover in lovers:
+		if not lover.has_method("on_game_over"):
+			continue
+
+		if lover.is_boss:
+			continue
+
+		if lover.partner_manager and lover.partner_manager.has_partners():
+			lover.partner_manager.notify_romance_ended(true)
+			lover.partner_manager.clear_all_partners()

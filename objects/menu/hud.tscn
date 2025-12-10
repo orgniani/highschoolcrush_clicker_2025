@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bp553va4wmaj3"]
+[gd_scene load_steps=12 format=3 uid="uid://bp553va4wmaj3"]
 
 [ext_resource type="Script" uid="uid://dspuclrb6fl6l" path="res://scripts/managers/hud_manager.gd" id="1_iin16"]
 [ext_resource type="FontFile" uid="uid://b8i3q121b40nv" path="res://art/fonts/MinimalPixelFont.ttf" id="1_l1st6"]
@@ -40,9 +40,72 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PickUpPanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PickUpPanel:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PointsPanel/ClickBonusOver:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3178q"]
+resource_name = "pickup_pop_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PickUpPanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.007981142),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PickUpPanel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.63849133, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_rurhu"]
-resource_name = "pop_up"
+resource_name = "gameover_pop_up"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -68,13 +131,30 @@ tracks/1/keys = {
 "values": [Vector2(1e-05, 1e-05), Vector2(1.3, 1.3), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_sseqv"]
+resource_name = "click_bonus_over"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointsPanel/ClickBonusOver:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b5spy"]
 _data = {
 &"RESET": SubResource("Animation_kk2rg"),
-&"pop_up": SubResource("Animation_rurhu")
+&"click_bonus_over": SubResource("Animation_sseqv"),
+&"gameover_pop_up": SubResource("Animation_rurhu"),
+&"pickup_pop_up": SubResource("Animation_3178q")
 }
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("score_label", "timer_label", "points_label", "floor_label", "romanced_label", "ending_label", "gameOver_anim")]
+[node name="HUD" type="Control" node_paths=PackedStringArray("score_label", "timer_label", "points_label", "floor_label", "romanced_label", "ending_label", "anims", "pickup_panel", "pickup_name_label", "pickup_description_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -90,7 +170,10 @@ points_label = NodePath("PointsPanel/PointsLabel")
 floor_label = NodePath("LoversPanel/FloorLabel")
 romanced_label = NodePath("GameOverPanel/RomancedLabel")
 ending_label = NodePath("GameOverPanel/EndingLabel")
-gameOver_anim = NodePath("AnimationPlayer")
+anims = NodePath("AnimationPlayer")
+pickup_panel = NodePath("PickUpPanel")
+pickup_name_label = NodePath("PickUpPanel/ItemNameLabel")
+pickup_description_label = NodePath("PickUpPanel/DescriptionLabel")
 
 [node name="LoversPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -171,6 +254,21 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_l1st6")
 theme_override_font_sizes/font_size = 36
 text = "Points:"
+vertical_alignment = 1
+
+[node name="ClickBonusOver" type="Label" parent="PointsPanel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_l1st6")
+theme_override_font_sizes/font_size = 36
+text = "CLICK BONUS OVER!"
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="GameOverPanel" type="Panel" parent="."]
@@ -261,6 +359,58 @@ theme_override_font_sizes/font_size = 40
 text = "Back"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PickUpPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -104.0
+offset_right = 251.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(240.42, 125)
+mouse_filter = 2
+
+[node name="ItemNameLabel" type="Label" parent="PickUpPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -53.000004
+offset_right = 179.0
+offset_bottom = 13.6666565
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_l1st6")
+theme_override_font_sizes/font_size = 100
+text = "item name!"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="PickUpPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = 9.0
+offset_right = 207.0
+offset_bottom = 42.333405
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_l1st6")
+theme_override_font_sizes/font_size = 50
+text = "description..."
+horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

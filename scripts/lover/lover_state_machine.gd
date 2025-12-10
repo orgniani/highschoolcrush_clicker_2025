@@ -51,7 +51,8 @@ func register_click():
 	if not _active:
 		_start_romance()
 
-	_fill += 1.0 / float(_required_clicks)
+	var click_bonus := GameManager._click_bonus_multiplier
+	_fill += (1.0 / float(_required_clicks)) * click_bonus
 	_fill = clamp(_fill, 0.0, 1.0)
 
 	if _fill >= 1.0:

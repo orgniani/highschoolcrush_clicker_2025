@@ -1,12 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0qiag5fmsl73"]
+[gd_scene load_steps=19 format=3 uid="uid://d0qiag5fmsl73"]
 
 [ext_resource type="Script" uid="uid://b6ft0mm7ki03w" path="res://scripts/scenes/game_scene.gd" id="1_nqmul"]
+[ext_resource type="PackedScene" uid="uid://bx6xlwr4mu8af" path="res://objects/pickup_item.tscn" id="2_2ukku"]
 [ext_resource type="TileSet" uid="uid://dii5dkt7jw1jb" path="res://resources/tile_maps/default_tile_map.tres" id="2_vmrxj"]
 [ext_resource type="PackedScene" uid="uid://gbsphto4w7bn" path="res://objects/characters/player.tscn" id="3_d4hcr"]
+[ext_resource type="Script" uid="uid://cvqr58y2kaq80" path="res://scripts/items/pickup_config.gd" id="3_vjuj4"]
+[ext_resource type="Resource" uid="uid://d2pp7o7mhjkfs" path="res://resources/items/item_fish.tres" id="4_28bym"]
 [ext_resource type="PackedScene" uid="uid://buhsyo1luhxbm" path="res://objects/characters/lover.tscn" id="4_gejle"]
 [ext_resource type="Resource" uid="uid://bngiiwwgchvd" path="res://resources/lovers/lover_curly_hair_config.tres" id="5_aw0oa"]
+[ext_resource type="Resource" uid="uid://h10f0oyfc7vd" path="res://resources/items/item_beet.tres" id="5_jrua1"]
 [ext_resource type="Resource" uid="uid://prxuqwniotqm" path="res://resources/player_config.tres" id="5_vmrxj"]
 [ext_resource type="Resource" uid="uid://cn5h6psr23iow" path="res://resources/lovers/lover_long_hair_config.tres" id="6_2w6b0"]
+[ext_resource type="Resource" uid="uid://c1lfwgnqwlv4j" path="res://resources/items/item_clock.tres" id="6_5y7na"]
 [ext_resource type="Resource" uid="uid://c34rqmpqvax7n" path="res://resources/lovers/lover_spikey_hair_config.tres" id="7_2ukku"]
 [ext_resource type="Resource" uid="uid://gdg1sp7dvssk" path="res://resources/lovers/lover_mop_hair_config.tres" id="8_vjuj4"]
 [ext_resource type="Resource" uid="uid://r7bmhai3b30o" path="res://resources/lovers/lover_short_hair_config.tres" id="9_28bym"]
@@ -18,11 +23,14 @@ background_mode = 3
 glow_enabled = true
 glow_blend_mode = 1
 
-[node name="Level5" type="Node2D" node_paths=PackedStringArray("player", "hud")]
+[node name="Level5" type="Node2D" node_paths=PackedStringArray("player", "hud", "drop_point")]
 script = ExtResource("1_nqmul")
 player = NodePath("CharactersYSort/Player")
 hud = NodePath("HUD/HUD")
 floor_name = "roof"
+drop_point = NodePath("DropPoint")
+pickup_scene = ExtResource("2_2ukku")
+pickup_configs = Array[ExtResource("3_vjuj4")]([ExtResource("4_28bym"), ExtResource("5_jrua1"), ExtResource("6_5y7na")])
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(109, 67)
@@ -116,6 +124,11 @@ config = ExtResource("5_aw0oa")
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover46/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover45")]
+
+[node name="DropPoint" type="Node2D" parent="."]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(450, 87)
 
 [node name="Wall" parent="." instance=ExtResource("10_jrua1")]
 position = Vector2(13, 67)

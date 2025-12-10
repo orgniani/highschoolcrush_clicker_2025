@@ -7,6 +7,7 @@ class LoverState:
 	var can_be_clicked: bool = true
 	var partner_ids: Array[String] = []
 	var current_expression: String = ""
+	var has_partner_override: bool = false
 
 var _lover_states: Dictionary = {}
 
@@ -31,10 +32,15 @@ func get_can_be_clicked(lover_id: String) -> bool:
 	return _get_or_create_state(lover_id).can_be_clicked
 
 func set_partners(lover_id: String, ids: Array[String]):
-	_get_or_create_state(lover_id).partner_ids = ids.duplicate()
+	var state := _get_or_create_state(lover_id)
+	state.partner_ids = ids.duplicate()
+	state.has_partner_override = true
 
 func get_partners(lover_id: String) -> Array[String]:
 	return _get_or_create_state(lover_id).partner_ids.duplicate()
+
+func has_partner_override(lover_id: String) -> bool:
+	return _get_or_create_state(lover_id).has_partner_override
 
 func set_expression(lover_id: String, value: String):
 	_get_or_create_state(lover_id).current_expression = value
