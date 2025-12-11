@@ -67,12 +67,7 @@ func handle_lover_success(lover: Node):
 	
 	print("Lover %s succeeded. Finished lovers: %d / %d" % [id, finished_lovers, total_lovers])
 	
-	var points := 1
-	if lover.has_node("Lover/LoverPartnerManager"):
-		var partner_manager = lover.get_node("Lover/LoverPartnerManager")
-		if partner_manager.has_method("get_partner_count"):
-			points += partner_manager.get_partner_count()
-	
+	var points = lover.points
 	total_points += points
 	updated_points.emit(total_points)
 	

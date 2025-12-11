@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bx6xlwr4mu8af"]
+[gd_scene load_steps=8 format=3 uid="uid://bx6xlwr4mu8af"]
 
 [ext_resource type="Script" uid="uid://cxso2lps45q8s" path="res://scripts/items/pickup_item.gd" id="1_23kri"]
 [ext_resource type="Texture2D" uid="uid://cgt4c4x8tm04b" path="res://art/sprites/beet.png" id="1_xbejn"]
@@ -6,6 +6,43 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06lye"]
 size = Vector2(12, 16)
+
+[sub_resource type="Animation" id="Animation_rsfrm"]
+resource_name = "float"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2tmqn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cnrce"]
+_data = {
+&"RESET": SubResource("Animation_2tmqn"),
+&"float": SubResource("Animation_rsfrm")
+}
 
 [node name="PickupItem" type="Node2D"]
 z_index = 10
@@ -21,5 +58,11 @@ collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_06lye")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cnrce")
+}
+autoplay = "float"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

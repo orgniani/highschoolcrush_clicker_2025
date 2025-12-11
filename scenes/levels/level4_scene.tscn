@@ -63,6 +63,7 @@ position = Vector2(118, 113)
 player = NodePath("../Player")
 config = ExtResource("5_ghcvs")
 is_boss = true
+points = 13
 
 [node name="LoverPartnerManager" parent="CharactersYSort/LoverBoss2/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover30"), NodePath("../../../Lover31"), NodePath("../../../Lover32"), NodePath("../../../Lover33")]
@@ -106,6 +107,7 @@ config = ExtResource("8_ejhgl")
 position = Vector2(422, 116)
 player = NodePath("../Player")
 config = ExtResource("9_xuhfb")
+points = 2
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover37/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover38")]
@@ -114,6 +116,7 @@ partners = [NodePath("../../../Lover38")]
 position = Vector2(451, 112)
 player = NodePath("../Player")
 config = ExtResource("7_hemhd")
+points = 2
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover38/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover37")]
@@ -121,7 +124,7 @@ partners = [NodePath("../../../Lover37")]
 [node name="DropPoint" type="Node2D" parent="."]
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(450, 87)
+position = Vector2(450, 90)
 
 [node name="Wall" parent="." instance=ExtResource("10_xa440")]
 position = Vector2(13, 67)

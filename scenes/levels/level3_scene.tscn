@@ -67,6 +67,7 @@ config = ExtResource("5_uf3wr")
 position = Vector2(70, 118)
 player = NodePath("../Player")
 config = ExtResource("6_kubor")
+points = 2
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover21/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover22")]
@@ -75,6 +76,7 @@ partners = [NodePath("../../../Lover22")]
 position = Vector2(98, 115)
 player = NodePath("../Player")
 config = ExtResource("7_ki12p")
+points = 2
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover22/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover21")]
@@ -88,6 +90,7 @@ config = ExtResource("8_8gpff")
 position = Vector2(261, 70)
 player = NodePath("../Player")
 config = ExtResource("9_crh4r")
+points = 2
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover24/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover25")]
@@ -96,6 +99,7 @@ partners = [NodePath("../../../Lover25")]
 position = Vector2(295, 70)
 player = NodePath("../Player")
 config = ExtResource("6_kubor")
+points = 2
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover25/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover24")]
@@ -104,6 +108,7 @@ partners = [NodePath("../../../Lover24")]
 position = Vector2(407, 119)
 player = NodePath("../Player")
 config = ExtResource("7_ki12p")
+points = 2
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover26/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover27")]
@@ -112,6 +117,7 @@ partners = [NodePath("../../../Lover27")]
 position = Vector2(444, 116)
 player = NodePath("../Player")
 config = ExtResource("5_uf3wr")
+points = 2
 
 [node name="LoverPartnerManager" parent="CharactersYSort/Lover27/Lover" index="4" node_paths=PackedStringArray("partners")]
 partners = [NodePath("../../../Lover26")]
@@ -129,7 +135,7 @@ config = ExtResource("9_crh4r")
 [node name="DropPoint" type="Node2D" parent="."]
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(450, 87)
+position = Vector2(450, 90)
 
 [node name="Wall" parent="." instance=ExtResource("9_fejdp")]
 position = Vector2(13, 67)

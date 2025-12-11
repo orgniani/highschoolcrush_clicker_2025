@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var required_clicks: int = 6
 @export var fill_time: float = 2.0
 @export var is_boss: bool = false
+@export var points: int = 1
 
 @onready var state_machine: LoverStateMachine = $"Lover/LoverStateMachine"
 @onready var follower: LoverFollower = $"Lover/LoverFollower"

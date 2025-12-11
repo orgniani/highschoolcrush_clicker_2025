@@ -91,16 +91,6 @@ position = Vector2(409, 118)
 player = NodePath("../Player")
 config = ExtResource("11_f4sb6")
 
-[node name="Jealousy3" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_iarw2")]
-position = Vector2(505, 58)
-player = NodePath("../Player")
-config = ExtResource("10_ntiyy")
-
-[node name="Jealousy4" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_iarw2")]
-position = Vector2(457, 58)
-player = NodePath("../Player")
-config = ExtResource("9_fn7ul")
-
 [node name="LoverBossTutorial" parent="CharactersYSort" node_paths=PackedStringArray("player") instance=ExtResource("4_iarw2")]
 position = Vector2(464, 113)
 player = NodePath("../Player")
@@ -108,7 +98,7 @@ config = ExtResource("9_fn7ul")
 is_boss = true
 
 [node name="LoverPartnerManager" parent="CharactersYSort/LoverBossTutorial/Lover" index="4" node_paths=PackedStringArray("partners")]
-partners = [NodePath("../../../Jealousy1"), NodePath("../../../Jealousy2"), NodePath("../../../Jealousy3"), NodePath("../../../Jealousy4")]
+partners = [NodePath("../../../Jealousy1"), NodePath("../../../Jealousy2")]
 
 [node name="Wall" parent="." instance=ExtResource("6_8ox5i")]
 visible = false
