@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d6r7xub5yb80"]
+[gd_scene load_steps=20 format=3 uid="uid://d6r7xub5yb80"]
 
 [ext_resource type="Script" uid="uid://b6ft0mm7ki03w" path="res://scripts/scenes/game_scene.gd" id="1_cqsit"]
 [ext_resource type="PackedScene" uid="uid://bx6xlwr4mu8af" path="res://objects/pickup_item.tscn" id="2_hk3yu"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://h10f0oyfc7vd" path="res://resources/items/item_beet.tres" id="5_xuhfb"]
 [ext_resource type="Resource" uid="uid://cn5h6psr23iow" path="res://resources/lovers/lover_long_hair_config.tres" id="6_hk3yu"]
 [ext_resource type="Resource" uid="uid://c1lfwgnqwlv4j" path="res://resources/items/item_clock.tres" id="6_xa440"]
+[ext_resource type="Resource" uid="uid://c6pge4cxuovsy" path="res://resources/minimap_icon_library.tres" id="7_ejhgl"]
 [ext_resource type="Resource" uid="uid://c34rqmpqvax7n" path="res://resources/lovers/lover_spikey_hair_config.tres" id="7_hemhd"]
 [ext_resource type="Resource" uid="uid://gdg1sp7dvssk" path="res://resources/lovers/lover_mop_hair_config.tres" id="8_ejhgl"]
 [ext_resource type="Resource" uid="uid://r7bmhai3b30o" path="res://resources/lovers/lover_short_hair_config.tres" id="9_xuhfb"]
@@ -22,14 +23,18 @@ background_mode = 3
 glow_enabled = true
 glow_blend_mode = 1
 
-[node name="Level4" type="Node2D" node_paths=PackedStringArray("player", "hud", "drop_point")]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xuhfb"]
+
+[node name="Level4" type="Node2D" node_paths=PackedStringArray("hud", "drop_point", "mini_map", "icons_root")]
 script = ExtResource("1_cqsit")
-player = NodePath("CharactersYSort/Player")
 hud = NodePath("HUD/HUD")
 floor_name = "third floor"
 drop_point = NodePath("DropPoint")
 pickup_scene = ExtResource("2_hk3yu")
 pickup_configs = Array[ExtResource("3_hemhd")]([ExtResource("4_ejhgl"), ExtResource("5_xuhfb"), ExtResource("6_xa440")])
+mini_map = NodePath("HUD/Minimap")
+icons_root = NodePath("HUD/Minimap/IconRoot")
+minimap_icons = ExtResource("7_ejhgl")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(109, 67)
@@ -141,6 +146,25 @@ environment = SubResource("Environment_k1o8x")
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="HUD" instance=ExtResource("11_r70qe")]
+
+[node name="Minimap" type="TextureRect" parent="HUD"]
+custom_minimum_size = Vector2(130, 100)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -197.0
+offset_top = 46.0
+offset_bottom = 146.0
+grow_horizontal = 0
+texture = SubResource("PlaceholderTexture2D_xuhfb")
+
+[node name="IconRoot" type="Control" parent="HUD/Minimap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [editable path="CharactersYSort/LoverBoss2"]
 [editable path="CharactersYSort/Lover37"]

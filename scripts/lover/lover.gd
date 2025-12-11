@@ -43,6 +43,7 @@ func _restore_state():
 	match status:
 		LoverStateTracker.LoverStatus.SUCCEEDED:
 			_has_succeeded = true
+			LoverStateTracker.emit_signal("lover_state_changed", _lover_id)
 			queue_free()
 			return
 		LoverStateTracker.LoverStatus.FAILED:
