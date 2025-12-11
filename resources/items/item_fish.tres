@@ -8,6 +8,6 @@ script = ExtResource("1_brdmp")
 name = "fish bomb!"
 description = "all the couples on this floor break up!"
 icon = ExtResource("1_u6rvg")
-drop_chance = 0.2
+drop_chance = 0.1
 pickup_type = "FISH"
 metadata/_custom_type_script = "uid://cvqr58y2kaq80"

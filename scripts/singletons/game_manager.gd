@@ -139,12 +139,12 @@ func break_all_partners():
 	
 	var lovers = get_tree().get_nodes_in_group("lovers")
 	for lover in lovers:
-		if not lover.has_method("on_game_over"):
-			continue
-
 		if lover.is_boss:
 			continue
 
 		if lover.partner_manager and lover.partner_manager.has_partners():
+			if lover.has_method("_on_partner_romance_ended"):
+				lover._on_partner_romance_ended(false)
+
 			lover.partner_manager.notify_romance_ended(true)
 			lover.partner_manager.clear_all_partners()

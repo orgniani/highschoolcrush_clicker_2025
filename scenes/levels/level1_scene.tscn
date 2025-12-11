@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dw3xvnexig6h5"]
+[gd_scene load_steps=19 format=3 uid="uid://dw3xvnexig6h5"]
 
 [ext_resource type="Script" uid="uid://b6ft0mm7ki03w" path="res://scripts/scenes/game_scene.gd" id="1_h3i4g"]
 [ext_resource type="TileSet" uid="uid://dii5dkt7jw1jb" path="res://resources/tile_maps/default_tile_map.tres" id="2_2mytq"]
@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://r7bmhai3b30o" path="res://resources/lovers/lover_short_hair_config.tres" id="9_2mytq"]
 [ext_resource type="PackedScene" uid="uid://q7ftv2y24aff" path="res://objects/wall.tscn" id="9_hua22"]
 [ext_resource type="PackedScene" uid="uid://bp553va4wmaj3" path="res://objects/menu/hud.tscn" id="10_4y0jp"]
+[ext_resource type="PackedScene" uid="uid://jy3ox6u674xi" path="res://objects/minimap.tscn" id="17_v8gpo"]
 
 [sub_resource type="Environment" id="Environment_k1o8x"]
 background_mode = 3
@@ -135,6 +136,19 @@ environment = SubResource("Environment_k1o8x")
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="HUD" instance=ExtResource("10_4y0jp")]
+
+[node name="Minimap" parent="HUD" instance=ExtResource("17_v8gpo")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -259.0
+offset_top = -149.0
+offset_right = -9.0
+offset_bottom = -49.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [editable path="CharactersYSort/Lover2"]
 [editable path="CharactersYSort/Lover3"]
