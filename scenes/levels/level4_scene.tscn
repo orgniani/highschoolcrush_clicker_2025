@@ -148,13 +148,13 @@ environment = SubResource("Environment_k1o8x")
 [node name="HUD" parent="HUD" instance=ExtResource("11_r70qe")]
 
 [node name="Minimap" type="TextureRect" parent="HUD"]
-custom_minimum_size = Vector2(130, 100)
+custom_minimum_size = Vector2(130, 60)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -197.0
 offset_top = 46.0
-offset_bottom = 146.0
+offset_bottom = 96.0
 grow_horizontal = 0
 texture = SubResource("PlaceholderTexture2D_xuhfb")
 

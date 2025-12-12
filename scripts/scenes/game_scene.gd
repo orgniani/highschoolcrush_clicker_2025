@@ -1,6 +1,10 @@
 extends Node2D
 
-const MINIMAP_PADDING := 0.5
+const WORLD_MIN_X := -10.0
+const WORLD_MAX_X :=  600.0
+const WORLD_MIN_Y := -50.0
+const WORLD_MAX_Y :=  50.0
+const PLAYER_MINIMAP_Y := 0.5
 
 @export var hud: HUD
 @export var floor_name: String
@@ -118,42 +122,33 @@ func _sort_by_chance(a, b) -> int:
 # --------------------------------------------------------------------------
 
 func _calculate_minimap_bounds():
-	var nodes = get_tree().get_nodes_in_group("lovers")
-
-	var xs: Array[float] = []
-	var ys: Array[float] = []
-
-	for n in nodes:
-		var p = n.global_position
-		xs.append(p.x)
-		ys.append(p.y)
-
-	var raw_min_x = xs.min()
-	var raw_max_x = xs.max()
-	var raw_min_y = ys.min()
-	var raw_max_y = ys.max()
-
-	var width = raw_max_x - raw_min_x
-	var height = raw_max_y - raw_min_y
-
-	# Apply padding
-	_min_x = raw_min_x - width * MINIMAP_PADDING
-	_max_x = raw_max_x + width * MINIMAP_PADDING
-
-	_min_y = raw_min_y - height * MINIMAP_PADDING
-	_max_y = raw_max_y + height * MINIMAP_PADDING
+	_min_x = WORLD_MIN_X
+	_max_x = WORLD_MAX_X
+	_min_y = WORLD_MIN_Y
+	_max_y = WORLD_MAX_Y
 
 func _world_to_minimap(pos: Vector2) -> Vector2:
-	var nx: float = (pos.x - _min_x) / max(1.0, (_max_x - _min_x))
-	var ny: float = (pos.y - _min_y) / max(1.0, (_max_y - _min_y))
-
 	var w: float = mini_map.size.x
 	var h: float = mini_map.size.y
 
-	return Vector2(
-		nx * w,
-		ny * h
-	)
+	var nx: float = (pos.x - _min_x) / max(1.0, (_max_x - _min_x))
+
+	var player_y = player.global_position.y
+	var dy = pos.y - player_y
+
+	var lover_min_y = _min_y - player_y
+	var lover_max_y = _max_y - player_y
+
+	var ny = inverse_lerp(lover_min_y, lover_max_y, dy)
+
+	var player_current_ny = inverse_lerp(lover_min_y, lover_max_y, 0.0)
+	var shift = PLAYER_MINIMAP_Y - player_current_ny
+	ny += shift
+
+	ny = clamp(ny, 0.0, 1.0)
+
+	return Vector2(nx * w, ny * h)
+
 
 # --------------------------------------------------------------------------
 # MINIMAP: BACKGROUND
