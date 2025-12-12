@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PickupConfig" load_steps=3 format=3 uid="uid://d2pp7o7mhjkfs"]
+
+[ext_resource type="Script" uid="uid://cvqr58y2kaq80" path="res://scripts/items/pickup_config.gd" id="1_brdmp"]
+[ext_resource type="Texture2D" uid="uid://dumj5i7jlyj24" path="res://art/sprites/fish.png" id="1_u6rvg"]
+
+[resource]
+script = ExtResource("1_brdmp")
+name = "fish bomb!"
+description = "all the couples on this floor break up!"
+icon = ExtResource("1_u6rvg")
+drop_chance = 0.1
+pickup_type = "FISH"
+metadata/_custom_type_script = "uid://cvqr58y2kaq80"

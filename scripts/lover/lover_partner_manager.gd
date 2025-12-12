@@ -54,6 +54,7 @@ func clear_all_partners():
 		var partner_manager = partner.get_node_or_null("Lover/LoverPartnerManager")
 		if partner_manager:
 			partner_manager.unregister_partner(owner_lover)
+
 	partners.clear()
 	_update_tracker()
 

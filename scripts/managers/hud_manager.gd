@@ -7,15 +7,26 @@ class_name HUD
 @export var score_label : Label
 @export var timer_label : Label
 @export var points_label: Label
+@export var floor_label: Label
 
 @export var romanced_label : Label
 @export var ending_label : Label
-@export var gameOver_anim : AnimationPlayer
+
+@export var pickup_panel: Control
+@export var pickup_name_label: Label
+@export var pickup_description_label: Label
+
+@export var pickup_anim: AnimationPlayer
+@export var click_bonus_anim: AnimationPlayer
+@export var game_over_anim: AnimationPlayer
 
 var _current_lovers : int
 var _total_lovers : int
 
 var _current_points : int
+
+func _ready() -> void:
+	pickup_panel.visible = false
 
 func update_timer(seconds: float):
 	var minutes := int(seconds) / 60
@@ -30,6 +41,9 @@ func update_score(current: int, total: int):
 func update_points(current_points: int):
 	_current_points = current_points
 	points_label.text = "Points: " + str(int(current_points))
+	
+func update_floor_name(floor_name: String):
+	floor_label.text = floor_name
 
 func show_game_over():
 	var romance_ratio := float(_current_lovers) / float(_total_lovers)
@@ -38,17 +52,37 @@ func show_game_over():
 
 	var ending_title: String
 	if combined_score >= 0.8:
-		ending_title = "ending: heartbreaker"
+		ending_title = "ending: love god"
 	elif combined_score >= 0.3:
-		ending_title = "ending: drama Maker"
+		ending_title = "ending: drama maker"
 	else:
-		ending_title = "ending: flop Era"
+		ending_title = "ending: flop era"
 
 	romanced_label.text = "You romanced %d out of %d students!" % [_current_lovers, _total_lovers]
 	ending_label.text = ending_title
-	gameOver_anim.play("pop_up")
+	game_over_anim.play("gameover_pop_up")
 
 func _on_back_button_pressed() -> void:
 		print("Back to menu!")
 		AudioManager.play_sound(button_click_audio)
 		get_tree().change_scene_to_file("res://scenes/menu_scene.tscn")
+
+func show_pickup_popup(config: PickupConfig) -> void:
+	pickup_name_label.text = config.name
+	pickup_description_label.text = config.description
+	pickup_anim.play("pickup_pop_up")
+
+	_auto_close_pickup_popup()
+	
+func _auto_close_pickup_popup() -> void:
+	await get_tree().create_timer(2.0).timeout
+	pickup_anim.play_backwards("pickup_pop_up")
+	
+func show_click_bonus_over() -> void:
+	click_bonus_anim.play("click_bonus_over")
+
+	_auto_close_click_bonus_over()
+	
+func _auto_close_click_bonus_over() -> void:
+	await get_tree().create_timer(2.0).timeout
+	click_bonus_anim.play_backwards("click_bonus_over")

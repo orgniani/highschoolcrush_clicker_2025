@@ -2,9 +2,10 @@ extends CharacterBody2D
 
 @export var player: CharacterBody2D
 @export var config: HumanConfig
-@export var required_clicks: int = 10
-@export var fill_time: float = 3.0
+@export var required_clicks: int = 6
+@export var fill_time: float = 2.0
 @export var is_boss: bool = false
+@export var points: int = 1
 
 @onready var state_machine: LoverStateMachine = $"Lover/LoverStateMachine"
 @onready var follower: LoverFollower = $"Lover/LoverFollower"
@@ -15,7 +16,8 @@ extends CharacterBody2D
 @onready var animator: HumanAnimator = $"HumanAnimator"
 @onready var lightning: Node2D = $"LightningBeam"
 @onready var jealous_popup: Node2D = $"JealousPopup"
-@onready var heart_bar: TextureProgressBar = $"HeartBar"
+@onready var bar: TextureRect = $"Bar"
+@onready var heart_bar: TextureProgressBar = $"Bar/HeartBar"
 
 var _can_be_clicked := true
 var _has_failed := false
@@ -41,6 +43,7 @@ func _restore_state():
 	match status:
 		LoverStateTracker.LoverStatus.SUCCEEDED:
 			_has_succeeded = true
+			LoverStateTracker.emit_signal("lover_state_changed", _lover_id)
 			queue_free()
 			return
 		LoverStateTracker.LoverStatus.FAILED:
@@ -67,13 +70,40 @@ func _restore_state():
 		"alerted": expressions.show_alerted()
 		_: expressions.hide()
 
+	_restore_partners()
 	_setup_state_machine()
+
+func _restore_partners():
+	if is_boss:
+		return
+
+	var has_override := LoverStateTracker.has_partner_override(_lover_id)
+	if not has_override:
+		return
+
+	var saved_ids := LoverStateTracker.get_partners(_lover_id)
+
+	partner_manager.partners.clear()
+
+	if saved_ids.is_empty():
+		print("[RESTORE_PARTNERS] Lover:", _lover_id, " -> no partners (override)")
+		return
+
+	var scene := get_tree().get_current_scene()
+	for partner_id in saved_ids:
+		var partner_node := scene.get_node_or_null(partner_id)
+		if partner_node and partner_node != self:
+			partner_manager.partners.append(partner_node)
+
+	if partner_manager.partners.size() > 0:
+		_can_be_clicked = false
+		LoverStateTracker.set_can_be_clicked(_lover_id, false)
 
 func _setup_lifecycle():
 	animator.apply_config(config)
 	animator.play_animation("idle", false)
 	heart_bar.max_value = required_clicks
-	heart_bar.visible = false
+	bar.visible = false
 	patrol.setup(animator, self)
 	partner_manager.owner_lover = self
 	partner_manager.lover_target = self
@@ -117,7 +147,7 @@ func _process(delta):
 func _on_romance_start():
 	animator.play_animation("idle", false)
 	patrol.stop()
-	heart_bar.visible = true
+	bar.visible = true
 	state_machine.set_jealous_partner_count(partner_manager.get_partner_count())
 	if partner_manager.has_partners():
 		partner_manager.notify_romance_started(self)
@@ -131,7 +161,7 @@ func _on_romance_success():
 	var follow_target = GlobalGameState.player.last_follower
 	follower.enable_follow(follow_target, self)
 	GlobalGameState.player.last_follower = self
-	heart_bar.visible = false
+	bar.visible = false
 	GlobalGameState.romanced_lovers.append(self)
 	GlobalGameState.romanced_ids.append(_lover_id)
 	GameManager.handle_lover_success(self)
@@ -158,7 +188,7 @@ func _on_romance_failed(from_partner := false):
 
 	set_process(false)
 	patrol.start()
-	heart_bar.visible = false
+	bar.visible = false
 	_can_be_clicked = false
 
 	var had_partners = partner_manager.has_partners()
@@ -216,4 +246,4 @@ func get_state_machine():
 
 func on_game_over():
 	set_process(false)
-	heart_bar.visible = false
+	bar.visible = false

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PickupConfig" load_steps=3 format=3 uid="uid://h10f0oyfc7vd"]
+
+[ext_resource type="Script" uid="uid://cvqr58y2kaq80" path="res://scripts/items/pickup_config.gd" id="1_d88l2"]
+[ext_resource type="Texture2D" uid="uid://cgt4c4x8tm04b" path="res://art/sprites/beet.png" id="1_whffj"]
+
+[resource]
+script = ExtResource("1_d88l2")
+name = "eat your beets!"
+description = "+50% click bonus for 10 seconds!"
+icon = ExtResource("1_whffj")
+drop_chance = 0.25
+pickup_type = "BEET"
+metadata/_custom_type_script = "uid://cvqr58y2kaq80"

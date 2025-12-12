@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://jy3ox6u674xi"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l4ugo"]
+
+[node name="Minimap" type="TextureRect"]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 100.0
+offset_bottom = 100.0
+texture = SubResource("PlaceholderTexture2D_l4ugo")
