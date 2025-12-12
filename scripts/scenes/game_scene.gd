@@ -1,6 +1,6 @@
 extends Node2D
 
-const MINIMAP_PADDING := 0.3
+const MINIMAP_PADDING := 0.5
 
 @export var hud: HUD
 @export var floor_name: String
@@ -16,7 +16,7 @@ const MINIMAP_PADDING := 0.3
 
 # Icons created at runtime
 var _player_icon: Sprite2D
-var _lover_icons: Dictionary = {}  # lover_id → Sprite2D
+var _lover_icons: Dictionary = {}
 
 # Minimap bounds
 var _min_x := 0.0
@@ -40,9 +40,10 @@ func _ready():
 
 	LoverStateTracker.lover_state_changed.connect(_on_lover_state_changed)
 
-	for lover in get_tree().get_nodes_in_group("lovers"):
-		GameManager.game_over_signal.connect(lover.on_game_over)
-
+	await get_tree().process_frame
+	_refresh_all_icons()
+	
+	_connect_game_over_to_lovers()
 
 func _process(delta):
 	_update_player_icon()
@@ -70,6 +71,12 @@ func _connect_game_manager():
 
 	if not GameManager.click_bonus_over_signal.is_connected(hud.show_click_bonus_over):
 		GameManager.click_bonus_over_signal.connect(hud.show_click_bonus_over)
+
+func _connect_game_over_to_lovers():
+	for lover in get_tree().get_nodes_in_group("lovers"):
+		if GameManager.game_over_signal.is_connected(lover.on_game_over):
+			continue
+		GameManager.game_over_signal.connect(lover.on_game_over)
 
 func _setup_hud():
 	hud.update_points(GameManager.total_points)
@@ -167,13 +174,13 @@ func _generate_minimap_background():
 # --------------------------------------------------------------------------
 
 func _create_minimap_icons():
-	# ---- PLAYER ICON ----
+	# PLAYER
 	_player_icon = Sprite2D.new()
 	_player_icon.texture = minimap_icons.player_icon
 	_player_icon.centered = true
 	icons_root.add_child(_player_icon)
 
-	# ---- LOVERS ----
+	# LOVERS
 	for lover in get_tree().get_nodes_in_group("lovers"):
 		if not lover.has_meta("lover_id"):
 			continue
@@ -190,8 +197,6 @@ func _create_minimap_icons():
 
 		icons_root.add_child(icon)
 		_lover_icons[id] = icon
-		
-		_on_lover_state_changed(id)
 
 # --------------------------------------------------------------------------
 # MINIMAP: UPDATE ICON POSITIONS
@@ -250,16 +255,13 @@ func _on_lover_state_changed(id: String):
 	# 3. BOSS LOGIC
 	# ---------------------------------------------------------
 	if lover.is_boss:
-		if status != LoverStateTracker.LoverStatus.FAILED and !can_click:
-			icon.texture = minimap_icons.lover_crush
-		else:
-			icon.texture = minimap_icons.lover_boss
+		icon.texture = minimap_icons.lover_boss
 		return
 
 	# ---------------------------------------------------------
 	# 4. PARTNERED (NOT BOSS)
 	# ---------------------------------------------------------
-	if partners.size() > 0:
+	if lover and lover.partner_manager.has_partners():
 		icon.texture = minimap_icons.lover_partnered
 		return
 
@@ -271,7 +273,14 @@ func _on_lover_state_changed(id: String):
 		return
 
 	# ---------------------------------------------------------
-	# 6. FREE DEFAULT
+	# 6. CLICK-BLOCKED (NOT BOSS, NOT PARTNERED, NOT FAILED)
+	# ---------------------------------------------------------
+	if !can_click:
+		icon.texture = minimap_icons.lover_crush
+		return
+
+	# ---------------------------------------------------------
+	# 7. FREE DEFAULT
 	# ---------------------------------------------------------
 	icon.texture = minimap_icons.lover_default
 
@@ -281,3 +290,7 @@ func _find_lover_by_id(id: String) -> Node:
 		if lover.has_meta("lover_id") and lover.get_meta("lover_id") == id:
 			return lover
 	return null
+
+func _refresh_all_icons():
+	for id in _lover_icons.keys():
+		_on_lover_state_changed(id)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dumj5i7jlyj24"
-path="res://.godot/imported/fish.png-7b37b1939e418434267681e296caeba9.ctex"
+uid="uid://dyb12lqaofsky"
+path="res://.godot/imported/icon_boss.png-2433bcb273eff567a5c3700f2a822044.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/sprites/fish.png"
-dest_files=["res://.godot/imported/fish.png-7b37b1939e418434267681e296caeba9.ctex"]
+source_file="res://art/sprites/Icons/icon_boss.png"
+dest_files=["res://.godot/imported/icon_boss.png-2433bcb273eff567a5c3700f2a822044.ctex"]
 
 [params]
 

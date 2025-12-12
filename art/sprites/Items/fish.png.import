@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgt4c4x8tm04b"
-path="res://.godot/imported/beet.png-e44ff43646fa0afe7c6033c27d6751ad.ctex"
+uid="uid://dumj5i7jlyj24"
+path="res://.godot/imported/fish.png-2a7728eca23991b00d5a19d29c2f16ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/sprites/beet.png"
-dest_files=["res://.godot/imported/beet.png-e44ff43646fa0afe7c6033c27d6751ad.ctex"]
+source_file="res://art/sprites/Items/fish.png"
+dest_files=["res://.godot/imported/fish.png-2a7728eca23991b00d5a19d29c2f16ff.ctex"]
 
 [params]
 

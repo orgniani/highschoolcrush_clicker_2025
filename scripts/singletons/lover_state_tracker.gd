@@ -29,25 +29,24 @@ func mark_failed(lover_id: String):
 
 func mark_succeeded(lover_id: String):
 	_get_or_create_state(lover_id).status = LoverStatus.SUCCEEDED
-	emit_signal("lover_state_changed", lover_id)
+	lover_state_changed.emit(lover_id)
 
 
 func set_can_be_clicked(lover_id: String, value: bool):
 	_get_or_create_state(lover_id).can_be_clicked = value
-	emit_signal("lover_state_changed", lover_id)
+	lover_state_changed.emit(lover_id)
 
 
 func set_partners(lover_id: String, ids: Array[String]):
 	var state := _get_or_create_state(lover_id)
 	state.partner_ids = ids.duplicate()
 	state.has_partner_override = true
-	emit_signal("lover_state_changed", lover_id)
+	lover_state_changed.emit(lover_id)
 
 
 func set_expression(lover_id: String, value: String):
 	_get_or_create_state(lover_id).current_expression = value
-	emit_signal("lover_state_changed", lover_id)
-
+	lover_state_changed.emit(lover_id)
 
 # ------------------------------------------------------------------------------
 # GETTERS (no signal)
