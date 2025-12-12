@@ -25,6 +25,10 @@ LoverStateTracker="*res://scripts/singletons/lover_state_tracker.gd"
 TransitionScreen="*res://objects/menu/transition_screen.tscn"
 AudioManager="*res://objects/managers/audio_manager.tscn"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [file_customization]
 
 folder_colors={
