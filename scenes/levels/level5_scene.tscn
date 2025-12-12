@@ -26,10 +26,11 @@ glow_blend_mode = 1
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_28bym"]
 
-[node name="Level5" type="Node2D" node_paths=PackedStringArray("hud", "drop_point", "mini_map", "icons_root")]
+[node name="Level5" type="Node2D" node_paths=PackedStringArray("hud", "character_Y_sort", "drop_point", "mini_map", "icons_root")]
 script = ExtResource("1_nqmul")
 hud = NodePath("HUD/HUD")
 floor_name = "roof"
+character_Y_sort = NodePath("CharactersYSort")
 drop_point = NodePath("DropPoint")
 pickup_scene = ExtResource("2_2ukku")
 pickup_configs = Array[ExtResource("3_vjuj4")]([ExtResource("4_28bym"), ExtResource("5_jrua1"), ExtResource("6_5y7na")])

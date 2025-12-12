@@ -9,6 +9,8 @@ const PLAYER_MINIMAP_Y := 0.5
 @export var hud: HUD
 @export var floor_name: String
 
+@export var character_Y_sort: Node2D
+
 @export var drop_point: Node2D
 @export var pickup_scene: PackedScene
 @export var pickup_configs: Array[PickupConfig]
@@ -48,6 +50,9 @@ func _ready():
 	_refresh_all_icons()
 	
 	_connect_game_over_to_lovers()
+	
+	await get_tree().process_frame
+	_move_persistent_characters_to_sort()
 
 func _process(delta):
 	_update_player_icon()
@@ -116,6 +121,23 @@ func _try_spawn_pickup():
 func _sort_by_chance(a, b) -> int:
 	return int(a.drop_chance - b.drop_chance)
 
+# --------------------------------------------------------------------------
+# CHARACTER Y BOUNDS
+# --------------------------------------------------------------------------
+
+func _move_persistent_characters_to_sort():
+	if is_instance_valid(player):
+		player.reparent(character_Y_sort)
+
+	for lover in get_tree().get_nodes_in_group("lovers"):
+		if not lover.has_meta("lover_id"):
+			continue
+
+		var id: String = lover.get_meta("lover_id")
+		var status := LoverStateTracker.get_status(id)
+
+		if status == LoverStateTracker.LoverStatus.SUCCEEDED:
+			lover.reparent(character_Y_sort)
 
 # --------------------------------------------------------------------------
 # MINIMAP: BOUNDS
